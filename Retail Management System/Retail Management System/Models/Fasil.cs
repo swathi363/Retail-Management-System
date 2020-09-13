@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Retail_Management_System.Models
 {
-    public class Class1
+    public class Fasil
     {
     }
 }
