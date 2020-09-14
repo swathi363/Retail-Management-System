@@ -24,6 +24,12 @@ namespace Retail_Management_System.Models
         [Display(Name = "Brand Name")]
         public string BrandName { get; set; }
         [Required]
+        [Display(Name = "Preferred Age")]
+        public string PreferredAge { get; set; }
+        [Required]
+        [Display(Name = "Preferred Gender")]
+        public string PreferredGender { get; set; }
+        [Required]
         [Display(Name = "Price")]
         public double Price { get; set; }
         [Required]
@@ -51,6 +57,9 @@ namespace Retail_Management_System.Models
             double TotalAmount = (price - (specialdiscount / 100) * price) * units;
             return TotalAmount;
         }
+        [Required]
+        [Display(Name ="Product Description")]
+        public string Description { get; set; }
 
         public virtual ICollection<Cart> Carts { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set }
@@ -75,6 +84,19 @@ namespace Retail_Management_System.Models
         Sports,
         Appliances,
         Other
+    }
+    public enum PreferredAge
+    {
+        Kids,
+        Adults,
+        Senior_Citizen,
+        All
+    }
+    public enum PreferredGender
+    {
+        Men,
+        Women,
+        Both
     }
 }
 
