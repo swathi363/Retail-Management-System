@@ -27,5 +27,5 @@ namespace Retail_Management_System.Models
         public virtual Bill Bill { get; set; }
     }
 
-    }
+    
 }

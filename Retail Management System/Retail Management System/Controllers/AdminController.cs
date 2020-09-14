@@ -11,10 +11,10 @@ using System.Web.Security;
 
 namespace Retail_Management_System.Controllers
 {
-    public class UserController : Controller
+    public class AdminController : Controller
     {
         RetailContext db = new RetailContext();
-        // GET: User
+        // GET: Admin
         public ActionResult Index()
         {
             return View();
@@ -34,7 +34,7 @@ namespace Retail_Management_System.Controllers
                 FormsAuthentication.SetAuthCookie(usr.UserId, false);
                 Session["UserId"] = user.UserId.ToString();
                 Session["Username"] = (user.Firstname + " " + user.Lastname).ToString();
-              
+
             }
             else
             {
@@ -42,23 +42,24 @@ namespace Retail_Management_System.Controllers
             }
             return View(usr);
         }
+
         public ActionResult Register()
         {
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register([Bind(Include = "UserId,Firstname,Lastname,Password,ConfirmPassword,Address,ContactNumber,City,Country")] User usr)
+        public ActionResult Register([Bind(Include = "UserId,Firstname,Lastname,Password,ConfirmPassword,Address,ContactNumber,City,Country")] Admin adm)
         {
-            usr.Password = encrypt(usr.Password);
-            usr.ConfirmPassword = encrypt(usr.ConfirmPassword);
-            var check = db.Users.Find(usr.UserId);
+            adm.Password = encrypt(adm.Password);
+            adm.ConfirmPassword = encrypt(adm.ConfirmPassword);
+            var check = db.Users.Find(adm.UserId);
             if (check == null)
             {
                 db.Configuration.ValidateOnSaveEnabled = false;
-                db.Users.Add(usr);
+                db.Admins.Add(adm);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Login");
             }
             else
             {
