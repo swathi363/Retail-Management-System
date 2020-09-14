@@ -46,5 +46,8 @@ namespace Retail_Management_System.Models
         [Display(Name = "Country")]
         [Required(ErrorMessage = "Country is required")]
         public string Country { get; set; }
+        public virtual ICollection<Cart> Carts { get; set; }
+        public virtual ICollection<Transaction> Transactions { get; set; }
+        public virtual ICollection<Feedback> Feedbacks { get; set; }
     }
 }

@@ -38,15 +38,19 @@ namespace Retail_Management_System.Models
         [Required]
         [Display(Name = "Sold Units")]
         public int SoldUnits { get; set; }
-        [Required]
+        
         [Display(Name = "Discount")]
         public double Discount { get; set; }
         [Required]
         [Display(Name = "Special Discount")]
         public double SpecialDiscount { get; set; }
         [Required]
-        [Display(Name = "Supplier Name")]
-        public string SupplierName { get; set; }
+        [Display(Name = "Supplier Id ")]
+        
+        public string SupplierId { get; set; }
+        [Required]
+        [Display(Name = "Product Description")]
+        public string Description { get; set; }
         public double GetAmount(double price, double discount, int units)
         {
             double TotalAmount = (price - (discount / 100) * price) * units;
@@ -57,12 +61,9 @@ namespace Retail_Management_System.Models
             double TotalAmount = (price - (specialdiscount / 100) * price) * units;
             return TotalAmount;
         }
-        [Required]
-        [Display(Name ="Product Description")]
-        public string Description { get; set; }
-
         public virtual ICollection<Cart> Carts { get; set; }
-        public virtual ICollection<Transaction> Transactions { get; set }
+        public virtual ICollection<Transaction> Transactions { get; set; }
+        public virtual Supplier supplier { get; set; }
     }
     public enum Category
     {

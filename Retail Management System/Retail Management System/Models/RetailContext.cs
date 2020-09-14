@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Retail_Management_System.Models
 {
-    public class RetailContext:DbContext
+    public class RetailContext : DbContext
     {
         public RetailContext()
         {
@@ -14,6 +14,17 @@ namespace Retail_Management_System.Models
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Admin> Admins { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Bill> Bills { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
 
     }
+    
+            
+
+
+    
 }
