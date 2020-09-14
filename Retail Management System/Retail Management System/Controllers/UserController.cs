@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
@@ -17,8 +18,11 @@ namespace Retail_Management_System.Controllers
         // GET: User
         public ActionResult Index()
         {
+            
             return View();
         }
+
+
         public ActionResult Login()
         {
             return View();
