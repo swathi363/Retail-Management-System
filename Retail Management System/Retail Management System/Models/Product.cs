@@ -36,11 +36,19 @@ namespace Retail_Management_System.Models
         [Display(Name = "Discount")]
         public double Discount { get; set; }
         [Required]
+        [Display(Name = "Special Discount")]
+        public double SpecialDiscount { get; set; }
+        [Required]
         [Display(Name = "Supplier Name")]
         public string SupplierName { get; set; }
         public double GetAmount(double price, double discount, int units)
         {
             double TotalAmount = (price - (discount / 100) * price) * units;
+            return TotalAmount;
+        }
+        public double GetSpecialAmount(double price, double specialdiscount, int units)
+        {
+            double TotalAmount = (price - (specialdiscount / 100) * price) * units;
             return TotalAmount;
         }
 
