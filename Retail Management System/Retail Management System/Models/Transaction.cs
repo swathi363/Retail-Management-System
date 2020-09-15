@@ -21,6 +21,7 @@ namespace Retail_Management_System.Models
         public int NoofProduct { get; set; }
         public double Amount { get; set; }
         [DataType(DataType.Date)]
+        public int soldunits { get; set; }
         public DateTime Tdate { get; set; }
         public virtual User user { get; set; }
         public virtual Product product { get; set; }

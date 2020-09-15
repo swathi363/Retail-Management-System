@@ -35,6 +35,7 @@ namespace Retail_Management_System.Models
         [Required]
         [Display(Name = "Stock Left")]
         public int Stock { get; set; }
+        
         [Required]
         [Display(Name = "Sold Units")]
         public int SoldUnits { get; set; }

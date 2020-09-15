@@ -62,7 +62,7 @@ namespace Retail_Management_System.Controllers
                 db.Configuration.ValidateOnSaveEnabled = false;
                 db.Users.Add(usr);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Login");
             }
             else
             {

@@ -8,7 +8,7 @@ namespace Retail_Management_System.Models
 {
     public class RetailContext : DbContext
     {
-        public RetailContext()
+        public RetailContext():base("Name=Dbconfig")
         {
 
         }

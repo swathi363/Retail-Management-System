@@ -61,7 +61,7 @@
         }
 
 
-        @if (Model.SoldUnits > Model.Stock - 30)
+        @if (Model.Stock<30)
         {
             <dt>Clearane Sale is on action.</dt>
         }
@@ -101,7 +101,7 @@
         @using (Html.BeginForm("AddtoCart", "Product", FormMethod.Post, new { @class = "form-inline" }))
         {
             @Html.TextBox("Itemno", "1", new { @class = "form-control", @placeholder = "Quantity" })
-            @Html.HiddenFor(m => m.ProductId, new { @class = "form-control", @value = Model.ProductId })
+            @Html.HiddenFor(m => m.Productid, new { @class = "form-control", @value = Model.Productid })
             <button type="submit" class="btn btn-success btn-sm ml-2">Add to Cart <i class="fa fa-cart-plus"></i></button>
         }
     </th>

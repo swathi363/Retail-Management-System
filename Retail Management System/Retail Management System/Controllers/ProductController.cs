@@ -60,7 +60,8 @@ namespace Retail_Management_System.Controllers
             {
                 return HttpNotFound();
             }
-            if (product.SoldUnits > (product.Stock - 30))
+            
+            if (product.Stock<30)
             {
                 product.SpecialDiscount = 25;
 

@@ -1,8 +1,10 @@
 ﻿using Retail_Management_System.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
@@ -15,9 +17,191 @@ namespace Retail_Management_System.Controllers
     {
         RetailContext db = new RetailContext();
         // GET: Admin
+        [Authorize]
         public ActionResult Index()
         {
             return View();
+        }
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult Details(string ProductId)
+        {
+            if (ProductId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = db.Products.Find(ProductId);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product);
+        }
+        [Authorize]
+        public ActionResult CreateSupplier(string SupplierId)
+        {
+            return View();
+        }
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateSupplier([Bind(Include = "SupplierId,SupplierName")]Supplier supplier)
+        {
+            if(ModelState.IsValid)
+            {
+                db.Suppliers.Add(supplier);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(supplier);
+        }
+        [Authorize]
+        public ActionResult EditSupplier(string SupplierId)
+        {
+            if (SupplierId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            }
+            Supplier supplier = db.Suppliers.Find(SupplierId);
+            if (supplier == null)
+            {
+                return HttpNotFound();
+
+            }
+            return View(supplier);
+        }
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditSupplier([Bind(Include = "SupplierId,SupplierName")] Supplier supplier)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(supplier).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+
+            }
+            return View(supplier);
+
+        }
+        
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult DetailsSuppliers(string SupplierId)
+        {
+            if(SupplierId==null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            }
+            Supplier supplier = db.Suppliers.Find(SupplierId);
+            if(supplier==null)
+            {
+                return HttpNotFound();
+
+            }
+            return View(supplier);
+
+        }
+        [Authorize]
+        public ActionResult DeleteSupplier(string SupplierId)
+        {
+            if (SupplierId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            }
+            Supplier supplier = db.Suppliers.Find(SupplierId);
+            if (supplier == null)
+            {
+                return HttpNotFound();
+
+            }
+            return View(supplier);
+        }
+        public ActionResult DeleteSupplierConfirmed(string SupplierId)
+        {
+            Supplier supplier = db.Suppliers.Find(SupplierId);
+            db.Entry(supplier).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+                
+        }
+        [Authorize]
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public ActionResult Create([Bind(Include = "Productid,ProductName,CategoryName,BrandName,PreferredAge,PreferredGender,Price,Stock,SoldUnits,Discount,SpecialDiscount,SupplierId,Description")]Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Products.Add(product);
+ 
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(product);
+
+        }
+        [Authorize]
+        public ActionResult Edit(string ProductId)
+        {
+            if (ProductId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = db.Products.Find(ProductId);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product);
+        }
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Productid,ProductName,CategoryName,BrandName,PreferredAge,PreferredGender,Price,Stock,SoldUnits,Discount,SpecialDiscount,SupplierId,Description")] Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(product).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(product);
+        }
+        [Authorize]
+        public ActionResult Delete(string ProductId)
+        {
+            if (ProductId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = db.Products.Find(ProductId);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product);
+        }
+        [Authorize]
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(string ProductId)
+        {
+            Product product = db.Products.Find(ProductId);
+            product.Stock = 0;
+            db.Entry(product).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
         public ActionResult Login()
         {
@@ -25,48 +209,27 @@ namespace Retail_Management_System.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(User usr)
+        public ActionResult Login(Admin adm)
         {
-            usr.Password = encrypt(usr.Password);
-            var user = db.Users.Where(a => a.UserId.Equals(usr.UserId) && a.Password.Equals(usr.Password)).FirstOrDefault();
-            if (user != null)
+            adm.Password = encrypt(adm.Password);
+            var admin = db.Admins.Where(a => a.UserId.Equals(adm.UserId) && a.Password.Equals(adm.Password)).FirstOrDefault();
+            if (admin != null)
             {
-                FormsAuthentication.SetAuthCookie(usr.UserId, false);
-                Session["UserId"] = user.UserId.ToString();
-                Session["Username"] = (user.Firstname + " " + user.Lastname).ToString();
+                FormsAuthentication.SetAuthCookie(adm.UserId, false);
+                Session["UserId"] = admin.UserId.ToString();
+                Session["Username"] = (admin.Firstname + " " + admin.Lastname).ToString();
+                return RedirectToAction("Index");
 
             }
             else
             {
                 ModelState.AddModelError("", "Invalid Login Credentials");
             }
-            return View(usr);
+            return View(adm);
         }
 
-        public ActionResult Register()
-        {
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Register([Bind(Include = "UserId,Firstname,Lastname,Password,ConfirmPassword,Address,ContactNumber,City,Country")] Admin adm)
-        {
-            adm.Password = encrypt(adm.Password);
-            adm.ConfirmPassword = encrypt(adm.ConfirmPassword);
-            var check = db.Users.Find(adm.UserId);
-            if (check == null)
-            {
-                db.Configuration.ValidateOnSaveEnabled = false;
-                db.Admins.Add(adm);
-                db.SaveChanges();
-                return RedirectToAction("Login");
-            }
-            else
-            {
-                ModelState.AddModelError("", "User already Exists");
-                return View();
-            }
-        }
+        
+        
         [Authorize]
         public ActionResult Logout()
         {
