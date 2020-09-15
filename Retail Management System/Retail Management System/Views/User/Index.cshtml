@@ -1,51 +1,50 @@
-﻿@model IEnumerable<Retail_Management_System.Models.Product>
+﻿@model Retail_Management_System.Models.User
 
 @{
-    ViewBag.Title = "Products";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-row card col-4 p-4 justify-content-center d-flex">
+
+        <h4 class="card-title"><i class="fa fa-users">User</i></h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-5" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-5" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-lg  btn-primary">Login</button>
+
+            </div>
+        </div>
+    </div>
 }
 
 
-@if (!string.IsNullOrEmpty(ViewBag.Error))
-{
-    <div class="alert-danger">@ViewBag.Error</div>
-}
-else
-{
-    <form method="get" action="/Product/Search" class="form-inline m-2">
-        <div class="h6 m-2">
-            View Products
-        </div>
-        @Html.TextBox("ProductName", null, new { @class = "form-control" })
-        <input type="submit" value="Search" class="btn btn-dark btn-sm" />
-    </form>
-    if (Model.ToList().Count == 0)
-    {
-        <div class="alert-info">No products found. Search for another product!</div>
-    }
-    else
-    {
-        <br />
-        <div class="row mr-3 ">
-
-            @foreach (var item in Model)
-            {
-                <div class="card col-3 mr-2 p-1">
-                    <div class="card-header text-center">
-                        @Html.DisplayFor(modelItem => item.ProductName)
-                    </div>
-                    <div class="font-weight-bold text-center" style="font-size:large">
-                        @Html.DisplayFor(modelItem => item.BrandName)
-                    </div>
-                    <div class="card-body text-center">
-                        @Html.DisplayFor(modelItem => item.Price) <br />
-                        <span class="alert-info">@Html.DisplayFor(modelItem => item.Discount)% off</span>
-                    </div>
-                    <div class="card-footer text-center">
-                        @Html.ActionLink("Details", "ProductView","Product", new { ProductId = item.Productid }, new { @class = "btn btn-info" })
-                    </div>
-                </div>
-            }
-        </div>
-    }
+<div style="font-style:oblique">
+    New User?
+    @Html.ActionLink("Sign Up", "Register", "User")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 }

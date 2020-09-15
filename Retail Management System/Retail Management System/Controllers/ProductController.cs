@@ -29,7 +29,7 @@ namespace Retail_Management_System.Controllers
                 if (category == "All")
                 {
                     // return the View named Products with all products list
-                    return View("Index", db.Products.ToList());
+                    return View("Products", db.Products.ToList());
                 }
                 else
                 {
@@ -49,6 +49,32 @@ namespace Retail_Management_System.Controllers
                 }
             }
         }
+        //Get Search product by productname
+        
+        public ActionResult Search(string ProductName)
+        {
+            var list = new List<Product>();
+            if (String.IsNullOrEmpty(ProductName))
+            {
+                list = db.Products.ToList();
+            }
+            else
+            {
+                list = db.Products.Where(p => p.ProductName.ToLower().Equals(ProductName.ToLower())).ToList();
+                if (list.Count == 0)
+                {
+                    list = db.Products.Where(p => p.CategoryName.ToLower().Equals(ProductName.ToLower())).ToList();
+                    if (list.Count == 0)
+                    {
+                        list = db.Products.Where(p => p.BrandName.ToLower().Equals(ProductName.ToLower())).ToList();
+                    }
+                }
+            }
+            ViewBag.Title = "Search Result";
+            return View("Products", list);
+        }
+
+
         public ActionResult ProductView(string ProductId)
         {
             if (ProductId == null)

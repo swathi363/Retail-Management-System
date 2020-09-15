@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Retail_Management_System.Models.Product>
+﻿@model Retail_Management_System.Models.Product
+
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -18,7 +20,4 @@
     }
     @Html.ActionLink("All Products", "Index", new { category = "All" }, new { @class = "list-group-item list-group-item-action" })
 </div>
-
-
-
 
