@@ -20,7 +20,7 @@ namespace Retail_Management_System.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            return View();
+            return View(db.Products.ToList());
         }
         [HttpPost]
         [Authorize]
@@ -203,6 +203,7 @@ namespace Retail_Management_System.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        
         public ActionResult Login()
         {
             return View();
@@ -215,7 +216,7 @@ namespace Retail_Management_System.Controllers
             var admin = db.Admins.Where(a => a.UserId.Equals(adm.UserId) && a.Password.Equals(adm.Password)).FirstOrDefault();
             if (admin != null)
             {
-                FormsAuthentication.SetAuthCookie(adm.UserId, false);
+                FormsAuthentication.SetAuthCookie(admin.UserId, false);
                 Session["UserId"] = admin.UserId.ToString();
                 Session["Username"] = (admin.Firstname + " " + admin.Lastname).ToString();
                 return RedirectToAction("Index");

@@ -1,35 +1,61 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    @Styles.Render("~/Content/css")
+    @*@Styles.Render("~/Content/css")*@
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="//unpkg.com/bootstrap-select-country@4.0.0/dist/css/bootstrap-select-country.min.css" type="text/css" />
 </head>
 <body>
     
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="navbar-brand">
             <span><i class="fa fa-shopping-basket"></i></span>
             Happy Retails
         </div>
+        <div>
+           
+
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item"><a href="/home/index" class="nav-link" style="color:white">Home<span><i class="fa fa-home" style="color:white"></i></span></a> </li>
+                <li class="nav-item"><a href="/home/about" class="nav-link" style="color:white">About<span><i class="fa fa-info-circle" style="color:white"></i></span></a></li>
+                <li class="nav-item"><a href="/home/contact" class="nav-link" style="color:white">Customer Care<span><i class="fa fa-phone" style="color:white"></i></span></a> </li>
+
+            </ul>
+</div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+       
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item"><a href="/admin/Login" class="nav-link">Admin<i class="fa fa-user"></i></a></li>
-                <li class="nav-item"><a href="/user/Login" class="nav-link">User<i class="fa fa-users"></i></a></li>
-                </ul>
-            </div>
-    </nav>
+                
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white">
+                        Login<i class="fa fa-sign-in"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/admin/login">Admin</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/user/login">User<i class="fa fa-Users"></i></a>
+                    </div>
+
+                </li>
+                <li class="nav-item"><a href="/user/register" class="nav-link" style="color:white">Sign Up<span><i class="fa fa-user-plus" style="color:white"></i></span></a> </li>
+
+                <li class="nav-item"><a href="/user/cart" class="nav-link" style="color:white">Cart<span><i class="fa fa-shopping-cart" style="color:white"></i></span></a> </li>
+            </ul>
+        </div>
+        </nav>
   
         
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p style="color:black">&copy; @DateTime.Now.Year - Happy Retails</p>
         </footer>
     </div>
 

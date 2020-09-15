@@ -1,4 +1,4 @@
-﻿@model Retail_Management_System.Models.Product
+﻿@model IEnumerable<Retail_Management_System.Models.Product>
 
 @{
     ViewBag.Title = "Index";
@@ -6,111 +6,103 @@
 
 <h2>Index</h2>
 
-<div>
-    <h4>Product</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
+<table>
+    <tr>
+    
+        <td>
+            @Html.ActionLink("Create New", "Create")
+        </td>
+        <td>
+            @Html.ActionLink("Add Supplier", "CreateSupplier", new { SupplierId=})
+        </td>
+    </tr>
+</table>
+<table class="table">
+    <tr>
+        <th>
             @Html.DisplayNameFor(model => model.supplier.SupplierName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.supplier.SupplierName)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.ProductName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProductName)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.CategoryName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CategoryName)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.BrandName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BrandName)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.PreferredAge)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PreferredAge)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.PreferredGender)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PreferredGender)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Stock)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Stock)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.SoldUnits)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SoldUnits)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Discount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Discount)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.SpecialDiscount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SpecialDiscount)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Description)
-        </dt>
+        </th>
+        <th></th>
+    </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.supplier.SupplierName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BrandName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PreferredAge)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PreferredGender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Stock)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoldUnits)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Discount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SpecialDiscount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { ProductId = item.Productid }) |
+            @Html.ActionLink("Details", "Details", new { ProductId = item.Productid }) |
+            @Html.ActionLink("Delete", "Delete", new { ProductId = item.Productid })
+        </td>
+    </tr>
+}
 
-    </dl>
-</div>
-    @Html.ActionLink("Edit", "Edit", new { ProductId = Model.Productid }) |
-    @Html.Action("Delete","Delete",new { ProductId = Model.Productid })
-@Html.ActionLink("Add Supplier", "CreateSupplier", new { SupplierId=Model.SupplierId})
-@Html.ActionLink("Edit Supplier", "EditSupplier", new { SupplierId=Model.SupplierId})
-    @Html.ActionLink("Back to List", "Index")
-</p>
+</table>
