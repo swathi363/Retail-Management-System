@@ -43,7 +43,7 @@ namespace Retail_Management_System.Models
         [Display(Name = "Discount")]
         public double Discount { get; set; }
         [Required]
-        [Display(Name = "Special Discount")]
+        [Display(Name = "Additional Discount")]
         public double SpecialDiscount { get; set; }
         [Required]
         [Display(Name = "Supplier Id ")]
@@ -61,6 +61,11 @@ namespace Retail_Management_System.Models
         {
             double TotalAmount = (price - (specialdiscount / 100) * price) * units;
             return TotalAmount;
+        }
+        public double TotalDiscount()
+        {
+            double TotalDiscount = Discount + SpecialDiscount;
+            return TotalDiscount;
         }
         public virtual ICollection<Cart> Carts { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }

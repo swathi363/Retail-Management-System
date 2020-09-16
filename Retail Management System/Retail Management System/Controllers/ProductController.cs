@@ -86,10 +86,12 @@ namespace Retail_Management_System.Controllers
             {
                 return HttpNotFound();
             }
-            
+           
             if (product.Stock<30)
             {
                 product.SpecialDiscount = 25;
+                
+
 
             }
             DateTime dt1 = new DateTime(2020, 09, 23);
@@ -107,7 +109,7 @@ namespace Retail_Management_System.Controllers
             {
                 product.SpecialDiscount = 13;
             }
-            return View();
+            return View(product);
         }
     }
 }
