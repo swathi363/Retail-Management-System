@@ -15,21 +15,14 @@ namespace Retail_Management_System.Controllers
     public class UserController : Controller
     {
         RetailContext db = new RetailContext();
-        // GET: User
-        public ActionResult Index()
-        {
-            
-            return View();
-        }
 
-
-        public ActionResult Login()
+        public ActionResult Index(string category)
         {
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(User usr)
+        public ActionResult Index(User usr)
         {
             usr.Password = encrypt(usr.Password);
             var user = db.Users.Where(a => a.UserId.Equals(usr.UserId) && a.Password.Equals(usr.Password)).FirstOrDefault();
@@ -38,7 +31,8 @@ namespace Retail_Management_System.Controllers
                 FormsAuthentication.SetAuthCookie(usr.UserId, false);
                 Session["UserId"] = user.UserId.ToString();
                 Session["Username"] = (user.Firstname + " " + user.Lastname).ToString();
-              
+                return RedirectToAction("Index","Product");
+
             }
             else
             {
@@ -46,6 +40,8 @@ namespace Retail_Management_System.Controllers
             }
             return View(usr);
         }
+
+       
         public ActionResult Register()
         {
             return View();

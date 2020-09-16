@@ -36,11 +36,18 @@
 
         <dd>
             @if (Model.Discount != 0 || Model.SpecialDiscount != 0)
-            {<s>  @Html.DisplayFor(model => model.Price) </s> <br />}
+
+
+            {    <s>  @Html.DisplayFor(model => model.Price) </s> <br />}
+                    
 
             @(Model.Price - (Model.Discount + Model.SpecialDiscount) / 100 * Model.Price)
 
-            @Html.DisplayFor(model => model.Price)
+           @Html.DisplayFor(model => model.Price)
+            
+            
+            
+
 
         </dd>
 
@@ -51,7 +58,7 @@
         {
             <dt>Available</dt>
         }
-        else if (Model.Stock > 2)
+        else if (Model.Stock > 10)
         {
             < dt > Only few left!</ dt >
         }
@@ -63,7 +70,7 @@
 
         @if (Model.Stock<30)
         {
-            <dt>Clearane Sale is on action.</dt>
+            <dt >Clearane Sale is on action.</dt>
         }
 
         @if (Model.Discount != 0)

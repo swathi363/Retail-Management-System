@@ -6,17 +6,16 @@
 
 <h2>Index</h2>
 
-<table>
-    <tr>
+<div>
     
-        <td>
+    
+        
             @Html.ActionLink("Create New", "Create")
-        </td>
-        <td>
-            @Html.ActionLink("Add Supplier", "CreateSupplier", new { SupplierId=})
-        </td>
-    </tr>
-</table>
+        
+        
+        
+    
+</div>
 <table class="table">
     <tr>
         <th>
@@ -101,8 +100,13 @@
             @Html.ActionLink("Edit", "Edit", new { ProductId = item.Productid }) |
             @Html.ActionLink("Details", "Details", new { ProductId = item.Productid }) |
             @Html.ActionLink("Delete", "Delete", new { ProductId = item.Productid })
+
         </td>
     </tr>
 }
 
 </table>
+<div>
+    @Html.ActionLink("Add Supplier", "CreateSupplier")
+
+</div>

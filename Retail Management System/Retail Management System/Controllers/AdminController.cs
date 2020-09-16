@@ -22,9 +22,11 @@ namespace Retail_Management_System.Controllers
         {
             return View(db.Products.ToList());
         }
-        [HttpPost]
+        
+             
+        
         [Authorize]
-        [ValidateAntiForgeryToken]
+        
         public ActionResult Details(string ProductId)
         {
             if (ProductId == null)
@@ -39,7 +41,7 @@ namespace Retail_Management_System.Controllers
             return View(product);
         }
         [Authorize]
-        public ActionResult CreateSupplier(string SupplierId)
+        public ActionResult CreateSupplier()
         {
             return View();
         }
