@@ -140,12 +140,12 @@ namespace Retail_Management_System.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Create([Bind(Include = "Productid,ProductName,CategoryName,BrandName,PreferredAge,PreferredGender,Price,Stock,SoldUnits,Discount,SpecialDiscount,SupplierId,Description")]Product product)
+        public ActionResult Create([Bind(Include = "Productid,ProductName,CategoryName,BrandName,PreferredAge,PreferredGender,Price,Stock,SoldUnits,Discount,SupplierId,Description")]Product product)
         {
             if (ModelState.IsValid)
             {
+                product.SpecialDiscount = 0;
                 db.Products.Add(product);
- 
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

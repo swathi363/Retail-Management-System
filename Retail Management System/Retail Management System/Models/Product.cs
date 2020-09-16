@@ -43,7 +43,7 @@ namespace Retail_Management_System.Models
         [Display(Name = "Discount")]
         public double Discount { get; set; }
         [Required]
-        [Display(Name = "Special Discount")]
+        [Display(Name = "Additional Discount")]
         public double SpecialDiscount { get; set; }
         [Required]
         [Display(Name = "Supplier Id ")]
@@ -52,15 +52,18 @@ namespace Retail_Management_System.Models
         [Required]
         [Display(Name = "Product Description")]
         public string Description { get; set; }
-        public double GetAmount(double price, double discount, int units)
+        public double GetAmount(double price, double discount,double SpecialDisCount, int units)
         {
-            double TotalAmount = (price - (discount / 100) * price) * units;
+            double TotalOff = discount + SpecialDisCount;
+            double TotalAmount = (price - (( TotalOff)/ 100) * price)*units;
             return TotalAmount;
         }
-        public double GetSpecialAmount(double price, double specialdiscount, int units)
+       
+        public string TotalDiscount()
         {
-            double TotalAmount = (price - (specialdiscount / 100) * price) * units;
-            return TotalAmount;
+            double TotalDiscount = (Discount + SpecialDiscount);
+            string Total = Convert.ToString(TotalDiscount);                
+            return Total;
         }
         public virtual ICollection<Cart> Carts { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
