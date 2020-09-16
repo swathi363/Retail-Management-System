@@ -102,7 +102,7 @@
                  @Html.DisplayName("₹")
 
             @(Model.Price - (Model.Discount + Model.SpecialDiscount) / 100 * Model.Price)
-                @Html.Display(Model.TotalDiscount())
+                @Html.Display(Convert.ToString(Model.Discount + Model.SpecialDiscount))
                
         }
 
