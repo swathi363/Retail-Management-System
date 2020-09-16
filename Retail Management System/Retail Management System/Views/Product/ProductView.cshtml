@@ -36,16 +36,16 @@
 
         <dd>
             @if (Model.Discount != 0 || Model.SpecialDiscount != 0)
-            {
-                <dt>
-                <s>  @Html.DisplayFor(model => model.Price) </s> <br />
+
+
+            {    <s>  @Html.DisplayFor(model => model.Price) </s> <br />}
                     
 
             @(Model.Price - (Model.Discount + Model.SpecialDiscount) / 100 * Model.Price)
 
            @Html.DisplayFor(model => model.Price)
-            </dt>
-            }
+            
+            
             
 
 
