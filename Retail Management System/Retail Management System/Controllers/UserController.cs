@@ -59,7 +59,7 @@ namespace Retail_Management_System.Controllers
                 db.Configuration.ValidateOnSaveEnabled = false;
                 db.Users.Add(usr);
                 db.SaveChanges();
-                return RedirectToAction("Login");
+                return RedirectToAction("Index");
             }
             else
             {
@@ -167,6 +167,90 @@ namespace Retail_Management_System.Controllers
                 ViewBag.Error = "Cart Empty";
             }
             return View();
+        }
+        [Authorize]
+        public ActionResult CartDelete(string UserId, string ProductId)
+        {
+            if (ProductId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Cart cart = db.Carts.Where(c => c.UserId.Equals(UserId) && c.ProductId.Equals(ProductId)).FirstOrDefault();
+            if (cart == null)
+            {
+                return HttpNotFound();
+            }
+            return View(cart);
+        }
+        //Post delete cart details
+        [Authorize]
+        [HttpPost, ActionName("CartDelete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(string UserId, string ProductId)
+        {
+            Cart cart = db.Carts.Where(c => c.UserId.Equals(UserId) && c.ProductId.Equals(ProductId)).FirstOrDefault();
+            db.Carts.Remove(cart);
+            db.SaveChanges();
+            return RedirectToAction("Cart");
+        }
+        [Authorize]
+        public ActionResult MyOrders()
+        {
+            string UserId = Session["UserId"].ToString();
+            var orders = db.Transactions.Where(c => c.UserId.Equals(UserId)).ToList().OrderBy(o => o.Tdate).ToList();
+            return View(orders);
+        }
+        [Authorize]
+        public ActionResult CancelOrder(int? TId)
+        {
+            if (TId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var transaction = db.Transactions.Where(t => t.Tid == TId).FirstOrDefault();
+            if (transaction == null)
+            {
+                return HttpNotFound();
+            }
+            return View(transaction);
+        }
+        [Authorize]
+        [HttpPost, ActionName("CancelOrder")]
+        [ValidateAntiForgeryToken]
+        public ActionResult CancelallConfirmed(int TId, int BillNo)
+        {
+            var transaction = db.Transactions.Find(TId);
+            var ProductId = transaction.ProductId;
+            var products = db.Products.Find(ProductId);
+            products.Stock = products.Stock + transaction.NoofProduct;
+            products.SoldUnits = products.SoldUnits + 1;
+            db.Entry(products).State = EntityState.Modified;
+            db.SaveChanges();
+            double Amount = transaction.Amount;
+            db.Transactions.Remove(transaction);
+            db.SaveChanges();
+            var bill = db.Bills.Find(BillNo);
+            bill.Amount = bill.Amount - Amount;
+            db.Entry(bill).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("MyOrders");
+        }
+        [Authorize]
+        public ActionResult Feedback(string ProductId)
+        {
+            ViewBag.ProductId = ProductId;
+            return View();
+        }
+        [Authorize]
+        [HttpPost]
+        public ActionResult Feedback([Bind(Include = "Feedback")] Feedback fed, string ProductId)
+        {
+            fed.ProductId = ProductId;
+            fed.UserId = Session["UserId"].ToString();
+            db.Feedbacks.Add(fed);
+            db.SaveChanges();
+            return RedirectToAction("MyOrders");
         }
     }
 }
