@@ -131,5 +131,42 @@ namespace Retail_Management_System.Controllers
             db.SaveChanges();
             return View(usr);
         }
+        [Authorize]
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+        //Post change password for user
+        [Authorize]
+        [HttpPost]
+        public ActionResult ChangePassword(User usr)
+        {
+            usr.Password = encrypt(usr.Password);
+            usr.ConfirmPassword = encrypt(usr.ConfirmPassword);
+            string username = User.Identity.Name;
+            User user = db.Users.FirstOrDefault(u => u.UserId.Equals(username));
+            user.Password = usr.Password;
+            user.ConfirmPassword = usr.ConfirmPassword;
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Settings");
+        }
+        [Authorize]
+        [HttpGet]
+        public ActionResult Cart()
+        {
+            string id = (string)Session["UserId"];
+
+            var carts = db.Carts.Where(c => c.UserId.Equals(id)).ToList();
+            if (carts != null)
+            {
+                return View(carts);
+            }
+            else
+            {
+                ViewBag.Error = "Cart Empty";
+            }
+            return View();
+        }
     }
 }

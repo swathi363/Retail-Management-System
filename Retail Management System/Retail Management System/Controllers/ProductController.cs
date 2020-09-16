@@ -1,6 +1,7 @@
 ﻿using Retail_Management_System.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -90,8 +91,8 @@ namespace Retail_Management_System.Controllers
             if (product.Stock<30)
             {
                 product.SpecialDiscount = 25;
-                
-
+                db.Entry(product).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
 
             }
             DateTime dt1 = new DateTime(2020, 09, 23);
@@ -100,16 +101,75 @@ namespace Retail_Management_System.Controllers
             if (DateTime.Now == dt1)
             {
                 product.SpecialDiscount = 24;
+                db.Entry(product).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
+
             }
             if (DateTime.Now == dt2)
             {
                 product.SpecialDiscount = 23;
+                db.Entry(product).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
             }
             if (DateTime.Now == dt3)
             {
                 product.SpecialDiscount = 13;
+                db.Entry(product).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
             }
             return View(product);
         }
+        [Authorize]
+        public ActionResult AddtoCart(string itemno, string ProductId)
+        {
+            string UserId = Session["UserId"].ToString();
+            int noofunits = int.Parse(itemno);
+            if(Session["UserId"]==null)
+            {
+                return RedirectToAction("Index", "User");
+            }
+            else
+            {
+                if (String.IsNullOrEmpty(ProductId))
+                {
+                    ViewBag.Error = "Empty";
+                }
+                else
+                {
+                    var p = db.Products.Where(pro => pro.Productid.Equals(ProductId)).FirstOrDefault();
+
+                    if (noofunits > p.Stock)
+                    {
+                        ViewBag.Error = "No stock available";
+                    }
+                    else
+                    {
+                        if (db.Carts.Where(car => car.ProductId.Equals(ProductId) && car.UserId.Equals(UserId)).FirstOrDefault() != null)
+                        {
+
+                            Cart cart = db.Carts.Where(car => car.ProductId.Equals(ProductId) && car.UserId.Equals(UserId)).FirstOrDefault();
+                            cart.NoofProduct = cart.NoofProduct + noofunits;
+                            db.Entry(cart).State = EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            Cart cart = new Cart();
+                            cart.UserId = Session["UserId"].ToString();
+                            cart.ProductId = p.Productid;
+                            cart.ProductName = p.ProductName;
+                            cart.NoofProduct = noofunits;
+                            cart.Amount = p.GetAmount(p.Price, p.Discount,p.SpecialDiscount, noofunits);
+                            db.Carts.Add(cart);
+                            db.SaveChanges();
+                        }
+                    }
+                }
+            }
+            return RedirectToAction("Cart", "User");
+        }
+        }
     }
-}

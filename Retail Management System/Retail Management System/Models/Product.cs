@@ -52,16 +52,13 @@ namespace Retail_Management_System.Models
         [Required]
         [Display(Name = "Product Description")]
         public string Description { get; set; }
-        public double GetAmount(double price, double discount, int units)
+        public double GetAmount(double price, double discount,double SpecialDisCount, int units)
         {
-            double TotalAmount = (price - (discount / 100) * price) * units;
+            double TotalOff = discount + SpecialDisCount;
+            double TotalAmount = (price - (( TotalOff)/ 100) * price)*units;
             return TotalAmount;
         }
-        public double GetSpecialAmount(double price, double specialdiscount, int units)
-        {
-            double TotalAmount = (price - (specialdiscount / 100) * price) * units;
-            return TotalAmount;
-        }
+       
         public string TotalDiscount()
         {
             double TotalDiscount = (Discount + SpecialDiscount);
