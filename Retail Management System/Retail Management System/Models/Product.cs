@@ -62,10 +62,11 @@ namespace Retail_Management_System.Models
             double TotalAmount = (price - (specialdiscount / 100) * price) * units;
             return TotalAmount;
         }
-        public double TotalDiscount()
+        public string TotalDiscount()
         {
-            double TotalDiscount = Discount + SpecialDiscount;
-            return TotalDiscount;
+            double TotalDiscount = (Discount + SpecialDiscount);
+            string Total = Convert.ToString(TotalDiscount);                
+            return Total;
         }
         public virtual ICollection<Cart> Carts { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
