@@ -102,6 +102,9 @@
                  @Html.DisplayName("₹")
 
             @(Model.Price - (Model.Discount + Model.SpecialDiscount) / 100 * Model.Price)
+                @Html.DisplayFor(model => model.Discount + model.SpecialDiscount)% Off
+                
+              
                 
                
         }
