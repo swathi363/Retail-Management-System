@@ -12,13 +12,13 @@
 }
 else
 {
-    <form method="get" action="/Product/Search" class="form-inline m-2">
+    @*<form method="get" action="/Product/Search" class="form-inline m-2">
         <div class="h6 m-2">
             View Products
         </div>
         @Html.TextBox("ProductName", null, new { @class = "form-control" })
         <input type="submit" value="Search" class="btn btn-dark btn-sm" />
-    </form>
+    </form>*@
     if (Model.ToList().Count == 0)
     {
         <div class="alert-info">No products found. Search for another product!</div>
