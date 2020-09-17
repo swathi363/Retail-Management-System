@@ -10,64 +10,102 @@
     
 
 </head>
-<body>
-   
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <div class="navbar-brand">
-                <span><i class="fa fa-shopping-basket"></i></span>
-                Happy Retails
-            </div>
-            <div>
-
-
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item"><a href="/home/index" class="nav-link" style="color:white">Home<span><i class="fa fa-home" style="color:white"></i></span></a> </li>
-                    <li class="nav-item"><a href="/home/about" class="nav-link" style="color:white">About<span><i class="fa fa-info-circle" style="color:white"></i></span></a></li>
-                    <li class="nav-item"><a href="/home/contact" class="nav-link" style="color:white">Customer Care<span><i class="fa fa-phone" style="color:white"></i></span></a> </li>
-
-                </ul>
-            </div>
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="nav navbar-nav ml-auto">
-
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white">
-                            Login<i class="fa fa-sign-in"></i>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/admin/login">Admin</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/user/index">User<i class="fa fa-Users"></i></a>
-                        </div>
-
-                    </li>
-                    <li class="nav-item"><a href="/user/register" class="nav-link" style="color:white">Sign Up<span><i class="fa fa-user-plus" style="color:white"></i></span></a> </li>
-
-                    <li class="nav-item"><a href="/user/cart" class="nav-link" style="color:white">Cart<span><i class="fa fa-shopping-cart" style="color:white"></i></span></a> </li>
-                </ul>
-            </div>
-        </nav>
-
-        <div class="container-fluid">
-
-            @RenderBody()
-            <div style="bottom:0;position:fixed; width:100%;">
-                <hr style="width:100%" />
-                <footer class="text-center">
-                    <p style="color:black">&copy; @DateTime.Now.Year - Happy Retails, All Rights Reserved</p>
-
-                   
-
-                </footer>
-            </div>
+   <body style="background-image:url('/IMAGES/backgrnd.png');" >
+               
+   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="navbar-brand">
+            <span><i class="fa fa-shopping-basket"></i></span>
+            Happy Retails
         </div>
-  
+        <div>
+
+
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item"><a href="/home/index" class="nav-link" style="color:white">Home<span><i class="fa fa-home" style="color:white"></i></span></a> </li>
+                <li class="nav-item"><a href="/home/about" class="nav-link" style="color:white">About<span><i class="fa fa-info-circle" style="color:white"></i></span></a></li>
+                <li class="nav-item"><a href="/home/contact" class="nav-link" style="color:white">Customer Care<span><i class="fa fa-phone" style="color:white"></i></span></a> </li>
+
+                <l1>
+
+
+
+                    <form method="get" action="/Product/Search" class="form-inline m-1">
+
+                        @Html.TextBox("ProductName", null, new { @class = "form-control" })
+
+                        <input type="submit" value="Search" class="btn btn-dark btn-sm" />
+
+
+                    </form>
+                </l1>
+            </ul>
+
+
+
+        </div>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="nav navbar-nav ml-auto">
+
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white">
+                        Login<i class="fa fa-sign-in"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/admin/login">Admin</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/user/index">User<i class="fa fa-Users"></i></a>
+                    </div>
+
+                </li>
+                <li class="nav-item"><a href="/user/register" class="nav-link" style="color:white">Sign Up<span><i class="fa fa-user-plus" style="color:white"></i></span></a> </li>
+
+                <li class="nav-item"><a href="/user/cart" class="nav-link" style="color:white">Cart<span><i class="fa fa-shopping-cart" style="color:white"></i></span></a> </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!--<div class="">
+
+            RenderBody()
+            <div style="bottom:0;position:fixed; width:100%;">-->
+    @*<hr style="width:100%" />*@
+    <!--<footer class="position-fixed">
+                <p style="color:black">&copy; @DateTime.Now.Year - Happy Retails, All Rights Reserved</p>
+
+
+
+            </footer>
+        </div>
+    </div>-->
+
+    <style >
+        .footer {
+            color: ghostwhite;
+            /*background-color: rgba(50,50,50,0.5);*/
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            z-index: -1
+        }
+    </style>
+    <div>    
+        @RenderBody()
+    <footer class="text-center footer ">
+
+        <p style="color:black">
+            &copy; @DateTime.Now.Year - Happy Retails, All Rights Reserved
+        </p>
+    </footer>
+    </div>
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

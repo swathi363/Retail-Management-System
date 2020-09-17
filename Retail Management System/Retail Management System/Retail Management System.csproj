@@ -163,6 +163,8 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="IMAGES\Appliances.png" />
+    <Content Include="IMAGES\backgrnd.png" />
+    <Content Include="IMAGES\backgrnd1.png" />
     <Content Include="IMAGES\endofseason.jpg" />
     <Content Include="IMAGES\images.png" />
     <Content Include="IMAGES\deals.jpg" />
@@ -329,6 +331,7 @@
     <Content Include="Views\User\MyOrders.cshtml" />
     <Content Include="Views\User\Feedback.cshtml" />
     <Content Include="Views\User\CancelOrder.cshtml" />
+    <Content Include="Views\Product\BrandView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

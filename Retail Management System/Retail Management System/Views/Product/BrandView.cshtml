@@ -12,13 +12,6 @@
 }
 else
 {
-    @*<form method="get" action="/Product/Search" class="form-inline m-2">
-        <div class="h6 m-2">
-            View Products
-        </div>
-        @Html.TextBox("ProductName", null, new { @class = "form-control" })
-        <input type="submit" value="Search" class="btn btn-dark btn-sm" />
-    </form>*@
 <form method="get" action="/Product/Filter" class="form-inline m-2">
     <div class="col-md-10">
         @{
@@ -70,7 +63,7 @@ else
 
             @foreach (var item in Model)
             {
-                <div class="card col-3 mr-2 p-1 ">
+                <div class="card col-3 mr-2 p-1">
                     <div class="card-header text-center">
                         @Html.DisplayFor(modelItem => item.ProductName)
                     </div>
@@ -89,3 +82,5 @@ else
         </div>
     }
 }
+
+
