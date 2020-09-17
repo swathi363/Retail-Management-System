@@ -140,24 +140,32 @@ namespace Retail_Management_System.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Create([Bind(Include = "Productid,ProductName,CategoryName,BrandName,PreferredAge,PreferredGender,Price,Stock,SoldUnits,Discount,SupplierId,Description,productImage")]Product product)
+        public ActionResult Create([Bind(Include = "Productid,ProductName,CategoryName,BrandName,PreferredAge,PreferredGender,Price,Stock,SoldUnits,Discount,SupplierId,Description,productImage")]Product product,HttpPostedFileBase file)
         {
+            var path = "";
+            if(file!=null)
+            {
+                if(file.ContentLength>0)
+                {
+                    if(Path.GetExtension(file.FileName).ToLower()==".jpg"
+                        ||Path.GetExtension(file.FileName).ToLower()==".png"
+                        || Path.GetExtension(file.FileName).ToLower() == ".gif"
+                        || Path.GetExtension(file.FileName).ToLower() == ".jpeg")
+                    {
+                        path = Path.Combine(Server.MapPath("~/IMAGES/"), product.Productid+".jpg");
+                        file.SaveAs(path);
+                        ViewBag.UploadSuccess = true;
+                    }
+
+                }
+            }
             if (ModelState.IsValid)
             {
-                HttpPostedFileBase file = Request.Files["ImageData"];
-                ContentRepository service = new ContentRepository();
-                int i = service.UploadImageInDataBase(file, product);
-                if (i == 1)
-                {
-                    return RedirectToAction("Index");
-                }
-                return View(product);
                 product.SpecialDiscount = 0;
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(product);
 
         }
