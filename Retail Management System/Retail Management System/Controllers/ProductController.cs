@@ -122,6 +122,80 @@ namespace Retail_Management_System.Controllers
             }
             return View(product);
         }
+        public ActionResult BrandView(string Brand)
+        {
+            if (Brand == null)
+            {
+                var brand = db.Products
+                                  .Select(p => p.BrandName)
+                                  .Distinct();
+                ViewBag.category = brand.ToList();
+                
+                return View();
+            }
+            else
+            {
+                    var products = db.Products.Where(p => p.BrandName.Equals(Brand)).ToList();
+
+                    if (products != null)
+                    {
+                        // return the View named Products with the required category lists 
+                        return View();
+                    }
+                    else
+                    {
+                        ViewBag.Error = "Invalid Category";
+                    }
+                    // return the View named Products without any data 
+                    return View();
+                
+            }
+        }
+    
+        public ActionResult Filter(string name)
+        {
+            var list = new List<Product>();
+            if(string.IsNullOrEmpty(name))
+            {
+                list = db.Products.ToList();
+            }
+            else if(name== "Category")
+            {
+                return RedirectToAction("Index");
+            }
+            else if(name== "Brand")
+            {
+                return RedirectToAction("BrandView");
+            }
+            else if (name == "Age")
+            {
+                list = db.Products.Where(p=>p.PreferredAge.Equals(name)).ToList();
+                
+            }
+            else if(name=="Gender")
+            {
+                list = db.Products.Where(p=>p.PreferredGender.Equals(name)).ToList();
+
+
+            }
+
+            else if (name == "Price(low to high)")
+            {
+                list = db.Products.Where(p => p.Price.Equals(name)).ToList();
+                list.Sort();
+
+            }
+            else if (name == "Price(high to low)")
+            {
+                list = db.Products.Where(p => p.Price.Equals(name)).ToList();
+                list.Sort();
+                list.Reverse();
+
+            }
+            return View ("Products", list);
+
+
+        }
         [Authorize]
         public ActionResult AddtoCart(string itemno, string ProductId)
         {
@@ -299,7 +373,7 @@ namespace Retail_Management_System.Controllers
         public ActionResult DebitCard(int? Tid)
         {
             var transaction = db.Transactions.Where(t => t.Tid==Tid).FirstOrDefault();
-            ViewBag.Deliverydate = transaction.Tdate.AddDays(5).ToString();
+            ViewBag.Deliverydate = transaction.Tdate.AddDays(5).ToShortDateString();
             return View();
         }
         public ActionResult NetBanking(int? Tid)

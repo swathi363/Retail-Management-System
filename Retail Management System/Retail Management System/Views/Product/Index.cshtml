@@ -5,14 +5,47 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<form method="get" action="/Product/Filter" class="form-inline m-2">
+    <div class="col-md-10">
+        @{
+            List<SelectListItem> listItems = new List<SelectListItem>();
+            listItems.Add(new SelectListItem
+            {
+                Text = "Category",
+                Value = "Category"
+            });
+            listItems.Add(new SelectListItem
+            {
+                Text = "Brand",
+                Value = "Brand"
+            });
+            listItems.Add(new SelectListItem
+            {
+                Text = "Age",
+                Value = "Age"
+            });
+            listItems.Add(new SelectListItem
+            {
+                Text = "Gender",
+                Value = "Gender"
+            });
+            listItems.Add(new SelectListItem
+            {
+                Text = "Price(low to high)",
+                Value = "Price(low to high)"
+            });
+            listItems.Add(new SelectListItem
+            {
+                Text = "Price(high to low)",
+                Value = "Price(high to low)"
+            });
 
-<form method="get" action="/Product/Search" class="form-inline m-2">
-    <div class="h6 m-2">
-        Shop By Category
+        }
+        @Html.DropDownList("name", listItems, new { @class = "form-control" })
+        <input type="submit" value="Filter" class="btn btn-dark btn-sm" />
     </div>
-    @Html.TextBox("ProductName", null, new { @class = "form-control" })
-    <input type="submit" value="Search" class="btn btn-dark btn-sm" />
-</form>
+    </form>
+
 <div class="m-3">
     @foreach (var item in (List<string>)ViewBag.category)
     {
