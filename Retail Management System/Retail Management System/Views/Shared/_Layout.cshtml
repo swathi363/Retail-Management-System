@@ -30,12 +30,14 @@
 
 
 
-                    <form method="get" action="/Product/Search" class="form-inline m-1">
+                    <form method="get" action="/Product/Search" class="form-inline-m1">
 
                         @Html.TextBox("ProductName", null, new { @class = "form-control" })
-
-                        <input type="submit" value="Search" class="btn btn-dark btn-sm" />
-
+                        <div class="form-group">
+                            <div class="col-md-10">
+                        <input type="submit" value="search" class="btn btn-dark btn-sm " />
+                            </div>
+                        </div>
 
                     </form>
                 </l1>

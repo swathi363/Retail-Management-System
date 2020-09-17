@@ -140,10 +140,18 @@ namespace Retail_Management_System.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Create([Bind(Include = "Productid,ProductName,CategoryName,BrandName,PreferredAge,PreferredGender,Price,Stock,SoldUnits,Discount,SupplierId,Description")]Product product)
+        public ActionResult Create([Bind(Include = "Productid,ProductName,CategoryName,BrandName,PreferredAge,PreferredGender,Price,Stock,SoldUnits,Discount,SupplierId,Description,productImage")]Product product)
         {
             if (ModelState.IsValid)
             {
+                HttpPostedFileBase file = Request.Files["ImageData"];
+                ContentRepository service = new ContentRepository();
+                int i = service.UploadImageInDataBase(file, product);
+                if (i == 1)
+                {
+                    return RedirectToAction("Index");
+                }
+                return View(product);
                 product.SpecialDiscount = 0;
                 db.Products.Add(product);
                 db.SaveChanges();

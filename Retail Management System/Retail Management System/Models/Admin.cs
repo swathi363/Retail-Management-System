@@ -32,21 +32,13 @@ namespace Retail_Management_System.Models
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "Confirm Password required")]
         public string ConfirmPassword { get; set; }
-        [Display(Name = "Address")]
-        [Required(ErrorMessage = "Address is required")]
-        public string Address { get; set; }
         [Display(Name = "ContactNumber")]
         [Required(ErrorMessage = "Contact number is required")]
         [StringLength(10, MinimumLength = 10, ErrorMessage = "Your mobile number  is not valid")]
         [RegularExpression(@"^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$", ErrorMessage = "Please enter a valid mobile number")]
-
         public string ContactNumber { get; set; }
-        [Display(Name = "City")]
-        [Required(ErrorMessage = "City is required")]
-        public string City { get; set; }
-        [Display(Name = "Country")]
-        [Required(ErrorMessage = "Country is required")]
-        public string Country { get; set; }
+       
+       
     }
 
 }
