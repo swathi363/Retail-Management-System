@@ -333,6 +333,7 @@
     <Content Include="Views\User\CancelOrder.cshtml" />
     <Content Include="Views\Product\Brand.cshtml" />
     <Content Include="Views\Product\BrandView.cshtml" />
+    <Content Include="Views\Shared\_background.cshtml" />
     <Content Include="Views\Product\AgeFilter.cshtml" />
     <Content Include="Views\Product\AgeFilterView.cshtml" />
     <Content Include="Views\Product\GenderFilter.cshtml" />
