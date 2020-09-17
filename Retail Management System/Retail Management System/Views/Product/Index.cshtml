@@ -29,16 +29,6 @@
                 Text = "Gender",
                 Value = "Gender"
             });
-            listItems.Add(new SelectListItem
-            {
-                Text = "Price(low to high)",
-                Value = "Price(low to high)"
-            });
-            listItems.Add(new SelectListItem
-            {
-                Text = "Price(high to low)",
-                Value = "Price(high to low)"
-            });
 
         }
         @Html.DropDownList("name", listItems, new { @class = "form-control" })

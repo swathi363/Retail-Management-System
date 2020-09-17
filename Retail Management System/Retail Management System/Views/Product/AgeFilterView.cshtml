@@ -12,43 +12,36 @@
 }
 else
 {
-    @*<form method="get" action="/Product/Search" class="form-inline m-2">
-        <div class="h6 m-2">
-            View Products
-        </div>
-        @Html.TextBox("ProductName", null, new { @class = "form-control" })
-        <input type="submit" value="Search" class="btn btn-dark btn-sm" />
-    </form>*@
-<form method="get" action="/Product/Filter" class="form-inline m-2">
-    <div class="col-md-10">
-        @{
-            List<SelectListItem> listItems = new List<SelectListItem>();
-            listItems.Add(new SelectListItem
-            {
-                Text = "Category",
-                Value = "Category"
-            });
-            listItems.Add(new SelectListItem
-            {
-                Text = "Brand",
-                Value = "Brand"
-            });
-            listItems.Add(new SelectListItem
-            {
-                Text = "Age",
-                Value = "Age"
-            });
-            listItems.Add(new SelectListItem
-            {
-                Text = "Gender",
-                Value = "Gender"
-            });
+    <form method="get" action="/Product/Filter" class="form-inline m-2">
+        <div class="col-md-10">
+            @{
+                List<SelectListItem> listItems = new List<SelectListItem>();
+                listItems.Add(new SelectListItem
+                {
+                    Text = "Category",
+                    Value = "Category"
+                });
+                listItems.Add(new SelectListItem
+                {
+                    Text = "Brand",
+                    Value = "Brand"
+                });
+                listItems.Add(new SelectListItem
+                {
+                    Text = "Age",
+                    Value = "Age"
+                });
+                listItems.Add(new SelectListItem
+                {
+                    Text = "Gender",
+                    Value = "Gender"
+                });
 
-        }
-        @Html.DropDownList("Filter", listItems, new { @class = "form-control" })
-        <input type="submit" value="Filter" class="btn btn-dark btn-sm" />
-    </div>
-</form>
+            }
+            @Html.DropDownList("Filter", listItems, new { @class = "form-control" })
+            <input type="submit" value="Filter" class="btn btn-dark btn-sm" />
+        </div>
+    </form>
     if (Model.ToList().Count == 0)
     {
         <div class="alert-info">No products found. Search for another product!</div>
@@ -60,7 +53,7 @@ else
 
             @foreach (var item in Model)
             {
-                <div class="card col-3 mr-2 p-1 ">
+                <div class="card col-3 mr-2 p-1">
                     <div class="card-header text-center">
                         @Html.DisplayFor(modelItem => item.ProductName)
                     </div>
@@ -79,3 +72,5 @@ else
         </div>
     }
 }
+
+
