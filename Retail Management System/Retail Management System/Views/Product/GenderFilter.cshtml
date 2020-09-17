@@ -2,7 +2,7 @@
 
 
 @{
-    ViewBag.Title = "BrandView";
+    ViewBag.Title = "AgeFilter";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <form method="get" action="/Product/Filter" class="form-inline m-2">
@@ -29,7 +29,8 @@
                 Text = "Gender",
                 Value = "Gender"
             });
-            
+           
+           
 
         }
         @Html.DropDownList("name", listItems, new { @class = "form-control" })
@@ -38,10 +39,10 @@
 </form>
 
 <div class="m-3 " style="opacity:100">
-    @foreach (var item in (List<string>)ViewBag.Brand)
+    @foreach (var item in (List<string>)ViewBag.Gender)
     {
 
-        @Html.ActionLink(item, "BrandView", new { Brand = item }, new { @class = "list-group-item list-group-item-action bg-transparent" })
+        @Html.ActionLink(item, "GenderFilter", new { Gender = item }, new { @class = "list-group-item list-group-item-action bg-transparent" })
 
     }
 </div>

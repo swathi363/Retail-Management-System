@@ -129,7 +129,7 @@ namespace Retail_Management_System.Controllers
                 var brand = db.Products
                                   .Select(p => p.BrandName)
                                   .Distinct();
-                ViewBag.category = brand.ToList();
+                ViewBag.Brand = brand.ToList();
                 
                 return View();
             }
@@ -140,18 +140,76 @@ namespace Retail_Management_System.Controllers
                     if (products != null)
                     {
                         // return the View named Products with the required category lists 
-                        return View();
+                        return View("Brand", products);
                     }
                     else
                     {
                         ViewBag.Error = "Invalid Category";
                     }
                     // return the View named Products without any data 
-                    return View();
+                    return View("Brand");
                 
             }
         }
-    
+        public ActionResult AgeFilter(string Age)
+        {
+            if (Age == null)
+            {
+                var age = db.Products
+                                  .Select(p => p.PreferredAge)
+                                  .Distinct();
+                ViewBag.Age = age.ToList();
+
+                return View();
+            }
+            else
+            {
+                var products = db.Products.Where(p => p.PreferredAge.Equals(Age)).ToList();
+
+                if (products != null)
+                {
+                    // return the View named Products with the required category lists 
+                    return View("AgeFilterView", products);
+                }
+                else
+                {
+                    ViewBag.Error = "Invalid Category";
+                }
+                // return the View named Products without any data 
+                return View("AgeFilterView");
+
+            }
+        }
+        public ActionResult GenderFilter(string Gender)
+        {
+            if (Gender == null)
+            {
+                var gender = db.Products
+                                  .Select(p => p.PreferredGender)
+                                  .Distinct();
+                ViewBag.Gender = gender.ToList();
+
+                return View();
+            }
+            else
+            {
+                var products = db.Products.Where(p => p.PreferredGender.Equals(Gender)).ToList();
+
+                if (products != null)
+                {
+                    // return the View named Products with the required category lists 
+                    return View("GenderFilterView", products);
+                }
+                else
+                {
+                    ViewBag.Error = "Invalid Category";
+                }
+                // return the View named Products without any data 
+                return View("GenderFilterView");
+
+            }
+        }
+
         public ActionResult Filter(string name)
         {
             var list = new List<Product>();
@@ -169,31 +227,15 @@ namespace Retail_Management_System.Controllers
             }
             else if (name == "Age")
             {
-                list = db.Products.Where(p=>p.PreferredAge.Equals(name)).ToList();
-                
+                return RedirectToAction("AgeFilter");
             }
             else if(name=="Gender")
             {
-                list = db.Products.Where(p=>p.PreferredGender.Equals(name)).ToList();
-
-
-            }
-
-            else if (name == "Price(low to high)")
-            {
-                list = db.Products.Where(p => p.Price.Equals(name)).ToList();
-                list.Sort();
+                return RedirectToAction("GenderFilter");
 
             }
-            else if (name == "Price(high to low)")
-            {
-                list = db.Products.Where(p => p.Price.Equals(name)).ToList();
-                list.Sort();
-                list.Reverse();
-
-            }
-            return View ("Products", list);
-
+            return RedirectToAction("Index");
+            
 
         }
         [Authorize]

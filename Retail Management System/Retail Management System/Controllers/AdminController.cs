@@ -262,5 +262,48 @@ namespace Retail_Management_System.Controllers
             }
             return clearText;
         }
+        public ActionResult Feedback()
+        {
+                return View(db.Feedbacks.ToList());
+        }
+        [Authorize]
+        public ActionResult Report()
+        {
+                return View();
+            
+        }
+        [Authorize]
+        [HttpPost]
+        public ActionResult Report(string TDate)
+        {
+            DateTime dt;
+            if (DateTime.TryParse(TDate, out dt))
+            {
+                var trs = db.Transactions.ToList();
+                for (int i = 0; i < trs.Count; i++)
+                {
+                    if (trs[i].Tdate.Month != dt.Month)
+                    {
+                        trs.Remove(trs[i]);
+                        i--;
+                    }
+                }
+                return View("ReportView", trs);
+            }
+            else
+            {
+                return RedirectToAction("Report");
+            }
+        }
+
+        //Dispose the database
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

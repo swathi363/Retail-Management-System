@@ -3,13 +3,14 @@
 @{
     ViewBag.Title = "CreateSupplier";
 }
+@Html.Partial("_background")
 
 <h2>CreateSupplier</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Supplier</h4>
         <hr />
@@ -40,5 +41,5 @@
 
 <div>
     @Html.ActionLink("Back to List", "Index")
-    @Html.ActionLink("Edit","EditSupplier")
+    @Html.ActionLink("Edit", "EditSupplier")
 </div>

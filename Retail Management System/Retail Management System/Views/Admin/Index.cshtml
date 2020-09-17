@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Retail_Management_System.Models.Product>
+@Html.Partial("_background")
 
 @{
     ViewBag.Title = "Index";
@@ -7,14 +8,14 @@
 <h2>Index</h2>
 
 <div>
-    
-    
-        
-            @Html.ActionLink("Create New", "Create")
-        
-        
-        
-    
+
+
+
+    @Html.ActionLink("Create New", "Create")
+
+
+
+
 </div>
 <table class="table">
     <tr>
@@ -57,53 +58,53 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model)
-{
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.supplier.SupplierName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BrandName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PreferredAge)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PreferredGender)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Stock)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SoldUnits)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Discount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SpecialDiscount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { ProductId = item.Productid }) |
-            @Html.ActionLink("Details", "Details", new { ProductId = item.Productid }) |
-            @Html.ActionLink("Delete", "Delete", new { ProductId = item.Productid })
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.supplier.SupplierName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrandName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PreferredAge)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PreferredGender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoldUnits)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpecialDiscount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { ProductId = item.Productid }) |
+                @Html.ActionLink("Details", "Details", new { ProductId = item.Productid }) |
+                @Html.ActionLink("Delete", "Delete", new { ProductId = item.Productid })
 
-        </td>
-    </tr>
-}
+            </td>
+        </tr>
+    }
 
 </table>
 <div>
