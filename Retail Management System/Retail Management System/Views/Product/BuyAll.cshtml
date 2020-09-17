@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Retail_Management_System.Models.Cart>
+
+@{
+    ViewBag.Title = "Confirm Order";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Pay Your Order</h2>
+<h4>Confirm Payment</h4>
+<p>
+    ThankYou @ViewBag.Name, for shopping with us
+<p>Your order will be delivered to: </p>
+<br />
+<p>
+    Your Order will be delevered to - <br />
+    <blockquote> @ViewBag.Address</blockquote>
+</p>
+
+<table class="table">
+    <tr>
+        <th colspan="3">
+            Review Your orders
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoofProduct)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+
+        </tr>
+    }
+    <p> Total Amount to be Paid <b>₹@ViewBag.TotalSum</b></p>
+</table>
+@Html.ActionLink("Confirm All Order", "PayAll", new { @class = "btn btn-success col-4" })

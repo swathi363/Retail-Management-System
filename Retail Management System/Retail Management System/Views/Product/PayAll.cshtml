@@ -1,0 +1,20 @@
+﻿@model Retail_Management_System.Models.Bill
+
+@{
+    ViewBag.Title = "PayNow";
+}
+
+<h2>PayNow</h2>
+<p>
+    Total amount to be paid :
+    <b>@ViewBag.TotalSum</b>
+</p>
+<ul>Choose Payment Options</ul>
+<li>@Html.ActionLink("Credit Card", "CreditCard", new { Tid = ViewBag.Tid })</li>
+<li>@Html.ActionLink("Debit Card", "DebitCard", new { Tid = ViewBag.Tid })</li>
+<li>@Html.ActionLink("Net Banking", "NetBanking", new { Tid = ViewBag.Tid })</li>
+
+
+
+
+

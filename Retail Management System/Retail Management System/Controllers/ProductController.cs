@@ -51,7 +51,7 @@ namespace Retail_Management_System.Controllers
             }
         }
         //Get Search product by productname
-        
+
         public ActionResult Search(string ProductName)
         {
             var list = new List<Product>();
@@ -87,8 +87,8 @@ namespace Retail_Management_System.Controllers
             {
                 return HttpNotFound();
             }
-           
-            if (product.Stock<30)
+
+            if (product.Stock < 30)
             {
                 product.SpecialDiscount = 25;
                 db.Entry(product).State = System.Data.Entity.EntityState.Modified;
@@ -127,7 +127,7 @@ namespace Retail_Management_System.Controllers
         {
             string UserId = Session["UserId"].ToString();
             int noofunits = int.Parse(itemno);
-            if(Session["UserId"]==null)
+            if (Session["UserId"] == null)
             {
                 return RedirectToAction("Index", "User");
             }
@@ -162,7 +162,7 @@ namespace Retail_Management_System.Controllers
                             cart.ProductId = p.Productid;
                             cart.ProductName = p.ProductName;
                             cart.NoofProduct = noofunits;
-                            cart.Amount = p.GetAmount(p.Price, p.Discount,p.SpecialDiscount, noofunits);
+                            cart.Amount = p.GetAmount(p.Price, p.Discount, p.SpecialDiscount, noofunits);
                             db.Carts.Add(cart);
                             db.SaveChanges();
                         }
@@ -171,5 +171,142 @@ namespace Retail_Management_System.Controllers
             }
             return RedirectToAction("Cart", "User");
         }
+        [Authorize]
+        public ActionResult BuyNow(string UserId, string ProductId)
+        {
+            ViewBag.UserId = UserId;
+            ViewBag.ProductId = ProductId;
+            var user = db.Users.Where(u => u.UserId.Equals(UserId)).FirstOrDefault();
+            return View(user);
+        }
+        
+      
+        
+        
+        [Authorize]
+        public ActionResult BuyAll()
+        {
+            double sum = 0;
+            string UserId = Session["UserId"].ToString();
+            var cart = db.Carts.Where(c => c.UserId.Equals(UserId)).ToList();
+            foreach (Cart c in cart)
+            {
+                sum = sum + c.Amount;
+            }
+            ViewBag.TotalSum = sum;
+            var user = db.Users.Where(u => u.UserId.Equals(UserId)).FirstOrDefault();
+            ViewBag.Address = user.Address + "\n" + user.City + "\n" + user.Country;
+            ViewBag.Name = user.Firstname + " " + user.Lastname;
+            return View(cart);
+        }
+        [Authorize]
+        public ActionResult PayAll()
+        {
+            string UserId = Session["UserId"].ToString();
+            var cart = db.Carts.Where(c => c.UserId.Equals(UserId)).ToList();
+            var t = db.Transactions.Select(tn => tn.BillNo).DefaultIfEmpty(0).Max() + 1;
+            Bill newbill = new Bill();
+            newbill.BillNo = t;
+            db.Bills.Add(newbill);
+            db.SaveChanges();
+            double sum = 0;
+
+            for (int i = 0; i < cart.Count; i++)
+            {
+                Transaction Trx = new Transaction();
+                Trx.BillNo = t;
+                Trx.UserId = cart[i].UserId;
+                var c = cart[i].ProductId.ToString();
+                Trx.ProductId = c;
+                Trx.ProductName = cart[i].ProductName;
+                Trx.NoofProduct = cart[i].NoofProduct;
+                Trx.Amount = cart[i].Amount;
+                sum = sum + Trx.Amount;
+                Trx.Tdate = DateTime.Now;
+                db.Transactions.Add(Trx);
+                db.SaveChanges();
+
+                var p = db.Products.Where(pro => pro.Productid.Equals(c)).FirstOrDefault();
+                p.Stock = p.Stock - cart[i].NoofProduct;
+                p.SoldUnits = p.SoldUnits + 1;
+                db.Entry(p).State = EntityState.Modified;
+                db.SaveChanges();
+                db.Carts.Remove(cart[i]);
+                db.SaveChanges();
+                ViewBag.Tid = Trx.Tid;
+
+            }
+
+            newbill.Amount = sum;
+            db.Entry(newbill).State = EntityState.Modified;
+            db.SaveChanges();
+            ViewBag.TotalSum = newbill.Amount.ToString();
+            return View();
+        }
+        public ActionResult PayNow(string UserId, string ProductId)
+        {
+            if (String.IsNullOrEmpty(ProductId))
+            {
+                ViewBag.Error = "Empty";
+            }
+            else
+            {
+                var c = db.Carts.Where(cart => cart.UserId.Equals(UserId) && cart.ProductId.Equals(ProductId)).FirstOrDefault();
+
+                var p = db.Products.Where(product => product.Productid.Equals(ProductId)).FirstOrDefault();
+                if (c.NoofProduct > p.Stock)
+                {
+                    ViewBag.Error = "No stock available";
+                }
+                else
+                {
+                    Transaction Trx = new Transaction();
+                    Bill newbill = new Bill();
+                    var t = db.Bills.Select(tn => tn.BillNo).DefaultIfEmpty(0).Max() + 1;
+                    newbill.BillNo = t;
+                    newbill.Amount = c.Amount;
+                    db.Bills.Add(newbill);
+                    db.SaveChanges();
+
+                    Trx.BillNo = t;
+                    Trx.UserId = c.UserId;
+                    Trx.ProductId = c.ProductId;
+                    Trx.ProductName = c.ProductName;
+                    Trx.NoofProduct = c.NoofProduct;
+                    Trx.Amount = c.Amount;
+                    Trx.Tdate = DateTime.Now;
+                    db.Transactions.Add(Trx);
+                    db.SaveChanges();
+                    p.Stock = p.Stock - c.NoofProduct;
+                    p.SoldUnits = p.SoldUnits + 1;
+                    db.Entry(p).State = EntityState.Modified;
+                    db.SaveChanges();
+                    db.Carts.Remove(c);
+                    db.SaveChanges();
+                    ViewBag.TotalSum = newbill.Amount.ToString();
+                    ViewBag.Tid = Trx.Tid;
+                }
+            }
+            return View();
+
+        }
+        public ActionResult CreditCard(int? Tid)
+        {
+            var transaction = db.Transactions.Where(t => t.Tid==Tid).FirstOrDefault();
+            ViewBag.Deliverydate = transaction.Tdate.AddDays(5).ToShortDateString();
+            return View();
+        }
+        public ActionResult DebitCard(int? Tid)
+        {
+            var transaction = db.Transactions.Where(t => t.Tid==Tid).FirstOrDefault();
+            ViewBag.Deliverydate = transaction.Tdate.AddDays(5).ToString();
+            return View();
+        }
+        public ActionResult NetBanking(int? Tid)
+        {
+            var transaction = db.Transactions.Where(t => t.Tid==Tid).FirstOrDefault();
+            ViewBag.Deliverydate = transaction.Tdate.AddDays(5).ToShortDateString();
+            return View();
         }
     }
+}

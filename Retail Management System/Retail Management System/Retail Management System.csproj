@@ -318,6 +318,17 @@
     <Content Include="Views\Product\Products.cshtml" />
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\User\Cart.cshtml" />
+    <Content Include="Views\Product\BuyNow.cshtml" />
+    <Content Include="Views\Product\BuyAll.cshtml" />
+    <Content Include="Views\Product\PayNow.cshtml" />
+    <Content Include="Views\Product\CreditCard.cshtml" />
+    <Content Include="Views\Product\DebitCard.cshtml" />
+    <Content Include="Views\Product\NetBanking.cshtml" />
+    <Content Include="Views\Product\PayAll.cshtml" />
+    <Content Include="Views\User\CartDelete.cshtml" />
+    <Content Include="Views\User\MyOrders.cshtml" />
+    <Content Include="Views\User\Feedback.cshtml" />
+    <Content Include="Views\User\CancelOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
