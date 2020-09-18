@@ -21,7 +21,7 @@
 
                 <form method="get" action="/Product/Search" class="form-inline">
 
-                    @Html.TextBox("ProductName", null, new { @class = "form-control ", @style = "width:390px", @placeholder = "Search for products, brands and more" })
+                    @Html.TextBox("ProductName", null, new { @class = "form-control ", @style = "width:330px", @placeholder = "Search for products, brands and more" })
                     <div class="form-group">
                         <div class="col-md-10">
                             <button type="submit" class="btn-dark btn btn-outline-info  fa fa-search" />
@@ -62,18 +62,22 @@
 
             <li class="nav-item dropdown ">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white">
-                    Hi Admin
+                   Hi @User.Identity.Name <i class=" fa fa-user-circle"></i>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="/admin/login">My Account <i class=" fa fa-user"></i></a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/user/index">Change Password <i class="fa fa-key"></i></a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/user/index">Logout <i class="fa fa-sign-out"></i></a>
+                    <a class="dropdown-item" href="/admin/logout">Logout <i class="fa fa-sign-out"></i></a>
                 </div>
             </li>
             <li class="nav-item dropdown ">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white">
+                <style>
+                    .dropdown-toggle::after
+                    {content:none;}
+                </style>
+                <a class="nav-link  dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white" >
                     Settings  <i class="fa fa-bars"></i>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
