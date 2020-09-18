@@ -7,135 +7,142 @@
 <h2>@ViewBag.Title</h2>
 
 <div>
-    
+
     <hr />
-    <dl class="card p-3 col-3">
-        @{ var img = Model.Productid + ".jpg";}
-        <img src="~/Images/@img" height="500" />
+    
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CategoryName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CategoryName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.BrandName)
-
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BrandName)
-        </dd>
-        @if (Model.Stock > 10)
-        {
-            <dt>Available</dt>
-        }
-        else if (Model.Stock < 10 && Model.Stock != 0)
-        {
-            <dt style="color:red">Only few left! Hurry up</dt>
-
-        }
-        else if (Model.Stock == 0)
-        {
-            <dt>No stock left.</dt>
-
-        }
+        <div class="card" style="width:100%";>
+        <dl class="card p-3 col-3" style="text-align:right">
 
 
-
-
-
-
-
-
-
-
-        @if (Model.Discount != 0)
-        {
             <dt>
-                @Html.DisplayNameFor(model => model.Discount)
+                @Html.DisplayNameFor(model => model.CategoryName)
             </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Discount)% Off
-            </dd>
-        }
-        else
-        {
-            <dt>No Discount Available!</dt>
-        }
 
-        @if (Model.SpecialDiscount != 0)
-        {
-            if (Model.Stock < 30 && Model.Stock != 0)
+            <dd>
+                @Html.DisplayFor(model => model.CategoryName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.BrandName)
+
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BrandName)
+            </dd>
+            @if (Model.Stock > 10)
             {
-                <dt style="color:yellow">Clearance Sale</dt>
+                <dt>Available</dt>
+            }
+            else if (Model.Stock < 10 && Model.Stock != 0)
+            {
+                <dt style="color:red">Only few left! Hurry up</dt>
+
+            }
+            else if (Model.Stock == 0)
+            {
+                <dt>No stock left.</dt>
+
             }
 
+
+
+            @if (Model.Discount != 0)
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.Discount)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Discount)% Off
+                </dd>
+            }
+            else
+            {
+                <dt>No Discount Available!</dt>
+            }
+
+            @if (Model.SpecialDiscount != 0)
+            {
+                if (Model.Stock < 30 && Model.Stock != 0)
+                {
+                    <dt style="color:yellow">Clearance Sale</dt>
+                }
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.SpecialDiscount)
+
+
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.SpecialDiscount)% off
+                </dd>
+
+            }
             <dt>
-                @Html.DisplayNameFor(model => model.SpecialDiscount)
-
-
+                @Html.DisplayNameFor(model => model.Price)
             </dt>
+
+
             <dd>
-                @Html.DisplayFor(model => model.SpecialDiscount)% off
+                @if (Model.Stock != 0)
+                {
+
+                    if (Model.Discount != 0 || Model.SpecialDiscount != 0)
+
+
+                    {<s>  ₹@Html.DisplayFor(model => model.Price) </s> <br />}
+                @Html.DisplayName("₹")
+
+                @(Model.Price - (Model.Discount + Model.SpecialDiscount) / 100 * Model.Price)
+                @*@Html.DisplayFor(model => (model.Discount + model.SpecialDiscount))
+                @Html.DisplayName("% Off")*@
+
+
+
+
+            }
+
+
+
+
+
+
+
+
             </dd>
 
-        }
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
 
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            
 
-        <dd>
-            @if (Model.Stock != 0)
+        </dl>
+            
+    </div>
+    <tr>
+        <div class="card-body">
+        <div class="card p-3 col-3" style="text-align:left">
+        <th align="left">
+            @{ var img = Model.Productid + ".jpg";}
+            <img src="~/Images/@img" height="700" />
+                
+            @using (Html.BeginForm("AddtoCart", "Product", FormMethod.Post, new { @class = "form-inline" }))
             {
-
-                if (Model.Discount != 0 || Model.SpecialDiscount != 0)
-
-
-                {<s>  ₹@Html.DisplayFor(model => model.Price) </s> <br />}
-            @Html.DisplayName("₹")
-
-            @(Model.Price - (Model.Discount + Model.SpecialDiscount) / 100 * Model.Price)
-            @*@Html.DisplayFor(model => (model.Discount + model.SpecialDiscount))
-            @Html.DisplayName("% Off")*@
-
-
-
-
-        }
-
-
-
-
-
-
-
-
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-
-    </dl>
+                @Html.TextBox("Itemno", "1", new { @class = "form-control", @placeholder = "Quantity" })
+                @Html.HiddenFor(m => m.Productid, new { @class = "form-control", @value = Model.Productid })
+                <button type="submit" class="btn btn-primary btn-sm ml-2">Add to Cart <i class="fa fa-cart-plus"></i></button>
+            }
+            
+        </th>
+            </div>
+            </div>
+        </div>
+        
 </div>
-<tr>
-    <th align="right">
-        @using (Html.BeginForm("AddtoCart", "Product", FormMethod.Post, new { @class = "form-inline" }))
-        {
-            @Html.TextBox("Itemno", "1", new { @class = "form-control", @placeholder = "Quantity" })
-            @Html.HiddenFor(m => m.Productid, new { @class = "form-control", @value = Model.Productid })
-            <button type="submit" class="btn btn-primary btn-sm ml-2">Add to Cart <i class="fa fa-cart-plus"></i></button>
-        }
-    </th>
 </tr>
 
 

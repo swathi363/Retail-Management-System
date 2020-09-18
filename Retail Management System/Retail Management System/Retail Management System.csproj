@@ -165,7 +165,9 @@
     <Content Include="IMAGES\Appliances.png" />
     <Content Include="IMAGES\backgrnd.png" />
     <Content Include="IMAGES\backgrnd1.png" />
+    <Content Include="IMAGES\clearnc.png" />
     <Content Include="IMAGES\endofseason.jpg" />
+    <Content Include="IMAGES\eosclearnc.png" />
     <Content Include="IMAGES\images.png" />
     <Content Include="IMAGES\deals.jpg" />
     <Content Include="IMAGES\LOGO111.png" />
