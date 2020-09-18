@@ -38,8 +38,8 @@ else
                 });
 
             }
-            @Html.DropDownList("Filter", listItems, new { @class = "form-control" })
-            <input type="submit" value="Filter" class="btn btn-dark btn-sm" />
+            @Html.DropDownList("Filter", listItems, new { @class = "form-control fa fa-filter " })
+            <input type="submit" value="Filter" class="btn btn-primary  btn-sm fa fa-filter" />
         </div>
     </form>
     if (Model.ToList().Count == 0)
@@ -56,7 +56,7 @@ else
             <div class="card col-3 mr-2 p-1">
                 <div class="card-header text-center">
                     @{ var img = item.Productid + ".jpg";}
-                    <img src="~/Images/@img" height="500" />
+                    <img src="~/Images/@img" width="50" />
                 </div>
                 <div class="card-header text-center">
 
