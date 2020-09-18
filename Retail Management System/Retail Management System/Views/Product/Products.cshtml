@@ -45,8 +45,8 @@ else
             });
 
         }
-        @Html.DropDownList("Filter", listItems, new { @class = "form-control" })
-        <input type="submit" value="Filter" class="btn btn-dark btn-sm" />
+        @Html.DropDownList("Filter", listItems, new { @class = "form-control fa fa-filter" })
+        <input type="submit" value="Filter" class="btn btn-dark btn-sm fa fa-filter" />
     </div>
 </form>
     if (Model.ToList().Count == 0)
@@ -60,21 +60,26 @@ else
 
             @foreach (var item in Model)
             {
-                <div class="card col-3 mr-2 p-1 ">
-                    <div class="card-header text-center">
-                        @Html.DisplayFor(modelItem => item.ProductName)
-                    </div>
-                    <div class="font-weight-bold text-center" style="font-size:large">
-                        @Html.DisplayFor(modelItem => item.BrandName)
-                    </div>
-                    <div class="card-body text-center">
-                        @Html.DisplayFor(modelItem => item.Price) <br />
-                        <span class="alert-info">@Html.DisplayFor(modelItem => item.Discount)% off</span>
-                    </div>
-                    <div class="card-footer text-center">
-                        @Html.ActionLink("Details", "ProductView", new { ProductId = item.Productid }, new { @class = "btn btn-primary" })
-                    </div>
+            <div class="card col-3 mr-2 p-1 ">
+                <div class="card-header text-center">
+                    @{ var img = item.Productid + ".jpg";}
+                    <img src="~/Images/@img"  width="50" />
                 </div>
+                <div class="card-header text-center">
+
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </div>
+                <div class="font-weight-bold text-center" style="font-size:large">
+                    @Html.DisplayFor(modelItem => item.BrandName)
+                </div>
+                <div class="card-body text-center">
+                    @Html.DisplayFor(modelItem => item.Price) <br />
+                    <span class="alert-info">@Html.DisplayFor(modelItem => item.Discount)% off</span>
+                </div>
+                <div class="card-footer text-center">
+                    @Html.ActionLink("Details", "ProductView", new { ProductId = item.Productid }, new { @class = "btn btn-primary" })
+                </div>
+            </div>
             }
         </div>
     }
