@@ -6,7 +6,14 @@
 }
 @Html.Partial("_background")
 @Html.Partial("user_navbar")
-
+@if (Session["UserId"] != null)
+{
+    @Html.Partial("user_navbar")
+}
+else
+{
+    @Html.Partial("admin_navbar")
+}
 
 @if (!string.IsNullOrEmpty(ViewBag.Error))
 {
