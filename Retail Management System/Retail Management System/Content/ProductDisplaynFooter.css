@@ -1,0 +1,99 @@
+﻿@import url(font-awesome.css);
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300);
+
+
+.content {
+}
+
+	.content .page-header {
+		padding-bottom: 5px;
+		margin: 20px 0 30px;
+		border-bottom: 1px solid #eee;
+	}
+
+		.content .page-header h2 {
+			font-weight: 700;
+		}
+
+
+.product-item {
+	position: relative;
+}
+
+	.product-item .caption h5 {
+		font-weight: 600;
+		font-size: 16px;
+		line-height: 20px;
+		border-top: 2px solid #333;
+		margin-top: 10px;
+		padding-top: 10px;
+	}
+
+	.product-item .caption .product-item-price {
+		font-size: 14px;
+		line-height: 16px;
+		font-weight: 400;
+	}
+
+
+	.product-item .product-item-badge {
+		position: absolute;
+		top: 4px;
+		left: 4px;
+		padding: 5px 12px 6px;
+		color: #fff;
+		font-size: 12px;
+		line-height: 14px;
+		font-weight: 600;
+		background: #333;
+		-webkit-border-radius: 4px 0 4px 0;
+		-moz-border-radius: 4px 0 4px 0;
+		-o-border-radius: 4px 0 4px 0;
+		border-radius: 4px 0 4px 0;
+	}
+
+.copyright .copyright-right {
+	text-align: right;
+}
+
+.copyright .list-social {
+	float: right;
+	margin-top: -10px;
+}
+
+	.copyright .list-social > li {
+		display: inline;
+		float: left;
+		margin: 2px 5px;
+	}
+
+		.copyright .list-social > li > a {
+			display: block;
+			width: 30px;
+			height: 30px;
+			position: relative;
+			background: #ffffff;
+			border: 1px solid #ccc;
+			-webkit-border-radius: 100%;
+			-moz-border-radius: 100%;
+			-o-border-radius: 100%;
+			border-radius: 100%;
+			font-size: 20px;
+			color: #333333;
+		}
+
+			.copyright .list-social > li > a:hover {
+				background: #333333;
+				border: 1px solid #333333;
+				font-size: 20px;
+				color: #ffffff;
+			}
+
+			.copyright .list-social > li > a .fa {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				margin-left: -8px;
+				margin-top: -9px;
+			}
+
