@@ -5,6 +5,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@Html.Partial("user_navbar")
 <form method="get" action="/Product/Filter" class="form-inline m-2">
     <div class="col-md-10">
         @{
@@ -32,16 +33,16 @@
 
         }
         @Html.DropDownList("name", listItems, new { @class = "form-control fa fa-filter" })
-        <input type="submit" value="Filter"  class="btn btn-dark btn-sm fa fa-filter" />
+        <input type="submit" value="Filter" class="btn btn-dark btn-sm fa fa-filter" />
     </div>
-    </form>
+</form>
 
-<div class="m-3 " style="opacity:100" >
+<div class="m-3 " style="opacity:100">
     @foreach (var item in (List<string>)ViewBag.category)
     {
-    
+
         @Html.ActionLink(item, "Index", new { category = item }, new { @class = "list-group-item list-group-item-action bg-transparent" })
-    
+
     }
     @Html.ActionLink("All Products", "Index", new { category = "All" }, new { @class = "list-group-item list-group-item-action bg-transparent " })
 </div>
