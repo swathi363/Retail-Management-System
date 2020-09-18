@@ -10,11 +10,8 @@
     
     <hr />
     <dl class="card p-3 col-3">
-
-
-
-
-        
+        @{ var img = Model.Productid + ".jpg";}
+        <img src="~/IMAGES/@img" >"height="50"/>
 
         <dt >
             @Html.DisplayNameFor(model => model.CategoryName)

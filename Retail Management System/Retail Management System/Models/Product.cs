@@ -52,9 +52,6 @@ namespace Retail_Management_System.Models
         [Required]
         [Display(Name = "Product Description")]
         public string Description { get; set; }
-        [Required]
-        [Display(Name ="Product Image")]
-        public byte[] productImage { get; set; }
         public double GetAmount(double price, double discount,double SpecialDisCount, int units)
         {
             double TotalOff = discount + SpecialDisCount;
