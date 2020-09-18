@@ -5,6 +5,8 @@
     ViewBag.Title = "BrandView";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@Html.Partial("_background")
+@Html.Partial("user_navbar")
 <form method="get" action="/Product/Filter" class="form-inline m-2">
     <div class="col-md-10">
         @{
@@ -29,7 +31,7 @@
                 Text = "Gender",
                 Value = "Gender"
             });
-            
+
 
         }
         @Html.DropDownList("name", listItems, new { @class = "form-control fa fa-filter" })
