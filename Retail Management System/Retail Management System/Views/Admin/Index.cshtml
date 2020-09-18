@@ -1,27 +1,25 @@
 ﻿@model IEnumerable<Retail_Management_System.Models.Product>
+
 @Html.Partial("_background")
+@Html.Partial("admin_navbar")
 
 @{
     ViewBag.Title = "Index";
 }
 
+
 <h2>Index</h2>
+<h2>Products</h2>
 
 <div>
 
 
-
-    @Html.ActionLink("Create New", "Create")
-
-
-
+    <a href="/admin/create" class="btn btn-dark btn-sm"><i class="fa fa-plus"></i> Add Product</a>
 
 </div>
-<table class="table">
+<table class="table" style="color:black">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.supplier.SupplierName)
-        </th>
+        
         <th>
             @Html.DisplayNameFor(model => model.ProductName)
         </th>
@@ -31,83 +29,46 @@
         <th>
             @Html.DisplayNameFor(model => model.BrandName)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PreferredAge)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PreferredGender)
-        </th>
+
         <th>
             @Html.DisplayNameFor(model => model.Price)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Stock)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SoldUnits)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Discount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SpecialDiscount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
+        
+        
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.supplier.SupplierName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CategoryName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BrandName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PreferredAge)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PreferredGender)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Stock)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoldUnits)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Discount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SpecialDiscount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { ProductId = item.Productid }) |
-                @Html.ActionLink("Details", "Details", new { ProductId = item.Productid }) |
-                @Html.ActionLink("Delete", "Delete", new { ProductId = item.Productid })
+<tr>
 
-            </td>
-        </tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.ProductName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CategoryName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BrandName)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.Price)
+    </td>
+
+    <td>
+    <td>
+        <a href="/admin/edit?ProductId=@item.Productid" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> Edit</a>
+        <a href="/admin/details?ProductId=@item.Productid" class="btn btn-dark btn-sm"><i class="fa fa-edit"></i> Details</a>
+        <a href="/admin/delete?ProductId=@item.Productid" class="btn btn-danger btn-sm"><i class="fa fa-remove"></i> Clear stock</a>
+    </td>
+    </td>
+</tr>
     }
 
 </table>
 <div>
-    @Html.ActionLink("Add Supplier", "CreateSupplier")
+    <a href="/admin/CreateSupplier" class="btn btn-dark btn-sm"><i class="fa fa-plus"></i> Add Supplier</a>
+
 
 </div>

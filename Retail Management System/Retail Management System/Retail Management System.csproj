@@ -165,9 +165,12 @@
     <Content Include="IMAGES\Appliances.png" />
     <Content Include="IMAGES\backgrnd.png" />
     <Content Include="IMAGES\backgrnd1.png" />
+    <Content Include="IMAGES\clearnc.png" />
     <Content Include="IMAGES\endofseason.jpg" />
+    <Content Include="IMAGES\eosclearnc.png" />
     <Content Include="IMAGES\images.png" />
     <Content Include="IMAGES\deals.jpg" />
+    <Content Include="IMAGES\LOGO111.png" />
     <Content Include="IMAGES\pic1.jpg" />
     <Content Include="IMAGES\pic2.jpg" />
     <Content Include="IMAGES\pic3.jpg" />
@@ -341,6 +344,9 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\ChangePassword.cshtml" />
     <Content Include="Views\Admin\Feedback.cshtml" />
+    <Content Include="Views\Shared\admin_navbar.cshtml" />
+    <Content Include="Views\Shared\common_navbar.cshtml" />
+    <Content Include="Views\Shared\user_navbar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
