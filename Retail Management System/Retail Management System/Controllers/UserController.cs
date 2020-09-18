@@ -73,7 +73,7 @@ namespace Retail_Management_System.Controllers
             FormsAuthentication.SignOut();
             Session.Clear();
             Session.Abandon();
-            return RedirectToAction("Login");
+            return RedirectToAction("Index");
         }
         public string encrypt(string clearText)
         {
@@ -155,6 +155,10 @@ namespace Retail_Management_System.Controllers
         [HttpGet]
         public ActionResult Cart()
         {
+            if(Session["UserId"]==null)
+            {
+                return RedirectToAction("Login","Admin");
+            }
             string id = (string)Session["UserId"];
 
             var carts = db.Carts.Where(c => c.UserId.Equals(id)).ToList();
