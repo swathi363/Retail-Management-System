@@ -241,7 +241,6 @@ namespace Retail_Management_System.Controllers
         [Authorize]
         public ActionResult AddtoCart(string itemno, string ProductId)
         {
-            string UserId = Session["UserId"].ToString();
             int noofunits = int.Parse(itemno);
             if (Session["UserId"] == null)
             {
@@ -255,6 +254,8 @@ namespace Retail_Management_System.Controllers
                 }
                 else
                 {
+                    string UserId = Session["UserId"].ToString();
+
                     var p = db.Products.Where(pro => pro.Productid.Equals(ProductId)).FirstOrDefault();
 
                     if (noofunits > p.Stock)

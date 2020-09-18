@@ -140,7 +140,7 @@ namespace Retail_Management_System.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Create([Bind(Include = "Productid,ProductName,CategoryName,BrandName,PreferredAge,PreferredGender,Price,Stock,SoldUnits,Discount,SupplierId,Description,productImage")]Product product,HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "Productid,ProductName,CategoryName,BrandName,PreferredAge,PreferredGender,Price,Stock,SoldUnits,Discount,SupplierId,Description")]Product product,HttpPostedFileBase file)
         {
             var path = "";
             if(file!=null)
