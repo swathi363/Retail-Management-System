@@ -32,10 +32,10 @@
 
                     <form method="get" action="/Product/Search" class="form-inline" >
 
-                        @Html.TextBox("ProductName",null, new { @class = "form-control", @style = "width:475px" } )
+                        @Html.TextBox("ProductName",null, new { @class = "form-control ", @style = "width:475px" ,@placeholder="Search for products, brands and more" } )
                        <div class="form-group">
                             <div class="col-md-10">
-                        <input type="submit" value="search" class="btn btn-dark btn-sm"/>
+                        <button type="submit"  class="btn btn-dark  fa fa-search" />
                             </div>
                        </div>
 
