@@ -3,13 +3,15 @@
 @{
     ViewBag.Title = "EditSupplier";
 }
+@Html.Partial("_background")
+@Html.Partial("admin_navbar")
 
 <h2>EditSupplier</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Supplier</h4>
         <hr />
