@@ -347,6 +347,7 @@
     <Content Include="Views\Shared\admin_navbar.cshtml" />
     <Content Include="Views\Shared\common_navbar.cshtml" />
     <Content Include="Views\Shared\user_navbar.cshtml" />
+    <Content Include="Views\Admin\SupplierView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

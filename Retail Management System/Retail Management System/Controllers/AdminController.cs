@@ -58,6 +58,10 @@ namespace Retail_Management_System.Controllers
             }
             return View(supplier);
         }
+        public ActionResult SupplierView()
+        {
+            return View(db.Suppliers.ToList());
+        }
         [Authorize]
         public ActionResult EditSupplier(string SupplierId)
         {
@@ -135,6 +139,7 @@ namespace Retail_Management_System.Controllers
         [Authorize]
         public ActionResult Create()
         {
+            ViewBag.Supplier = db.Suppliers;
             return View();
         }
         [HttpPost]
