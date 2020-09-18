@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Retail_Management_System.Models.Supplier>
+@*@Html.Partial("_background")*@
+@Html.Partial("admin_navbar")
+
+@{
+    ViewBag.Title = "SupplierView";
+}
+
+<h2>Suppliers</h2>
+
+<p>
+    <a href="/admin/CreateSupplier" class="btn btn-dark btn-sm"><i class="fa fa-plus"></i> Add Supplier</a>
+
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SupplierName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupplierName)
+            </td>
+            <td>
+                <a href="/admin/edit?SupplierId=@item.SupplierId" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> Edit</a>
+                <a href="/admin/details?SupplierId=@item.SupplierId" class="btn btn-dark btn-sm"><i class="fa fa-edit"></i> Details</a>
+            </td>
+        </tr>
+    }
+
+</table>

@@ -90,12 +90,11 @@
 
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SupplierId, "SupplierId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SupplierId)
             <div class="col-md-10">
-                @Html.EditorFor(model => model.SupplierId, new { htmlAttributes = new { @class = "form-control" } })
-
-                @Html.ValidationMessageFor(model => model.SupplierId, "", new { @class = "text-danger" })
+            @Html.DropDownListFor(model=>model.SupplierId,new SelectList(ViewBag.Supplier,"SupplierId","SupplierName"),"Select Supplier", htmlAttributes: new { @class="form-control"})
             </div>
+                @Html.ValidationMessageFor(model => model.SupplierId, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
