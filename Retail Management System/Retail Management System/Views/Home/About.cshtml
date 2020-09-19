@@ -2,7 +2,15 @@
     ViewBag.Title = "About";
 }
 @Html.Partial("_background")
-@Html.Partial("common_navbar")
+
+@if (Session["UserId"] != null)
+{
+    @Html.Partial("user_navbar")
+}
+else
+{
+    @Html.Partial("common_navbar")
+}
 <div class="container-fluid">
 
     <h2><b>@ViewBag.Title</b></h2>

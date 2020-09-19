@@ -1,14 +1,14 @@
 ﻿<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="navbar-brand">
         @*<span><i class="fa fa-shopping-basket"></i></span>*@
-        <img src="~/IMAGES/logooo.png" height="40px" />
+        <img src="~/IMAGES/logooo.png" height="35px" />
         
         @*<i class="font">Happy Retails</i>*@
-        <img src="~/IMAGES/brand.png" height="40px" />
+        <img src="~/IMAGES/brand.png" height="35px" />
     </div>
     <style>
-        .font{
-            font-family: 'Times New Roman', Times, serif;
+        .font {
+            font-family: 'Grandstander', cursive;
             font-style: normal;
         }
     </style>
@@ -26,7 +26,7 @@
 
                 <form method="get" action="/Product/Search" class="form-inline">
 
-                    @Html.TextBox("ProductName", null, new { @class = "form-control ", @style = "width:447px", @placeholder = "Search for products, brands and more" })
+                    @Html.TextBox("ProductName", null, new { @class = "form-control ", @style = "width:440px", @placeholder = "Search for products, brands and more" })
                     <div class="form-group">
                         <div class="col-md-10">
                             <button type="submit" class="btn-dark btn btn-outline-info  fa fa-search" />
