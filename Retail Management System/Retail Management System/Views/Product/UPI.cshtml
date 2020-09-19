@@ -1,0 +1,19 @@
+﻿@model Retail_Management_System.Models.Carddetails
+
+@{
+    ViewBag.Title = "UPI";
+}
+@Html.Partial("_background")
+@Html.Partial("user_navbar")
+
+
+<h2>UPI</h2>
+
+<div>
+    <label>
+        Mobile Number* @Html.ValidationMessageFor(model => model.mobile)
+    </label>
+    @Html.TextBoxFor(model => model.mobile, new { @class = "inputComn", @placeholder = "Mobile Number" })
+
+</div>
+@Html.ActionLink("Confirm Payment", "ConfirmPayment", new { Tid = ViewBag.Tid })

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Runtime.Remoting.Messaging;
 using System.Web;
 using System.Web.Mvc;
 
@@ -409,20 +410,32 @@ namespace Retail_Management_System.Controllers
         }
         public ActionResult CreditCard(int? Tid)
         {
-            var transaction = db.Transactions.Where(t => t.Tid==Tid).FirstOrDefault();
-            ViewBag.Deliverydate = transaction.Tdate.AddDays(5).ToShortDateString();
-            ViewData["CardType"]=new SelectList()
+            var transaction = db.Transactions.Where(t => t.Tid == Tid).FirstOrDefault();
+            ViewBag.Tid = transaction.Tid;
             return View();
         }
-        public ActionResult DebitCard(int? Tid)
-        {
-            var transaction = db.Transactions.Where(t => t.Tid==Tid).FirstOrDefault();
-            ViewBag.Deliverydate = transaction.Tdate.AddDays(5).ToShortDateString();
-            return View();
-        }
+        
         public ActionResult NetBanking(int? Tid)
         {
-            var transaction = db.Transactions.Where(t => t.Tid==Tid).FirstOrDefault();
+            var transaction = db.Transactions.Where(t => t.Tid == Tid).FirstOrDefault();
+            ViewBag.Tid = transaction.Tid;
+            return View();
+        }
+        public ActionResult CashOnDelivery(int? Tid)
+        {
+            var transaction = db.Transactions.Where(t => t.Tid == Tid).FirstOrDefault();
+            ViewBag.Deliverydate = transaction.Tdate.AddDays(5).ToShortDateString();
+            return View();
+        }
+        public ActionResult UPI(int? Tid)
+        {
+            var transaction = db.Transactions.Where(t => t.Tid == Tid).FirstOrDefault();
+            ViewBag.Tid = transaction.Tid;
+            return View();
+        }
+        public ActionResult ConfirmPayment(int? Tid)
+        {
+            var transaction = db.Transactions.Where(t => t.Tid == Tid).FirstOrDefault();
             ViewBag.Deliverydate = transaction.Tdate.AddDays(5).ToShortDateString();
             return View();
         }

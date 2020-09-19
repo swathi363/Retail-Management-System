@@ -5,7 +5,7 @@
 }
 @Html.Partial("_background")
 @Html.Partial("admin_navbar")
-<html>
+
 <h2>ReportView</h2>
 
 <table id="report" class="table">
@@ -65,20 +65,37 @@
     }
 
 </table>
-<input type="submit" id="btnExport" value="Export" />
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
-</script>
-<script src="~/Scripts/table2excel.js"></script>
 <script type="text/javascript">
-    $(function () {
-        $("#btnExport").click(function () {
-            $("#report").table2excel({
-                filename: "table.xls"
+    function exportTableToExcel(tableID, filename = '') {
+        var downloadLink;
+        var dataType = 'application/vnd.ms-excel';
+        var tableSelect = document.getElementById(tableID);
+        var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+        // Specify file name
+        filename = filename ? filename + '.xls' : 'excel_data.xls';
+
+        // Create download link element
+        downloadLink = document.createElement("a");
+
+        document.body.appendChild(downloadLink);
+
+        if (navigator.msSaveOrOpenBlob) {
+            var blob = new Blob(['\ufeff', tableHTML], {
+                type: dataType
             });
-        });
-    });
+            navigator.msSaveOrOpenBlob(blob, filename);
+        } else {
+            // Create a link to the file
+            downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
 
+            // Setting the file name
+            downloadLink.download = filename;
 
-    </script>
-</html>
+            //triggering the function
+            downloadLink.click();
+        }
+    }
+</script>
+<button onclick="exportTableToExcel('report')">Export Table Data To Excel File</button>
 

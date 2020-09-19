@@ -1,18 +1,62 @@
-﻿@model Retail_Management_System.Models.Bill
+﻿@model Retail_Management_System.Models.ShippingDetails
 
 @{
-    ViewBag.Title = "PayNow";
+    ViewBag.Title = "PayAll";
 }
+@Html.Partial("_background")
+@Html.Partial("user_navbar")
 
-<h2>PayNow</h2>
-<p>
-    Total amount to be paid :
-    <b>@ViewBag.TotalSum</b>
-</p>
+
+<h2>Pay All</h2>
+<div style="color:red">
+    <p>
+        Total amount to be paid :
+        <b>@ViewBag.TotalSum</b>
+    </p>
+</div>
+<p>Shipping Address</p>
+<div>
+    <label>
+        Addres* @Html.ValidationMessageFor(model => model.Address)
+    </label>
+    @Html.TextBoxFor(model => model.Address, new { @class = "inputComn", @placeholder = "Address" })
+</div>
+<div>
+    <label>
+        City* @Html.ValidationMessageFor(model => model.City)
+    </label>
+    @Html.TextBoxFor(model => model.City, new { @class = "inputComn", @placeholder = "City" })
+</div>
+<div>
+    <label>
+        State* @Html.ValidationMessageFor(model => model.State)
+    </label>
+    @Html.TextBoxFor(model => model.State, new { @class = "inputComn", @placeholder = "State" })
+</div>
+<div>
+    <label>
+        Country* @Html.ValidationMessageFor(model => model.Country)
+    </label>
+    @Html.TextBoxFor(model => model.Country, new { @class = "inputComn", @placeholder = "Country" })
+</div>
+<div>
+    <label>
+        ZipCode* @Html.ValidationMessageFor(model => model.ZipCode)
+    </label>
+    @Html.TextBoxFor(model => model.ZipCode, new { @class = "inputComn", @placeholder = "Zipcode" })
+</div>
+<input type="submit" value="Add" class="btn btn-default" />
+
+
+
+
 <ul>Choose Payment Options</ul>
-<li>@Html.ActionLink("Credit Card", "CreditCard", new { Tid = ViewBag.Tid })</li>
-<li>@Html.ActionLink("Debit Card", "DebitCard", new { Tid = ViewBag.Tid })</li>
+<li>@Html.ActionLink("Credit Card or Debit Card", "CreditCard", new { Tid = ViewBag.Tid })</li>
 <li>@Html.ActionLink("Net Banking", "NetBanking", new { Tid = ViewBag.Tid })</li>
+<li>@Html.ActionLink("Cash On Delivery", "CashOnDelivery", new { Tid = ViewBag.Tid })</li>
+<li>@Html.ActionLink("UPI", "UPI", new { Tid = ViewBag.Tid })</li>
+
+
 
 
 

@@ -10,8 +10,8 @@
 
 
 
-<div class="container card m-5">
-    <h2 class=" card-title">Generate Report</h2>
+<div class="container card m-5 bg-transparent">
+    <h2 class=" card-title ">Generate Report</h2>
     @using (Html.BeginForm("Report", "Admin", FormMethod.Post, new { @class = "form-inline m-3" }))
     {
         @Html.TextBox("TDate", null, new { @class = "form-control", @type = "Date" })

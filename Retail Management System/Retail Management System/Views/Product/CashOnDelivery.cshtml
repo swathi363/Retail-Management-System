@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "CashOnDelivery";
+}
+@Html.Partial("_background")
+@Html.Partial("user_navbar")
+
+<h2>CashOnDelivery</h2>
+Thank You for shopping with us.
+Your order will be expected to @ViewBag.Deliverydate
+<br />
+@Html.ActionLink("My Orders", "MyOrders", "User")
+

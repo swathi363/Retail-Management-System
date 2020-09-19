@@ -1,18 +1,35 @@
-﻿@model Retail_Management_System.Models.Transaction
-
+﻿@model Retail_Management_System.Models.Carddetails
 @{
     ViewBag.Title = "CreditCard";
 }
 @Html.Partial("_background")
 @Html.Partial("user_navbar")
 
-<h2>Payment Status</h2>
-<p>
-    Your Payment was successful
-</p>
-<p>
-    Thank yoou for shopping with Happy Retail.<br />
-    The expected delivery date:<b>@ViewBag.DeliveryDate</b>
-</p>
-@Html.ActionLink("My Orders", "MyOrders", "User")
+<h2>CreditCard</h2>
+<div>
+    <label>
+        Card Type
+    </label>
+    @Html.DropDownListFor(model => model.CardType, new SelectList(Enum.GetValues(typeof(Retail_Management_System.Models.Carddetails.CardTypeName))), "Select Your Card", new { @class = "form-control" })
+    @Html.ValidationMessageFor(model => model.CardType, "", new { @class = "text-danger" })
 
+</div>
+<div>
+    <label>
+        Name on Card* @Html.ValidationMessageFor(model => model.CardName)
+    </label>
+    @Html.TextBoxFor(model => model.CardName, new { @class = "inputComn", @placeholder = "Name" })
+</div>
+<div>
+    <label>
+        Card Number* @Html.ValidationMessageFor(model => model.cardnumber)
+    </label>
+    @Html.TextBoxFor(model => model.cardnumber, new { @class = "inputComn", @placeholder = "Card Number" })
+</div>
+<div>
+    <label>
+        cvv* @Html.ValidationMessageFor(model => model.cvv)
+    </label>
+    @Html.TextBoxFor(model => model.cvv, new { @class = "inputComn", @placeholder = "cvv" })
+</div>
+@Html.ActionLink("Confirm Payment", "ConfirmPayment", new { Tid = ViewBag.Tid })

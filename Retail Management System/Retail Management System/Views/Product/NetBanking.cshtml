@@ -1,17 +1,31 @@
-﻿@model Retail_Management_System.Models.Transaction
-
+﻿
 @{
-    ViewBag.Title = "CreditCard";
+    ViewBag.Title = "NetBanking";
 }
 @Html.Partial("_background")
 @Html.Partial("user_navbar")
-<h2>Payment Status</h2>
-<p>
-    Your Payment was successful
-</p>
-<p>
-    Thank yoou for shopping with Happy Retail.<br />
-    The expected delivery date:<b>@ViewBag.DeliveryDate</b>
-</p>
-@Html.ActionLink("My Orders", "MyOrders", "User")
 
+
+
+<h2>NetBanking</h2>
+<p>
+    Choose your Bank
+</p>
+<ul>
+    <li>
+        SBI
+    </li>
+    <li>
+        HDFC
+    </li>
+    <li>
+        ICICI
+    </li>
+    <li>
+        Axis Bank
+    </li>
+    <li>
+        Standarad Charterd
+    </li>
+</ul>
+@Html.ActionLink("Confirm Payment", "ConfirmPayment", new { Tid = ViewBag.Tid })
