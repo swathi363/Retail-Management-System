@@ -407,13 +407,13 @@ namespace Retail_Management_System.Controllers
             return View();
 
         }
-        public ActionResult CreditCard(int? Tid)
-        {
-            var transaction = db.Transactions.Where(t => t.Tid==Tid).FirstOrDefault();
-            ViewBag.Deliverydate = transaction.Tdate.AddDays(5).ToShortDateString();
-            ViewData["CardType"]=new SelectList()
-            return View();
-        }
+        //public ActionResult CreditCard(int? Tid)
+        //{
+        //    var transaction = db.Transactions.Where(t => t.Tid==Tid).FirstOrDefault();
+        //    ViewBag.Deliverydate = transaction.Tdate.AddDays(5).ToShortDateString();
+        //    ViewData["CardType"] = new SelectList();
+        //    return View();
+        //}
         public ActionResult DebitCard(int? Tid)
         {
             var transaction = db.Transactions.Where(t => t.Tid==Tid).FirstOrDefault();

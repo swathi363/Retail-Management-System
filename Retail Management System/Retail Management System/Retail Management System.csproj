@@ -200,6 +200,7 @@
     <Content Include="IMAGES\Appliances.png" />
     <Content Include="IMAGES\backgrnd.png" />
     <Content Include="IMAGES\backgrnd1.png" />
+    <Content Include="IMAGES\brand.png" />
     <Content Include="IMAGES\clearnc.png" />
     <Content Include="IMAGES\endofseason.jpg" />
     <Content Include="IMAGES\eosclearnc.png" />
