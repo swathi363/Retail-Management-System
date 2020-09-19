@@ -2,22 +2,17 @@
     <div class="navbar-brand">
         @*<span><i class="fa fa-shopping-basket"></i></span>*@
         <img src="~/IMAGES/logooo.png" height="40px" />
-        <style>
-            .font {
-                font-family: 'Book Antiqua';
-                font-style: normal;
-            }
-        </style>
+        
         @*<i class="font">Happy Retails</i>*@
         <img src="~/IMAGES/brand.png" height="40px" />
     </div>
     <style>
-        *{
+        .font{
             font-family: 'Times New Roman', Times, serif;
             font-style: normal;
         }
     </style>
-    <div>
+    <div class="font">
 
 
         <ul class="nav navbar-nav ml-auto">
@@ -31,7 +26,7 @@
 
                 <form method="get" action="/Product/Search" class="form-inline">
 
-                    @Html.TextBox("ProductName", null, new { @class = "form-control ", @style = "width:430px", @placeholder = "Search for products, brands and more" })
+                    @Html.TextBox("ProductName", null, new { @class = "form-control ", @style = "width:447px", @placeholder = "Search for products, brands and more" })
                     <div class="form-group">
                         <div class="col-md-10">
                             <button type="submit" class="btn-dark btn btn-outline-info  fa fa-search" />
@@ -44,8 +39,9 @@
         </ul>
 
 
-
-    </div>
+        </div>
+    <div class="font">
+    
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -71,4 +67,5 @@
             <li class="nav-item"><a href="/user/index" class="nav-link" style="color:white">Cart<span><i class="fa fa-shopping-cart" style="color:white"></i></span></a> </li>
         </ul>
     </div>
+        </div>
 </nav>
