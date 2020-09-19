@@ -1,5 +1,13 @@
 ﻿<link href="~/Content/ProductDisplaynFooter.css" rel="stylesheet" />
-@Html.Partial("common_navbar")
+
+@if (Session["UserId"] != null)
+{
+    @Html.Partial("user_navbar")
+}
+else
+{
+    @Html.Partial("common_navbar")
+}
 
 <div id="demo" class="carousel slide" data-ride="carousel">
 
