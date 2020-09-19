@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Retail_Management_System.Models.Transaction>
+
+@{
+    ViewBag.Title = "ReportView";
+}
+@Html.Partial("_background")
+@Html.Partial("admin_navbar")
+<html>
+<h2>ReportView</h2>
+
+<table id="report" class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Bill.BillNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user.Firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoofProduct)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tdate)
+        </th>
+        <th></th>
+    </tr>
+    @{double sum = 0; }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bill.BillNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.user.Firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoofProduct)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount) @{ sum = sum + item.Amount;}
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tdate)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Total Sales Amount
+
+            </td>
+            <td>
+                ₹@sum
+            </td>
+        </tr>
+    }
+
+</table>
+<input type="submit" id="btnExport" value="Export" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+</script>
+<script src="~/Scripts/table2excel.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#btnExport").click(function () {
+            $("#report").table2excel({
+                filename: "table.xls"
+            });
+        });
+    });
+
+
+    </script>
+</html>
+

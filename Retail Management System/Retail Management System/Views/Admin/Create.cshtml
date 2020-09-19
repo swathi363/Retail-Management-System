@@ -57,7 +57,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.PreferredGender, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.PreferredGender, new SelectList(Enum.GetValues(typeof(Retail_Management_System.Models.PreferredGender))), "Selevt Prefered Gender", new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.PreferredGender, new SelectList(Enum.GetValues(typeof(Retail_Management_System.Models.PreferredGender))), "Select Prefered Gender", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.PreferredGender, "", new { @class = "text-danger" })
             </div>
         </div>
