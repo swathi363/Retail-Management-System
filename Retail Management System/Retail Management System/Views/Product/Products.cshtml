@@ -5,7 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @Html.Partial("_background")
-@Html.Partial("common_navbar")
+@if (Session["UserId"] != null)
+{
+    @Html.Partial("user_navbar")
+}
+else
+{
+    @Html.Partial("common_navbar")
+}
 
 
 @if (!string.IsNullOrEmpty(ViewBag.Error))

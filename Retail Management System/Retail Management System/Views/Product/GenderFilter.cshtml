@@ -6,14 +6,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @Html.Partial("_background")
-@Html.Partial("user_navbar")
 @if (Session["UserId"] != null)
 {
     @Html.Partial("user_navbar")
 }
 else
 {
-    @Html.Partial("admin_navbar")
+    @Html.Partial("common_navbar")
 }
 <form method="get" action="/Product/Filter" class="form-inline m-2">
     <div class="col-md-10">

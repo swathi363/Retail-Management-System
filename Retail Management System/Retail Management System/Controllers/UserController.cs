@@ -124,8 +124,6 @@ namespace Retail_Management_System.Controllers
             user.ContactNumber = usr.ContactNumber;
             user.City = usr.City;
             user.Country = usr.Country;
-            user.Password = user.Password;
-            user.ConfirmPassword = user.Password;
             Session["Username"] = (user.Firstname + " " + user.Lastname).ToString();
             db.Entry(user).State = EntityState.Modified;
             db.SaveChanges();
@@ -157,7 +155,7 @@ namespace Retail_Management_System.Controllers
         {
             if(Session["UserId"]==null)
             {
-                return RedirectToAction("Login","Admin");
+                return RedirectToAction("Index");
             }
             string id = (string)Session["UserId"];
 
