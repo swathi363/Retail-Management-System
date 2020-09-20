@@ -7,47 +7,49 @@
 @Html.Partial("_background")
 @Html.Partial("user_navbar")
 
-<h3 class="alert-danger p-3">Are you sure you want to Cancel the order? This cant be undone</h3>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
+<h5 class="alert-danger p-3"style="text-align:center">Are you sure you want to Cancel the order? This can't be undone!</h5>
+<div class="d-flex justify-content-center">
+    <div class="card w-25 p-4 mt-5 ">
+        <dl class="dl-horizontal">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.product.ProductName)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.product.ProductName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.product.ProductName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.product.ProductName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NoofProduct)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.NoofProduct)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.NoofProduct)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.NoofProduct)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Amount)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Amount)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Amount)
-        </dd>
+            <dd>
+                ₹ @Html.DisplayFor(model => model.Amount)
+            </dd>
 
-    </dl>
+        </dl>
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="hidden" value=@Model.Tid name="TId" />
-            <input type="hidden" value="@Model.BillNo" name="BillNo" />
-            <input type="submit" value="Cancel Order" class="btn btn-danger" /> |
-            @Html.ActionLink("Back to Orders", "MyOrders", null, new { @class = "btn btn-success" })
-        </div>
-    }
-</div>
+            <div class="form-actions no-color">
+                <input type="hidden" value=@Model.Tid name="TId" />
+                <input type="hidden" value="@Model.BillNo" name="BillNo" />
+                <input type="submit" value="Cancel Order" class="btn btn-danger" /> |
+                @Html.ActionLink("Back to Orders", "MyOrders", null, new { @class = "btn btn-success" })
+            </div>
+        }
+    </div>
+    </div>
+
 

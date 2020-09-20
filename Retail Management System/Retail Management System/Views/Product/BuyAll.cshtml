@@ -7,40 +7,47 @@
 @Html.Partial("_background")
 @Html.Partial("user_navbar")
 
-<h2>Pay Your Order</h2>
-<h4>Confirm Payment</h4>
-<p>
-    ThankYou @ViewBag.Name, for shopping with us
-<p>Your order will be delivered to: </p>
-<br />
-<p>
-    Your Order will be delevered to - <br />
-    <blockquote> @ViewBag.Address</blockquote>
-</p>
+<div class="d-flex justify-content-center">
+    <div class="card w-50 p-4 mt-5 ">
 
-<table class="table">
-    <tr>
-        <th colspan="3">
-            Review Your orders
-        </th>
 
-    </tr>
+        <p style="color:chocolate" class="d-flex justify-content-center">
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NoofProduct)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
+            Do you want to confirm your order?
+        </p>
 
-        </tr>
-    }
-    <p> Total Amount to be Paid <b>₹@ViewBag.TotalSum</b></p>
-</table>
-@Html.ActionLink("Confirm All Order", "PayAll", new { @class = "btn btn-success col-4" })
+
+        <table class="table">
+            <tr>
+                <th colspan="3">
+                    Review Your orders
+                </th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NoofProduct)
+                    </td>
+                    <td>
+                        ₹@Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+
+                </tr>
+            }
+        </table>
+        <div class="d-flex justify-content-center">
+            @Html.ActionLink("Confirm Order", "PayNow", new { UserId = ViewBag.UserId, ProductId = ViewBag.ProductId }, new { @class = "mt-2 col-4 btn btn-success" })
+        </div>
+    </div>
+</div>
+<div class=" d-flex justify-content-center">
+    <p class="mt-2">
+        @Html.ActionLink("Back to Cart", "Cart", "User", null, new { @class = "btn btn-info btn-sm" })
+    </p>
+</div>

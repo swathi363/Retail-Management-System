@@ -1,4 +1,7 @@
-﻿@model Retail_Management_System.Models.ShippingDetails
+﻿
+
+@model Retail_Management_System.Models.ShippingDetails
+
 
 @{
     ViewBag.Title = "PayNow";
@@ -6,77 +9,81 @@
 @Html.Partial("_background")
 @Html.Partial("user_navbar")
 
+<div class="d-flex justify-content-center">
+    <div class="card w-25 p-4 mt-5" >
 
-<h2>PayNow</h2>
-<div style="color:red">
-    <p>
-        Total amount to be paid :
-        <b>@ViewBag.TotalSum</b>
-    </p>
-</div>
-<p>Shipping Address</p>
-<div>
-<table>
-    <tr>
-        <td>
-            Address* @Html.ValidationMessageFor(model => model.Address)
+        <h2>PayNow</h2>
+        <div style="color:red">
+            <p>
+                Total amount to be paid :
+                <b>@ViewBag.TotalSum</b>
+            </p>
+        </div>
 
-        </td>
-        <td>
-            @Html.TextBoxFor(model => model.Address, new { @class = "inputComn", @placeholder = "Address" })
+        <p>if you want to change the  shipping Address</p>
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        Address* @Html.ValidationMessageFor(model => model.Address)
 
-        </td>
-    </tr>
-    
-    <tr>
-        <td>
-            City* @Html.ValidationMessageFor(model => model.City)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.Address, new { @class = "inputComn", @placeholder = "Address" })
 
-        </td>
-        <td>
-            @Html.TextBoxFor(model => model.City, new { @class = "inputComn", @placeholder = "City" })
+                    </td>
+                </tr>
 
-        </td>
-    </tr>
-    <tr>
-        <td>
-            State* @Html.ValidationMessageFor(model => model.State)
-        </td>
-        <td>
-            @Html.TextBoxFor(model => model.State, new { @class = "inputComn", @placeholder = "State" })
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Country* @Html.ValidationMessageFor(model => model.Country)
-        </td>
-        <td>
-            @Html.TextBoxFor(model => model.Country, new { @class = "inputComn", @placeholder = "Country" })
+                <tr>
+                    <td>
+                        City* @Html.ValidationMessageFor(model => model.City)
 
-        </td>
-    </tr>
-    <tr>
-        <td>
-            ZipCode* @Html.ValidationMessageFor(model => model.ZipCode)
-        </td>
-        <td>
-            @Html.TextBoxFor(model => model.ZipCode, new { @class = "inputComn", @placeholder = "Zipcode" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.City, new { @class = "inputComn", @placeholder = "City" })
 
-        </td>
-    </tr>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        State* @Html.ValidationMessageFor(model => model.State)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.State, new { @class = "inputComn", @placeholder = "State" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Country* @Html.ValidationMessageFor(model => model.Country)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.Country, new { @class = "inputComn", @placeholder = "Country" })
 
-    </table>
-</div>
-<input type="submit" value="Add" class="btn btn-default" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        ZipCode* @Html.ValidationMessageFor(model => model.ZipCode)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.ZipCode, new { @class = "inputComn", @placeholder = "Zipcode" })
+
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+        <input type="submit" value="Add" class="btn btn-default" />
 
 
 
-<ul>Choose Payment Options</ul>
-<li>@Html.ActionLink("Credit Card or Debit Card", "CreditCard", new { Tid = ViewBag.Tid })</li>
-<li>@Html.ActionLink("Net Banking", "NetBanking", new { Tid = ViewBag.Tid })</li>
-<li>@Html.ActionLink("Cash On Delivery", "CashOnDelivery", new { Tid = ViewBag.Tid })</li>
-<li>@Html.ActionLink("UPI", "UPI", new { Tid = ViewBag.Tid })</li>
-
+        <ul>Choose Payment Options</ul>
+        <li>@Html.ActionLink("Credit Card or Debit Card", "CreditCard", new { Tid = ViewBag.Tid })</li>
+        <li>@Html.ActionLink("Net Banking", "NetBanking", new { Tid = ViewBag.Tid })</li>
+        <li>@Html.ActionLink("Cash On Delivery", "CashOnDelivery", new { Tid = ViewBag.Tid })</li>
+        <li>@Html.ActionLink("UPI", "UPI", new { Tid = ViewBag.Tid })</li>
+        </div>
+    </div>
 
 
 

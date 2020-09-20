@@ -31,7 +31,8 @@ namespace Retail_Management_System.Controllers
             {
                 FormsAuthentication.SetAuthCookie(usr.UserId, false);
                 Session["UserId"] = user.UserId.ToString();
-                Session["Username"] = (user.Firstname + " " + user.Lastname).ToString();
+                Session["Username"] = (user.Firstname).ToString();
+                Session["Role"] = "user";
                 return RedirectToAction("Index","Product");
 
             }
@@ -124,6 +125,8 @@ namespace Retail_Management_System.Controllers
             user.ContactNumber = usr.ContactNumber;
             user.City = usr.City;
             user.Country = usr.Country;
+            user.Password = user.Password;
+            user.ConfirmPassword = user.Password;
             Session["Username"] = (user.Firstname + " " + user.Lastname).ToString();
             db.Entry(user).State = EntityState.Modified;
             db.SaveChanges();
@@ -147,7 +150,7 @@ namespace Retail_Management_System.Controllers
             user.ConfirmPassword = usr.ConfirmPassword;
             db.Entry(user).State = EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("Settings");
+            return RedirectToAction("Index");
         }
         [Authorize]
         [HttpGet]

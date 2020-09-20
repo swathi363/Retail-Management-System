@@ -88,6 +88,7 @@ namespace Retail_Management_System.Models
         ToysBaby,
         Sports,
         Appliances,
+        Covid_19_Supplies,
         Other
     }
     public enum PreferredAge

@@ -65,16 +65,17 @@ else
     else
     {
         <br />
-        <div class="row mr-3 ">
+        <div class="row justify-content-center ">
 
             @foreach (var item in Model)
             {
-                <div class="card col-3 mr-2 p-1 ">
-                    <div class="card-header text-center">
+                <div class="card  p-2  mr-2 mt-3 my-1"style="width:20vw">
+                    
+                    <div class="card-header text-center" style="height:45%">
                         @{ var img = item.Productid + ".jpg";}
                         <img src="~/Images/@img" width="50" />
                     </div>
-                    <div class="card-header text-center">
+                    <div class="card-header text-center"style="height:45%">
 
                         @Html.DisplayFor(modelItem => item.ProductName)
                     </div>
@@ -89,6 +90,7 @@ else
                         @Html.ActionLink("Details", "ProductView", new { ProductId = item.Productid }, new { @class = "btn btn-primary" })
                     </div>
                 </div>
+                    
             }
         </div>
     }

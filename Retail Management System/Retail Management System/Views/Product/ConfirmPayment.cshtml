@@ -4,15 +4,19 @@
 }
 @Html.Partial("_background")
 @Html.Partial("user_navbar")
+<div class="d-flex justify-content-center">
+    <div class="card w-50 p-4 mt-5" style="box-shadow:0 0 5px 5px green">
 
-<h2>Payment Status</h2>
-<p>
-    Your Payment was successful
-</p>
-<p>
-    Thank you for shopping with Happy Retail.<br />
-    
+        <h2>Payment Status</h2>
+        <p style="color:green">
+            Your Payment was successful
+        </p>
+        <p>
+            Thank you for shopping with Happy Retail.<br />
 
-    The expected delivery date:<b>@ViewBag.DeliveryDate</b>
-</p>
-@Html.ActionLink("My Orders", "MyOrders", "User")
+
+            The expected delivery date:<b>@ViewBag.DeliveryDate</b>
+        </p>
+        @Html.ActionLink("My Orders", "MyOrders", "User")
+        </div>
+</div>

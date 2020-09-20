@@ -6,7 +6,7 @@
 @Html.Partial("_background")
 @Html.Partial("user_navbar")
 
-<h2>Cart</h2>
+<h2 style="text-align:center">My Cart</h2>
 
 @if (Model.ToList().Count > 0)
 {
@@ -16,9 +16,7 @@
                 @Html.DisplayNameFor(model => model.product.ProductName)
             </th>
 
-            <th>
-                @Html.DisplayNameFor(model => model.ProductName)
-            </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.NoofProduct)
             </th>
@@ -35,9 +33,6 @@
                     @Html.DisplayFor(modelItem => item.product.ProductName)
                 </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductName)
-                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NoofProduct)
                 </td>

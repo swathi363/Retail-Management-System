@@ -7,27 +7,22 @@
 @Html.Partial("_background")
 @Html.Partial("user_navbar")
 
-<h2>Pay Your Order</h2>
+<div class="d-flex justify-content-center">
+    <div class="card w-50 p-4 mt-5 " >
 
-<div>
-    <h4>Confirm Payment</h4>
-    <hr />
 
-    Thankyou
-    @Html.DisplayFor(model => model.Firstname) @Html.DisplayFor(model => model.Lastname), for shopping with us
-    <p>Your order will be delivered to: </p>
-    <blockquote>
-        @Html.DisplayFor(model => model.Address)
-        <br />
-        @Html.DisplayFor(model => model.City)
-        <br />
-        @Html.DisplayFor(model => model.Country)
-    </blockquote>
-    <div>
-        @Html.ActionLink("Confirm Order", "PayNow", new { UserId = ViewBag.UserId, ProductId = ViewBag.ProductId }, new { @class = "mt-2 col-4 btn btn-success" })
+        <p style="color:chocolate" class="d-flex justify-content-center">
+           
+            Do you want to confirm your order?
+        </p>
+        <div class="d-flex justify-content-center">
+            @Html.ActionLink("Confirm Order", "PayNow", new { UserId = ViewBag.UserId, ProductId = ViewBag.ProductId }, new { @class = "mt-2 col-4 btn btn-success" })
+        </div>
+        </div>
     </div>
-</div>
-<p class="mt-2">
-    @Html.ActionLink("Back to Cart", "Cart", "User", null, new { @class = "btn btn-info btn-sm" })
-</p>
-
+<div class=" d-flex justify-content-center">
+    <p class="mt-2">
+        @Html.ActionLink("Back to Cart", "Cart", "User", null, new { @class = "btn btn-info btn-sm" })
+    </p>
+    </div>
+    

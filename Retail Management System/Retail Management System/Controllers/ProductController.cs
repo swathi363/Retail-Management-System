@@ -98,7 +98,7 @@ namespace Retail_Management_System.Controllers
             }
             DateTime dt1 = new DateTime(2020, 09, 23);
             DateTime dt2 = new DateTime(2020, 09, 18);
-            DateTime dt3 = new DateTime(2020, 09, 22);
+            DateTime dt3 = new DateTime(2020,09,21);
             if (DateTime.Now == dt1)
             {
                 product.SpecialDiscount = 24;
@@ -249,40 +249,50 @@ namespace Retail_Management_System.Controllers
             }
             else
             {
-                if (String.IsNullOrEmpty(ProductId))
+                var p = db.Products.Where(pro => pro.Productid.Equals(ProductId)).FirstOrDefault();
+
+                if (p.Stock == 0)
                 {
-                    ViewBag.Error = "Empty";
+                    ViewBag.Error = "No stock left!";
                 }
                 else
                 {
-                    string UserId = Session["UserId"].ToString();
-
-                    var p = db.Products.Where(pro => pro.Productid.Equals(ProductId)).FirstOrDefault();
-
-                    if (noofunits > p.Stock)
+                    if (String.IsNullOrEmpty(ProductId))
                     {
-                        ViewBag.Error = "No stock available";
+                        ViewBag.Error = "Empty";
                     }
+
+
                     else
                     {
-                        if (db.Carts.Where(car => car.ProductId.Equals(ProductId) && car.UserId.Equals(UserId)).FirstOrDefault() != null)
-                        {
+                        string UserId = Session["UserId"].ToString();
 
-                            Cart cart = db.Carts.Where(car => car.ProductId.Equals(ProductId) && car.UserId.Equals(UserId)).FirstOrDefault();
-                            cart.NoofProduct = cart.NoofProduct + noofunits;
-                            db.Entry(cart).State = EntityState.Modified;
-                            db.SaveChanges();
+
+                        if (noofunits > p.Stock)
+                        {
+                            ViewBag.Error = "No stock available";
                         }
                         else
                         {
-                            Cart cart = new Cart();
-                            cart.UserId = Session["UserId"].ToString();
-                            cart.ProductId = p.Productid;
-                            cart.ProductName = p.ProductName;
-                            cart.NoofProduct = noofunits;
-                            cart.Amount = p.GetAmount(p.Price, p.Discount, p.SpecialDiscount, noofunits);
-                            db.Carts.Add(cart);
-                            db.SaveChanges();
+                            if (db.Carts.Where(car => car.ProductId.Equals(ProductId) && car.UserId.Equals(UserId)).FirstOrDefault() != null)
+                            {
+
+                                Cart cart = db.Carts.Where(car => car.ProductId.Equals(ProductId) && car.UserId.Equals(UserId)).FirstOrDefault();
+                                cart.NoofProduct = cart.NoofProduct + noofunits;
+                                db.Entry(cart).State = EntityState.Modified;
+                                db.SaveChanges();
+                            }
+                            else
+                            {
+                                Cart cart = new Cart();
+                                cart.UserId = Session["UserId"].ToString();
+                                cart.ProductId = p.Productid;
+                                cart.ProductName = p.ProductName;
+                                cart.NoofProduct = noofunits;
+                                cart.Amount = p.GetAmount(p.Price, p.Discount, p.SpecialDiscount, noofunits);
+                                db.Carts.Add(cart);
+                                db.SaveChanges();
+                            }
                         }
                     }
                 }
@@ -351,6 +361,7 @@ namespace Retail_Management_System.Controllers
                 db.SaveChanges();
                 db.Carts.Remove(cart[i]);
                 db.SaveChanges();
+
                 ViewBag.Tid = Trx.Tid;
 
             }
@@ -401,6 +412,8 @@ namespace Retail_Management_System.Controllers
                     db.SaveChanges();
                     db.Carts.Remove(c);
                     db.SaveChanges();
+                    var user = db.Users.Find(UserId);
+                    ViewBag.Address = user.Address;
                     ViewBag.TotalSum = newbill.Amount.ToString();
                     ViewBag.Tid = Trx.Tid;
                 }

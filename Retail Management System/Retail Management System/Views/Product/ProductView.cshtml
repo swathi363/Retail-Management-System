@@ -1,4 +1,5 @@
-﻿@model Retail_Management_System.Models.Product
+﻿
+@model Retail_Management_System.Models.Product
 
 @{
     ViewBag.Title = Model.ProductName;
@@ -22,7 +23,7 @@ else
         <div class="row">
             &emsp;&emsp;&emsp;
             <div class="col" style="align-items:center">
-                <div class="card p-sm-1 col-sm-8">
+                <div class="card p-sm-1 col-sm-8 bg-transparent">
 
                     @{ var img = Model.Productid + ".jpg";}
                     <img src="~/Images/@img" height="330" />
@@ -57,16 +58,16 @@ else
                     </dd>
                     @if (Model.Stock > 10)
                     {
-                        <dt>Available</dt>
+                        <dt style="color:green">Available</dt>
                     }
                     else if (Model.Stock < 10 && Model.Stock != 0)
                     {
-                        <dt style="color:red">Only few left! Hurry up</dt>
+                        <dt style="color:yellow">Only few left! Hurry up</dt>
 
                     }
                     else if (Model.Stock == 0)
                     {
-                        <dt>No stock left.</dt>
+                        <dt style="color:red">No stock left.</dt>
 
                     }
 
@@ -109,10 +110,9 @@ else
 
 
                     <dd>
-                        @if (Model.Stock != 0)
-                        {
+                       
 
-                            if (Model.Discount != 0 || Model.SpecialDiscount != 0)
+                            @if (Model.Discount != 0 || Model.SpecialDiscount != 0)
 
 
                             {<s>  ₹@Html.DisplayFor(model => model.Price) </s> <br />}
@@ -125,7 +125,7 @@ else
 
 
 
-                    }
+                    
 
 
 
@@ -161,3 +161,5 @@ else
 
 
 </div>
+
+

@@ -44,7 +44,7 @@
 
                 <li class="nav-item dropdown ">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white">
-                        Hi @User.Identity.Name <i class="fa fa-user-circle-o" style="color:white"></i></a>
+                        Hi @Session["Username"] <i class="fa fa-user-circle-o" style="color:white"></i></a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/user/edit">My Account <i class=" fa fa-user"></i></a>
                         <div class="dropdown-divider"></div>
@@ -53,6 +53,8 @@
                         <a class="dropdown-item" href="/user/changepassword">Change Password <i class="fa fa-key"></i></a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/user/logout"> Logout <i class="fa fa-sign-out"></i></a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/product/filter"> filter <i class="fa fa-filter"></i></a>
                     </div>
                 </li>
             <li class="nav-item"><a href="/user/cart" class="nav-link" style="color:white">Cart<span><i class="fa fa-shopping-cart" style="color:white"></i></span></a> </li>

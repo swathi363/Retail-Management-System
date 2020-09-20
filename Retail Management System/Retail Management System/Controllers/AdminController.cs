@@ -97,7 +97,6 @@ namespace Retail_Management_System.Controllers
         }
         
         [Authorize]
-        [ValidateAntiForgeryToken]
         public ActionResult DetailsSuppliers(string SupplierId)
         {
             if(SupplierId==null)
@@ -247,7 +246,8 @@ namespace Retail_Management_System.Controllers
             {
                 FormsAuthentication.SetAuthCookie(admin.UserId, false);
                 Session["UserId"] = admin.UserId.ToString();
-                Session["Username"] = (admin.Firstname + " " + admin.Lastname).ToString();
+                Session["Username"] = (admin.Firstname).ToString();
+                Session["Role"] = "Admin";
                 return RedirectToAction("Index");
 
             }
@@ -377,7 +377,9 @@ namespace Retail_Management_System.Controllers
             user.Firstname = usr.Firstname;
             user.Lastname = usr.Lastname;
             user.ContactNumber = usr.ContactNumber;
-            Session["Username"] = (user.Firstname + " " + user.Lastname).ToString();
+            user.Password = (user.Password);
+            user.ConfirmPassword = (user.Password);
+            Session["Username"] = (user.Firstname).ToString();
             db.Entry(user).State = EntityState.Modified;
             db.SaveChanges();
             return View(usr);
@@ -407,7 +409,7 @@ namespace Retail_Management_System.Controllers
                 string username = User.Identity.Name;
                 Admin user = db.Admins.FirstOrDefault(u => u.UserId.Equals(username));
                 user.Password = usr.Password;
-                user.ConfirmPassword = usr.ConfirmPassword;
+                user.ConfirmPassword = usr.Password;
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

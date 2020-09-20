@@ -16,6 +16,7 @@ namespace Retail_Management_System.Models
         public string UserId { get; set; }//Also a foreign key from user table
         public string ProductId { get; set; }//Also a foregin key from product table
         public string ProductName { get; set; }
+        [Display(Name ="Quantity")]
         public int NoofProduct { get; set; }
         public double Amount { get; set; }
 
