@@ -97,9 +97,9 @@ namespace Retail_Management_System.Controllers
 
             }
             DateTime dt1 = new DateTime(2020, 09, 23);
-            DateTime dt2 = new DateTime(2020, 09, 18);
+            DateTime dt2 = new DateTime(2020, 09, 20);
             DateTime dt3 = new DateTime(2020,09,21);
-            if (DateTime.Now == dt1)
+            if (DateTime.Now.Date == dt1.Date&&DateTime.Now.Month==dt1.Month)
             {
                 product.SpecialDiscount = 24;
                 db.Entry(product).State = System.Data.Entity.EntityState.Modified;
@@ -107,14 +107,14 @@ namespace Retail_Management_System.Controllers
 
 
             }
-            if (DateTime.Now == dt2)
+            if (DateTime.Now.Date == dt2.Date && DateTime.Now.Month == dt2.Month)
             {
                 product.SpecialDiscount = 23;
                 db.Entry(product).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
 
             }
-            if (DateTime.Now == dt3)
+            if (DateTime.Now.Date == dt3.Date && DateTime.Now.Month == dt3.Month)
             {
                 product.SpecialDiscount = 13;
                 db.Entry(product).State = System.Data.Entity.EntityState.Modified;
