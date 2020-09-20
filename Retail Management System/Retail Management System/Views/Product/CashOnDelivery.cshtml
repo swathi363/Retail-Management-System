@@ -5,15 +5,16 @@
 @Html.Partial("_background")
 @Html.Partial("user_navbar")
 <div class="d-flex justify-content-center">
-    <div class="card w-50 p-4 mt-5" style="box-shadow:0 0 5px 5px green">
+    <div class="card w-50 p-4 mt-5" style="box-shadow: 0 19px 38px rgba(0,0,0,0.30),0 15px 12px rgba(0,0,0,0.22)">
 
 
         <h2>CashOnDelivery</h2>
         Thank You for shopping with us.
         Your order will be expected to @ViewBag.Deliverydate
         <br />
+        <div class="d-flex justify-content-center">
         <a href="/user/myorders" class="bctn btn-primary btn-sm"><i class="fa fa-archive"></i> My Orders</a>
-
+            </div>
 
     </div>
 </div>

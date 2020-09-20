@@ -7,6 +7,8 @@
 @Html.Partial("admin_navbar")
 
 <h2>ReportView</h2>
+<button onclick="exportTableToExcel('report')">Export</button>
+
 
 <table id="report" class="table">
     <tr>
@@ -97,5 +99,4 @@
         }
     }
 </script>
-<button onclick="exportTableToExcel('report')">Export Table Data To Excel File</button>
 

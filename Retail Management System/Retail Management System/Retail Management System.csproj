@@ -212,6 +212,7 @@
     <Content Include="IMAGES\eosclearnc.png" />
     <Content Include="IMAGES\FaceShield.jpg" />
     <Content Include="IMAGES\Hand Sanitizer.jpg" />
+    <Content Include="IMAGES\HappyRetails.jpg" />
     <Content Include="IMAGES\images.png" />
     <Content Include="IMAGES\deals.jpg" />
     <Content Include="IMAGES\LOGO111.png" />
@@ -358,7 +359,6 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Admin\Login.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
-    <Content Include="Views\Admin\Register.cshtml" />
     <Content Include="Views\Product\ProductView.cshtml" />
     <Content Include="Views\Admin\Details.cshtml" />
     <Content Include="Views\Admin\CreateSupplier.cshtml" />

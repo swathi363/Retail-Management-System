@@ -7,17 +7,18 @@
 @Html.Partial("user_navbar")
 
 
-<h2>UPI</h2>
 <div class="d-flex justify-content-center">
     <div class="card w-25 p-4 mt-5 ">
+        <h3>UPI</h3>
+
         <label>
             Mobile Number* @Html.ValidationMessageFor(model => model.mobile)
         </label>
         @Html.TextBoxFor(model => model.mobile, new { @class = "inputComn", @placeholder = "Mobile Number" })
 
-    
-    <div class="d-flex justify-content-center">
-        <a href="/product/confirmpayment" class="bctn btn-primary btn-sm"> Confirm Payment</a>
+
+        <div class="d-flex justify-content-center mt-2">
+            <a href="/product/confirmpayment" class="bctn btn-primary btn-sm"> Confirm Payment</a>
         </div>
     </div>
 
