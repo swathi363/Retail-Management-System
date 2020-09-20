@@ -6,26 +6,32 @@
 @Html.Partial("user_navbar")
 
 
+<div class="d-flex justify-content-center">
+    <div class="card w-25 p-4 mt-5 ">
+        <h2>NetBanking</h2>
+        <p>
+            Choose your Bank
+        </p>
+        <ul>
+            <li>
+                SBI
+            </li>
+            <li>
+                HDFC
+            </li>
+            <li>
+                ICICI
+            </li>
+            <li>
+                Axis Bank
+            </li>
+            <li>
+                Standarad Charterd
+            </li>
+        </ul>
+        <div class="d-flex justify-content-center">
+            <a href="/product/confirmpayment" class="bctn btn-primary btn-sm"> Confirm Payment</a>
 
-<h2>NetBanking</h2>
-<p>
-    Choose your Bank
-</p>
-<ul>
-    <li>
-        SBI
-    </li>
-    <li>
-        HDFC
-    </li>
-    <li>
-        ICICI
-    </li>
-    <li>
-        Axis Bank
-    </li>
-    <li>
-        Standarad Charterd
-    </li>
-</ul>
-@Html.ActionLink("Confirm Payment", "ConfirmPayment", new { Tid = ViewBag.Tid })
+        </div>
+    </div>
+</div>

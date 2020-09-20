@@ -362,7 +362,6 @@ namespace Retail_Management_System.Controllers
                 db.Carts.Remove(cart[i]);
                 db.SaveChanges();
 
-                ViewBag.Tid = Trx.Tid;
 
             }
 
@@ -415,41 +414,33 @@ namespace Retail_Management_System.Controllers
                     var user = db.Users.Find(UserId);
                     ViewBag.Address = user.Address;
                     ViewBag.TotalSum = newbill.Amount.ToString();
-                    ViewBag.Tid = Trx.Tid;
                 }
             }
             return View();
 
         }
-        public ActionResult CreditCard(int? Tid)
+        public ActionResult CreditCard()
         {
-            var transaction = db.Transactions.Where(t => t.Tid == Tid).FirstOrDefault();
-            ViewBag.Tid = transaction.Tid;
+           
             return View();
         }
         
-        public ActionResult NetBanking(int? Tid)
+        public ActionResult NetBanking()
         {
-            var transaction = db.Transactions.Where(t => t.Tid == Tid).FirstOrDefault();
-            ViewBag.Tid = transaction.Tid;
             return View();
         }
-        public ActionResult CashOnDelivery(int? Tid)
+        public ActionResult CashOnDelivery()
         {
-            var transaction = db.Transactions.Where(t => t.Tid == Tid).FirstOrDefault();
-            ViewBag.Deliverydate = transaction.Tdate.AddDays(5).ToShortDateString();
+            ViewBag.Deliverydate = DateTime.Now.AddDays(5).ToShortDateString();
             return View();
         }
-        public ActionResult UPI(int? Tid)
+        public ActionResult UPI()
         {
-            var transaction = db.Transactions.Where(t => t.Tid == Tid).FirstOrDefault();
-            ViewBag.Tid = transaction.Tid;
             return View();
         }
         public ActionResult ConfirmPayment(int? Tid)
         {
-            var transaction = db.Transactions.Where(t => t.Tid == Tid).FirstOrDefault();
-            ViewBag.Deliverydate = transaction.Tdate.AddDays(5).ToShortDateString();
+            ViewBag.Deliverydate = DateTime.Now.AddDays(5).ToShortDateString();
             return View();
         }
     }
