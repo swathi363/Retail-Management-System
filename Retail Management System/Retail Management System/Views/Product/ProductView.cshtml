@@ -30,7 +30,7 @@ else
                 <div class="card p-sm-1 col-sm-8 bg-transparent">
 
                     @{ var img = Model.Productid + ".jpg";}
-                    <img src="~/Images/@img" height="330" />
+                    <img src="~/Images/@img" height="500" width="250" />
 
                     @using (Html.BeginForm("AddtoCart", "Product", FormMethod.Post, new { @class = "form-inline" }))
                     {

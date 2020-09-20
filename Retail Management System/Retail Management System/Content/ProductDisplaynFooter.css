@@ -97,3 +97,13 @@
 				margin-top: -9px;
 			}
 
+
+footer {
+	color: ghostwhite;
+	background-color: rgba(50, 50, 50,0.5);
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+}
