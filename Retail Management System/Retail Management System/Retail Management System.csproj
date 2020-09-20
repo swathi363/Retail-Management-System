@@ -406,6 +406,7 @@
     <Content Include="Views\Product\ConfirmPayment.cshtml" />
     <Content Include="Views\Product\CashOnDelivery.cshtml" />
     <Content Include="Views\Product\Filter.cshtml" />
+    <Content Include="Views\Admin\DetailsAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
