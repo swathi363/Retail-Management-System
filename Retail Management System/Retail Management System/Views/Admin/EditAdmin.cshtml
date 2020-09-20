@@ -5,14 +5,18 @@
 }
 @Html.Partial("_background")
 @Html.Partial("admin_navbar")
-<h2>EditAdmin</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+<div class="d-flex justify-content-center">
+    
+
+    <div class="card w-50 mt-4 ">
+        <h2 class="text-center">Edit Admin</h2>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Admin</h4>
+
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.UserId)
@@ -35,7 +39,7 @@
 
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ContactNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ContactNumber, htmlAttributes: new { @class = "control-label col-md-4" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ContactNumber, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ContactNumber, "", new { @class = "text-danger" })
@@ -48,8 +52,10 @@
             </div>
         </div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+        }
+    </div>
 </div>
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
