@@ -5,9 +5,13 @@
     ViewBag.Title = Model.ProductName;
 }
 @Html.Partial("_background")
-@if (Session["UserId"] != null)
+@if (Session["UserId"] != null && @Session["Role"].ToString() == "user")
 {
     @Html.Partial("user_navbar")
+}
+else if (Session["UserId"] != null && @Session["Role"].ToString() == "Admin")
+{
+    @Html.Partial("admin_navbar")
 }
 else
 {
@@ -110,12 +114,12 @@ else
 
 
                     <dd>
-                       
-
-                            @if (Model.Discount != 0 || Model.SpecialDiscount != 0)
 
 
-                            {<s>  ₹@Html.DisplayFor(model => model.Price) </s> <br />}
+                        @if (Model.Discount != 0 || Model.SpecialDiscount != 0)
+
+
+                        {<s>  ₹@Html.DisplayFor(model => model.Price) </s> <br />}
                         @Html.DisplayName("₹")
 
                         @(Model.Price - (Model.Discount + Model.SpecialDiscount) / 100 * Model.Price)
@@ -125,7 +129,7 @@ else
 
 
 
-                    
+
 
 
 
