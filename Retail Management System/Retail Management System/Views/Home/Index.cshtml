@@ -8,82 +8,82 @@ else if (Session["UserId"] != null && @Session["Role"].ToString() == "Admin")
 {
     @Html.Partial("admin_navbar")
 }
-    
+
 else
 {
     @Html.Partial("common_navbar")
 }
 
-<div id = "demo" class="carousel slide" data-ride="carousel">
+<div id="demo" class="carousel slide" data-ride="carousel">
 
-<!-- Indicators -->
-<ul class="carousel-indicators">
-<li data-target="#demo" data-slide-to="0" class="active"></li>
-<li data-target="#demo" data-slide-to="1"></li>
-<li data-target="#demo" data-slide-to="2"></li>
-<li data-target="#demo" data-slide-to="3"></li>
-<li data-target="#demo" data-slide-to="4"></li>
-</ul>
+    <!-- Indicators -->
+    <ul class="carousel-indicators">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2"></li>
+        <li data-target="#demo" data-slide-to="3"></li>
+        <li data-target="#demo" data-slide-to="4"></li>
+    </ul>
 
-<!-- The slideshow -->
-<div class="carousel-inner">
-<div class="carousel-item active">
-<img style = " height:350px ;width:100% " src="../IMAGES/pic5.jpg" alt="HAPPY RETAIL">
-</div>
-<div class="carousel-item">
-<img style = " height:350px ;width:100% " src="../IMAGES/Appliances.png" alt="HAPPY RETAIL">
-</div>
-<div class="carousel-item">
-<img style = " height:350px ;width:100% " src="../IMAGES/clearnc.png" alt="HAPPY RETAIL">
-</div>
-<div class="carousel-item">
-<img style = " height:350px ;width:100% " src="../IMAGES/deal.jpg" alt="HAPPY RETAIL">
-</div>
-<div class="carousel-item">
-<img style = " height:350px ;width:100% " src="../IMAGES/diwalisale.png" alt="HAPPY RETAIL">
-</div>
-</div>
+    <!-- The slideshow -->
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img style=" height:350px ;width:100% " src="../IMAGES/pic5.jpg" alt="HAPPY RETAIL">
+        </div>
+        <div class="carousel-item">
+            <img style=" height:350px ;width:100% " src="../IMAGES/Appliances.png" alt="HAPPY RETAIL">
+        </div>
+        <div class="carousel-item">
+            <img style=" height:350px ;width:100% " src="../IMAGES/clearnc.png" alt="HAPPY RETAIL">
+        </div>
+        <div class="carousel-item">
+            <img style=" height:350px ;width:100% " src="../IMAGES/deal.jpg" alt="HAPPY RETAIL">
+        </div>
+        <div class="carousel-item">
+            <img style=" height:350px ;width:100% " src="../IMAGES/diwalisale.png" alt="HAPPY RETAIL">
+        </div>
+    </div>
 
-<!-- Left and right controls -->
-<a class="carousel-control-prev" href="#demo" data-slide="prev">
-<span class="fa fa-chevron-circle-left"></span>
-</a>
-<a class="right carousel-control-next" href="#demo" data-slide="next">
-<span class="fa fa-chevron-right"></span>
-</a>
+    <!-- Left and right controls -->
+    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+        <span class="fa fa-chevron-circle-left"></span>
+    </a>
+    <a class="right carousel-control-next" href="#demo" data-slide="next">
+        <span class="fa fa-chevron-right"></span>
+    </a>
 
 </div>
 
 
 <div class="row">
-<div class="col-md-12">
-<div class="page-header">
-<h2><small></small></h2>
-</div>
-</div>
+    <div class="col-md-12">
+        <div class="page-header" style="color:darkblue">
+            <h2> &nbsp Top Deals<small></small></h2>
+        </div>
+    </div>
 </div>
 
 <div class="row product-container">
 
-<div class="col-md-3 col-sm-3 col-xs-6 card" style="margin-bottom:8px">
-<a href = "/Product/Search?ProductName=electronics" >
+    <div class="col-md-3 col-sm-3 col-xs-6 card" style="margin-bottom:8px">
+        <a href="/Product/Search?ProductName=electronics">
 
 
 
-<div class="thumbnail product-item" style="height:250px">
+            <div class="thumbnail product-item" style="height:250px">
 
-<img class="img-responsive" title="Click to View Product detail"
-     style="cursor:pointer;height:160px;width:100%"
-     src="~/IMAGES/pic6.jpg" />
+                <img class="img-responsive" title="Click to View Product detail"
+                     style="cursor:pointer;height:160px;width:100%"
+                     src="~/IMAGES/pic6.jpg" />
 
-<div class="caption">
-    <h5>Electronics</h5>
-@*<p>500.00 ৳.</p>*@
-                <p>Offer zone</p>
-                <div class="product-item-badge">New Arrivals</div>
+                <div class="caption">
+                    <h5>Electronics</h5>
+                    @*<p>500.00 ৳.</p>*@
+                    <p>Offer zone</p>
+                    <div class="product-item-badge" style="color:yellow">New Arrivals</div>
+                </div>
             </div>
-        </div>
-            </a>
+        </a>
     </div>
 
     <div class="col-md-3 col-sm-3 col-xs-6 card" style="margin-bottom:8px">
@@ -91,13 +91,13 @@ else
 
             <img class="img-responsive" title="Click to View Product detail"
                  style="cursor:pointer;height:160px;width:100%"
-                 src="~/IMAGES/Appliances.png" />
+                src="~/categorypics/furniture.jpg" />
 
             <div class="caption">
-                <h5>Appliances</h5>
-@*<p>500.00 ৳.</p>*@
+                <h5>Furniture</h5>
+                @*<p>500.00 ৳.</p>*@
                 <p>Clearance Sale</p>
-                <div class="product-item-badge"style="color:yellow">Trending</div>
+                <div class="product-item-badge" style="color:yellow">Trending</div>
             </div>
         </div>
     </div>
@@ -107,13 +107,13 @@ else
 
             <img class="img-responsive" title="Click to View Product detail"
                  style="cursor:pointer;height:160px;width:100%"
-                 src="~/IMAGES/images.png" />
+                 src="~/categorypics/wearables.jpg" />
 
             <div class="caption">
-                <h5>Fashion</h5>
-@*<p>500.00 ৳.</p>*@
+                <h5>Wearables</h5>
+                @*<p>500.00 ৳.</p>*@
                 <p>New Arrivals</p>
-                <div class="product-item-badge">Flash Sale</div>
+                <div class="product-item-badge" style="color:yellow">Buy Now</div>
             </div>
         </div>
     </div>
@@ -123,54 +123,268 @@ else
             <a href="/Product/Search?ProductName=smartphones">
                 <img class="img-responsive" title="Click to View Product detail"
                      style="cursor:pointer;height:160px;width:100%"
-                     src="~/IMAGES/pic6.jpg" />
+                      src="~/categorypics/laptop1.jpg" />
 
                 <div class="caption">
-                    <h5>Mobile Phones</h5>
+                    <h5>Laptops</h5>
                     @*<p>500.00 ৳.</p>*@
                     <p>Mid Range</p>
-                    <div class="product-item-badge">Buy Now</div>
+                    <div class="product-item-badge" style="color:yellow;">Flash Sale</div>
                 </div>
             </a>
 
         </div>
     </div>
+</div>
 
-
-    <div class="col-md-3 col-sm-3 col-xs-6 card" style="margin-bottom:8px;">
-        <div class="thumbnail product-item" style="height:250px">
-            <a href = "/Product/Search?ProductName=Fashion" >
-            <img class="img-responsive" title="Click to View Product detail"
-                 style="cursor:pointer;height:160px;width:100%"
-                 src="~/IMAGES/pic5.jpg" />
-
-            <div class="caption">
-                <h5>Fashion</h5>
-@*<p>500.00 ৳.</p>*@
-                <p>Classic Collections</p>
-                <div class="product-item-badge">Live Offer</div>
-            </div>
-                </a>
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-header" style="color:darkblue">
+            <h2> &nbsp Covid-19 Special Picks<small></small></h2>
         </div>
-        
+    </div>
+</div>
+
+<div class="row product-container">
+
+    <div class="col-md-3 col-sm-3 col-xs-6 card" style="margin-bottom:8px">
+        <a href="/Product/Search?ProductName=electronics">
+
+
+
+            <div class="thumbnail product-item" style="height:280px">
+
+                <img class="img-responsive" title="Click to View Product detail"
+                     style="cursor:pointer;height:160px;width:100%"
+                     src="~/IMAGES/Hand Sanitizer.jpg" />
+
+                <div class="caption">
+                    <h5>Hand Sanitizer</h5>
+                    <p>₹399*</p>
+                    <p>Trending</p>
+                    <div class="product-item-badge" style="opacity:0.8">Latest Deals</div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3 col-sm-3 col-xs-6 card" style="margin-bottom:8px">
+        <a href="/Product/Search?ProductName=electronics">
+
+
+
+            <div class="thumbnail product-item" style="height:280px">
+
+                <img class="img-responsive" title="Click to View Product detail"
+                     style="cursor:pointer;height:160px;width:100%"
+                     src="~/IMAGES/Mask.jpg" />
+
+                <div class="caption">
+                    <h5>Face Mask</h5>
+                    <p>₹40*</p>
+                    <p>Variety Collections</p>
+                    <div class="product-item-badge" style="opacity:0.8">New Arrivals</div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+
+    <div class="col-md-3 col-sm-3 col-xs-6 card" style="margin-bottom:8px">
+        <a href="/Product/Search?ProductName=electronics">
+
+
+
+            <div class="thumbnail product-item" style="height:280px">
+
+                <img class="img-responsive" title="Click to View Product detail"
+                     style="cursor:pointer;height:160px;width:100%"
+                     src="~/IMAGES/FaceShield.jpg" />
+
+                <div class="caption">
+                    <h5>Face Shields</h5>
+                    <p>₹149*</p>
+                    <p>Branded</p>
+                    <div class="product-item-badge" style="opacity:0.8">Trending</div>
+                </div>
+            </div>
+        </a>
     </div>
 
     <div class="col-md-3 col-sm-3 col-xs-6 card" style="margin-bottom:8px;">
-        <div class="thumbnail product-item" style="height:250px">
+        <div class="thumbnail product-item" style="height:280px">
+            <a href="/Product/Search?ProductName=Fashion">
+                <img class="img-responsive" title="Click to View Product detail"
+                     style="cursor:pointer;height:160px;width:100%"
+                     src="~/categorypics/COVID-19 PPE and Safety Suppliers.jpg" />
 
-            <img class="img-responsive" title="Click to View Product detail"
-                 style="cursor:pointer;height:160px;width:100%"
-                 src="~/IMAGES/pic4.jpg" />
+                <div class="caption">
+                    <h5>Covid Combo Pack</h5>
+                    <p>₹499*</p>
+                    <p>Hurry Up</p>
 
-            <div class="caption">
-                <h5>Laptops</h5>
-        @*<p>500.00 ৳.</p>*@
-<p>Latest Gadgets</p>
-<div class="product-item-badge">Limited Offer</div>
-            </div>
+                    <div class="product-item-badge" style="opacity:0.8">Limited Offer</div>
+
+                </div>
+            </a>
         </div>
-    </div>
 
+    </div>
 </div>
 
 
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-header" style="color:darkblue">
+            <h2> &nbsp Categories<small></small></h2>
+        </div>
+    </div>
+</div>
+
+<div class="row product-container">
+
+    <div class="col-md-3 col-sm-3 col-xs-6 card" style="margin-bottom:8px">
+        <a href="/Product/Search?ProductName=electronics">
+
+            <div class="thumbnail product-item" style="height:250px">
+
+                <img class="img-responsive" title="Click to View Product detail"
+                     style="cursor:pointer;height:160px;width:100%"
+                     src="~/categorypics/jewellery.jpg" />
+
+                <div class="caption">
+                    <h5>Jewellery</h5>
+                    @*<p>500.00 ৳.</p>*@
+                    <p>Blind Deals</p>
+                    @*<div class="product-item-badge" style="color:yellow">New Arrivals</div>*@
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3 col-sm-3 col-xs-6 card" style="margin-bottom:8px">
+        <div class="thumbnail product-item" style="height:250px">
+
+            <img class="img-responsive" title="Click to View Product detail"
+                 style="cursor:pointer;height:160px;width:100%"
+                 src="~/categorypics/appliances.jpg" />
+
+            <div class="caption">
+                <h5>Appliances</h5>
+                @*<p>500.00 ৳.</p>*@
+                <p>Super Saver Deals</p>
+                @*<div class="product-item-badge" style="color:yellow">Trending</div>*@
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 col-sm-3 col-xs-6 card" style="margin-bottom:8px;">
+        <div class="thumbnail product-item" style="height:250px">
+
+            <img class="img-responsive" title="Click to View Product detail"
+                 style="cursor:pointer;height:160px;width:100%"
+                 src="~/categorypics/electricals.jpg" />
+
+            <div class="caption">
+                <h5>Electrical</h5>
+                @*<p>500.00 ৳.</p>*@
+                <p>Lightning Deals</p>
+                @*<div class="product-item-badge" style="color:yellow">Buy Now</div>*@
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 col-sm-3 col-xs-6 card" style="margin-bottom:8px;">
+        <div class="thumbnail product-item" style="height:250px">
+            <a href="/Product/Search?ProductName=smartphones">
+                <img class="img-responsive" title="Click to View Product detail"
+                     style="cursor:pointer;height:160px;width:100%"
+                     src="~/categorypics/smartphones1.jpg" />
+
+                <div class="caption">
+                    <h5>Mobiles</h5>
+                    @*<p>500.00 ৳.</p>*@
+                    <p>Flash Deals</p>
+                    @*<div class="product-item-badge" style="color:yellow;">Flash Sale</div>*@
+                </div>
+            </a>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="row product-container">
+
+    <div class="col-md-3 col-sm-3 col-xs-6 card" style="margin-bottom:8px">
+        <a href="/Product/Search?ProductName=electronics">
+
+            <div class="thumbnail product-item" style="height:250px">
+
+                <img class="img-responsive" title="Click to View Product detail"
+                     style="cursor:pointer;height:160px;width:100%"
+                     src="~/categorypics/fashion.jpg" />
+
+                <div class="caption">
+                    <h5>Fashion</h5>
+                    @*<p>500.00 ৳.</p>*@
+                    <p>Dhamaka sale</p>
+                    @*<div class="product-item-badge" style="color:yellow">New Arrivals</div>*@
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3 col-sm-3 col-xs-6 card" style="margin-bottom:8px">
+        <div class="thumbnail product-item" style="height:250px">
+
+            <img class="img-responsive" title="Click to View Product detail"
+                 style="cursor:pointer;height:160px;width:100%"
+                 src="~/categorypics/sports.jpeg" />
+
+            <div class="caption">
+                <h5>Sports</h5>
+                @*<p>500.00 ৳.</p>*@
+                <p>Limitted Offer</p>
+                @*<div class="product-item-badge" style="color:yellow">Trending</div>*@
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 col-sm-3 col-xs-6 card" style="margin-bottom:8px;">
+        <div class="thumbnail product-item" style="height:250px">
+
+            <img class="img-responsive" title="Click to View Product detail"
+                 style="cursor:pointer;height:160px;width:100%"
+                 src="~/categorypics/Refrigerator.jpg" />
+
+            <div class="caption">
+                <h5>Refrigerator</h5>
+                @*<p>500.00 ৳.</p>*@
+                <p>Top Picks</p>
+                @*<div class="product-item-badge" style="color:yellow">Buy Now</div>*@
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 col-sm-3 col-xs-6 card" style="margin-bottom:8px;">
+        <div class="thumbnail product-item" style="height:250px">
+            <a href="/Product/Search?ProductName=smartphones">
+                <img class="img-responsive" title="Click to View Product detail"
+                     style="cursor:pointer;height:160px;width:100%"
+                     src="~/categorypics/Utilities2.jpg" />
+
+                <div class="caption">
+                    <h5>Utilities</h5>
+                    @*<p>500.00 ৳.</p>*@
+                    <p>Offer On</p>
+                    @*<div class="product-item-badge" style="color:yellow;">Flash Sale</div>*@
+                </div>
+            </a>
+
+        </div>
+    </div>
+</div>
