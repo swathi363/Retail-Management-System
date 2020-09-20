@@ -167,6 +167,7 @@
   <ItemGroup>
     <Content Include="categorypics\appliances.jpg" />
     <Content Include="categorypics\clothing.jpg" />
+    <Content Include="categorypics\COVID-19 PPE and Safety Suppliers.jpg" />
     <Content Include="categorypics\electricals.jpg" />
     <Content Include="categorypics\electronics.jpg" />
     <Content Include="categorypics\fashion.jpg" />
