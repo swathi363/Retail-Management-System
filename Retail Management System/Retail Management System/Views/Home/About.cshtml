@@ -3,10 +3,15 @@
 }
 @Html.Partial("_background")
 
-@if (Session["UserId"] != null)
+@if (Session["UserId"] != null && @Session["Role"].ToString() == "user")
 {
     @Html.Partial("user_navbar")
 }
+else if (Session["UserId"] != null && @Session["Role"].ToString() == "Admin")
+{
+    @Html.Partial("admin_navbar")
+}
+
 else
 {
     @Html.Partial("common_navbar")

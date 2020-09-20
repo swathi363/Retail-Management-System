@@ -20,12 +20,14 @@
             <li class="nav-item"><a href="/home/contact" class="nav-link" style="color:white">Customer Care<span><i class="fa fa-phone" style="color:white"></i></span></a> </li>
 
             <li>
-                <form method="get" action="/Product/Search" class="form-inline">
+                <form method="get" action="/Product/Search">
+                    <div class="input-group ">
+                        @Html.TextBox("ProductName", null, new { @class = "form-control ", @style = "width:400px", @placeholder = "Search for products, brands and more" })
 
-                    @Html.TextBox("ProductName", null, new { @class = "form-control ", @style = "width:280px", @placeholder = "Search for products, brands and more" })
-                    <div class="form-group">
-                        <div class="col-md-10">
-                            <button type="submit" class="btn-dark btn btn-outline-info  fa fa-search" />
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-light ">
+                                <i class="fa fa-search text-primary"></i>
+                            </button>
                         </div>
                     </div>
 
