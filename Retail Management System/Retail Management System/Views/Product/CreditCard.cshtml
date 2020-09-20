@@ -7,29 +7,46 @@
 
 <h2>CreditCard</h2>
 <div>
-    <label>
-        Card Type
-    </label>
-    @Html.DropDownListFor(model => model.CardType, new SelectList(Enum.GetValues(typeof(Retail_Management_System.Models.Carddetails.CardTypeName))), "Select Your Card", new { @class = "form-control" })
-    @Html.ValidationMessageFor(model => model.CardType, "", new { @class = "text-danger" })
+    <table>
+        <tr>
+            <td>
+                Card Type
+
+            </td>
+            <td>
+                @Html.DropDownListFor(model => model.CardType, new SelectList(Enum.GetValues(typeof(Retail_Management_System.Models.Carddetails.CardTypeName))), "Select Your Card", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CardType, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Name on Card* @Html.ValidationMessageFor(model => model.CardName)
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.CardName, new { @class = "inputComn", @placeholder = "Name" })
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Card Number* @Html.ValidationMessageFor(model => model.cardnumber)
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.cardnumber, new { @class = "inputComn", @placeholder = "Card Number" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                cvv* @Html.ValidationMessageFor(model => model.cvv)
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.cvv, new { @class = "inputComn", @placeholder = "cvv" })
+
+            </td>
+        </tr>
+    </table>
+    
 
 </div>
-<div>
-    <label>
-        Name on Card* @Html.ValidationMessageFor(model => model.CardName)
-    </label>
-    @Html.TextBoxFor(model => model.CardName, new { @class = "inputComn", @placeholder = "Name" })
-</div>
-<div>
-    <label>
-        Card Number* @Html.ValidationMessageFor(model => model.cardnumber)
-    </label>
-    @Html.TextBoxFor(model => model.cardnumber, new { @class = "inputComn", @placeholder = "Card Number" })
-</div>
-<div>
-    <label>
-        cvv* @Html.ValidationMessageFor(model => model.cvv)
-    </label>
-    @Html.TextBoxFor(model => model.cvv, new { @class = "inputComn", @placeholder = "cvv" })
-</div>
+
 @Html.ActionLink("Confirm Payment", "ConfirmPayment", new { Tid = ViewBag.Tid })

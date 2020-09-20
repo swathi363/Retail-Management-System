@@ -6,14 +6,13 @@
 @Html.Partial("_background")
 @Html.Partial("admin_navbar")
 
-<h2>CreateSupplier</h2>
+<h2 style="text-align:center">Create Supplier</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Supplier</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -41,6 +40,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
-    @Html.ActionLink("Edit", "EditSupplier")
+    <a href="/admin/index" class="btn btn-dark btn-sm"><i class="fa fa-backward"></i> Back</a>
 </div>

@@ -14,35 +14,58 @@
         <b>@ViewBag.TotalSum</b>
     </p>
 </div>
+<p>Shipping Address</p>
 <div>
-    <label>
-        Addres* @Html.ValidationMessageFor(model => model.Address)
-    </label>
-    @Html.TextBoxFor(model => model.Address, new { @class = "inputComn", @placeholder = "Address" })
-</div>
-<div>
-    <label>
-        City* @Html.ValidationMessageFor(model => model.City)
-    </label>
-    @Html.TextBoxFor(model => model.City, new { @class = "inputComn", @placeholder = "City" })
-</div>
-<div>
-    <label>
-        State* @Html.ValidationMessageFor(model => model.State)
-    </label>
-    @Html.TextBoxFor(model => model.State, new { @class = "inputComn", @placeholder = "State" })
-</div>
-<div>
-    <label>
-        Country* @Html.ValidationMessageFor(model => model.Country)
-    </label>
-    @Html.TextBoxFor(model => model.Country, new { @class = "inputComn", @placeholder = "Country" })
-</div>
-<div>
-    <label>
-        ZipCode* @Html.ValidationMessageFor(model => model.ZipCode)
-    </label>
-    @Html.TextBoxFor(model => model.ZipCode, new { @class = "inputComn", @placeholder = "Zipcode" })
+<table>
+    <tr>
+        <td>
+            Address* @Html.ValidationMessageFor(model => model.Address)
+
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.Address, new { @class = "inputComn", @placeholder = "Address" })
+
+        </td>
+    </tr>
+    
+    <tr>
+        <td>
+            City* @Html.ValidationMessageFor(model => model.City)
+
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.City, new { @class = "inputComn", @placeholder = "City" })
+
+        </td>
+    </tr>
+    <tr>
+        <td>
+            State* @Html.ValidationMessageFor(model => model.State)
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.State, new { @class = "inputComn", @placeholder = "State" })
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Country* @Html.ValidationMessageFor(model => model.Country)
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.Country, new { @class = "inputComn", @placeholder = "Country" })
+
+        </td>
+    </tr>
+    <tr>
+        <td>
+            ZipCode* @Html.ValidationMessageFor(model => model.ZipCode)
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.ZipCode, new { @class = "inputComn", @placeholder = "Zipcode" })
+
+        </td>
+    </tr>
+
+    </table>
 </div>
 <input type="submit" value="Add" class="btn btn-default" />
 

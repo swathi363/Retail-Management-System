@@ -1,20 +1,18 @@
 ﻿@model Retail_Management_System.Models.Admin
 
-@{
-    ViewBag.Title = "AddAdmin";
-}
+
 @Html.Partial("_background")
 @Html.Partial("admin_navbar")
 
 
-<h2>Add Admin</h2>
+
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Admin</h4>
+        <h4 style="text-align:center">Add Admin</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -59,12 +57,13 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Add" class="btn btn-default" />
+                <input type="submit" value="Add" class="btn btn-dark" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back", "Index")
+    <a href="/admin/index" class="btn btn-dark btn-sm"><i class="fa fa-backward"></i> Back</a>
+
 </div>

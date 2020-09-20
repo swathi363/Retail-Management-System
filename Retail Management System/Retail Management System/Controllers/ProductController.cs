@@ -411,7 +411,6 @@ namespace Retail_Management_System.Controllers
         public ActionResult CreditCard(int? Tid)
         {
             var transaction = db.Transactions.Where(t => t.Tid == Tid).FirstOrDefault();
-            var transaction = db.Transactions.Where(t => t.Tid == Tid).FirstOrDefault();
             ViewBag.Tid = transaction.Tid;
             return View();
         }
@@ -426,7 +425,6 @@ namespace Retail_Management_System.Controllers
         {
             var transaction = db.Transactions.Where(t => t.Tid == Tid).FirstOrDefault();
             ViewBag.Deliverydate = transaction.Tdate.AddDays(5).ToShortDateString();
-            ViewData["CardType"]=new SelectList()
             return View();
         }
         public ActionResult UPI(int? Tid)

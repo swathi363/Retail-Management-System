@@ -141,6 +141,10 @@ namespace Retail_Management_System.Controllers
         [Authorize]
         public ActionResult Create()
         {
+            if(Session["UserId"]==null)
+            {
+                return RedirectToAction("Login");
+            }
             ViewBag.Supplier = db.Suppliers;
             return View();
         }
@@ -318,7 +322,7 @@ namespace Retail_Management_System.Controllers
                 return RedirectToAction("Report");
             }
         }
-       
+       [Authorize]
         public ActionResult AddAdmin()
         {
             return View();
@@ -328,20 +332,27 @@ namespace Retail_Management_System.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddAdmin([Bind(Include = "UserId,Firstname,Lastname,Password,ConfirmPassword,ContactNumber")]Admin adm)
         {
-            adm.Password = encrypt(adm.Password);
-            adm.ConfirmPassword = encrypt(adm.ConfirmPassword);
-            var check = db.Users.Find(adm.UserId);
-            if (check == null)
+            if (Session["UserId"] == null)
             {
-                db.Configuration.ValidateOnSaveEnabled = false;
-                db.Admins.Add(adm);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Login");
             }
             else
             {
-                ModelState.AddModelError("", "User already Exists");
-                return View();
+                adm.Password = encrypt(adm.Password);
+                adm.ConfirmPassword = encrypt(adm.ConfirmPassword);
+                var check = db.Users.Find(adm.UserId);
+                if (check == null)
+                {
+                    db.Configuration.ValidateOnSaveEnabled = false;
+                    db.Admins.Add(adm);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "User already Exists");
+                    return View();
+                }
             }
         }
         [Authorize]
@@ -374,22 +385,33 @@ namespace Retail_Management_System.Controllers
         [Authorize]
         public ActionResult ChangePassword()
         {
+            if(Session["UserId"]==null)
+            {
+                return RedirectToAction("Login");
+            }
             return View();
         }
-        //Post change password for user
+        //Post change password for admin
         [Authorize]
         [HttpPost]
         public ActionResult ChangePassword(Admin usr)
         {
-            usr.Password = encrypt(usr.Password);
-            usr.ConfirmPassword = encrypt(usr.ConfirmPassword);
-            string username = User.Identity.Name;
-            Admin user = db.Admins.FirstOrDefault(u => u.UserId.Equals(username));
-            user.Password = usr.Password;
-            user.ConfirmPassword = usr.ConfirmPassword;
-            db.Entry(user).State = EntityState.Modified;
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (Session["UserId"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                usr.Password = encrypt(usr.Password);
+                usr.ConfirmPassword = encrypt(usr.ConfirmPassword);
+                string username = User.Identity.Name;
+                Admin user = db.Admins.FirstOrDefault(u => u.UserId.Equals(username));
+                user.Password = usr.Password;
+                user.ConfirmPassword = usr.ConfirmPassword;
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
         }
         //Dispose the database
         protected override void Dispose(bool disposing)
