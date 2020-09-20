@@ -5,13 +5,12 @@
 }
 @Html.Partial("_background")
 @Html.Partial("admin_navbar")
-<h2>Create</h2>
+<h2 style="text-align:center">Add Product</h2>
  @using (Html.BeginForm("Create","Admin",FormMethod.Post,new { enctype="multipart/form-data"}))
  { 
      @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Product</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -57,7 +56,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.PreferredGender, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.PreferredGender, new SelectList(Enum.GetValues(typeof(Retail_Management_System.Models.PreferredGender))), "Selevt Prefered Gender", new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.PreferredGender, new SelectList(Enum.GetValues(typeof(Retail_Management_System.Models.PreferredGender))), "Select Prefered Gender", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.PreferredGender, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -114,7 +113,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Add" class="btn btn-default" />
+                    <input type="submit" value="Add" class="btn btn-dark" />
                    
 
                 </div>
@@ -124,6 +123,5 @@
 }
        
 <div>
-  
-    @Html.ActionLink("Back to List", "Index")
+    <a href="/admin/index" class="btn btn-dark btn-sm"><i class="fa fa-backward"></i> Back</a>
 </div>

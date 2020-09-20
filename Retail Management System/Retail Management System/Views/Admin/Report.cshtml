@@ -1,0 +1,23 @@
+﻿@model Retail_Management_System.Models.Transaction
+
+@{
+    ViewBag.Title = "Report";
+}
+@Html.Partial("_background")
+@Html.Partial("admin_navbar")
+
+<h2>Report</h2>
+
+
+
+<div class="container card m-5 bg-transparent">
+    <h2 class=" card-title ">Generate Report</h2>
+    @using (Html.BeginForm("Report", "Admin", FormMethod.Post, new { @class = "form-inline m-3" }))
+    {
+        @Html.TextBox("TDate", null, new { @class = "form-control", @type = "Date" })
+
+        <button type="submit" class="btn btn-success btn-sm ml-2"><i class="fa fa-search"></i></button>
+    }
+</div>
+
+

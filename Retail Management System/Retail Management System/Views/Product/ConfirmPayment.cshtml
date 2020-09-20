@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Retail_Management_System.Models.ShippingDetails>
+@{
+    ViewBag.Title = "Confirm Payment";
+}
+@Html.Partial("_background")
+@Html.Partial("user_navbar")
+
+<h2>Payment Status</h2>
+<p>
+    Your Payment was successful
+</p>
+<p>
+    Thank you for shopping with Happy Retail.<br />
+    
+
+    The expected delivery date:<b>@ViewBag.DeliveryDate</b>
+</p>
+@Html.ActionLink("My Orders", "MyOrders", "User")

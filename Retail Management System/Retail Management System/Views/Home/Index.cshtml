@@ -1,5 +1,13 @@
 ﻿<link href="~/Content/ProductDisplaynFooter.css" rel="stylesheet" />
-@Html.Partial("common_navbar")
+
+@if (Session["UserId"] != null)
+{
+    @Html.Partial("user_navbar")
+}
+else
+{
+    @Html.Partial("common_navbar")
+}
 
 <div id="demo" class="carousel slide" data-ride="carousel">
 
@@ -53,6 +61,9 @@
 <div class="row product-container">
 
     <div class="col-md-3 col-sm-3 col-xs-6 card" style="margin-bottom:8px">
+        <a href="/Product/Search?ProductName=electronics">
+
+        
         <div class="thumbnail product-item" style="height:250px">
 
             <img class="img-responsive" title="Click to View Product detail"
@@ -66,6 +77,7 @@
                 <div class="product-item-badge">New Arrivals</div>
             </div>
         </div>
+            </a>
     </div>
 
     <div class="col-md-3 col-sm-3 col-xs-6 card" style="margin-bottom:8px">
@@ -102,7 +114,7 @@
 
     <div class="col-md-3 col-sm-3 col-xs-6 card" style="margin-bottom:8px;">
         <div class="thumbnail product-item" style="height:250px">
-
+            <a href="/Product/Search?ProductName=smartphones">
             <img class="img-responsive" title="Click to View Product detail"
                  style="cursor:pointer;height:160px;width:100%"
                  src="~/IMAGES/pic6.jpg" />
@@ -114,11 +126,13 @@
                 <div class="product-item-badge">Buy Now</div>
             </div>
         </div>
+        </a>
     </div>
+    
 
     <div class="col-md-3 col-sm-3 col-xs-6 card" style="margin-bottom:8px;">
         <div class="thumbnail product-item" style="height:250px">
-
+            <a href="/Product/Search?ProductName=Fashion">
             <img class="img-responsive" title="Click to View Product detail"
                  style="cursor:pointer;height:160px;width:100%"
                  src="~/IMAGES/pic5.jpg" />
@@ -130,6 +144,7 @@
                 <div class="product-item-badge">Live Offer</div>
             </div>
         </div>
+        </a>
     </div>
 
     <div class="col-md-3 col-sm-3 col-xs-6 card" style="margin-bottom:8px;">

@@ -1,18 +1,83 @@
-﻿@model Retail_Management_System.Models.Bill
+﻿@model Retail_Management_System.Models.ShippingDetails
 
 @{
     ViewBag.Title = "PayNow";
 }
+@Html.Partial("_background")
+@Html.Partial("user_navbar")
+
 
 <h2>PayNow</h2>
-<p>
-    Total amount to be paid :
-    <b>@ViewBag.TotalSum</b>
-</p>
+<div style="color:red">
+    <p>
+        Total amount to be paid :
+        <b>@ViewBag.TotalSum</b>
+    </p>
+</div>
+<p>Shipping Address</p>
+<div>
+<table>
+    <tr>
+        <td>
+            Address* @Html.ValidationMessageFor(model => model.Address)
+
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.Address, new { @class = "inputComn", @placeholder = "Address" })
+
+        </td>
+    </tr>
+    
+    <tr>
+        <td>
+            City* @Html.ValidationMessageFor(model => model.City)
+
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.City, new { @class = "inputComn", @placeholder = "City" })
+
+        </td>
+    </tr>
+    <tr>
+        <td>
+            State* @Html.ValidationMessageFor(model => model.State)
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.State, new { @class = "inputComn", @placeholder = "State" })
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Country* @Html.ValidationMessageFor(model => model.Country)
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.Country, new { @class = "inputComn", @placeholder = "Country" })
+
+        </td>
+    </tr>
+    <tr>
+        <td>
+            ZipCode* @Html.ValidationMessageFor(model => model.ZipCode)
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.ZipCode, new { @class = "inputComn", @placeholder = "Zipcode" })
+
+        </td>
+    </tr>
+
+    </table>
+</div>
+<input type="submit" value="Add" class="btn btn-default" />
+
+
+
 <ul>Choose Payment Options</ul>
-<li>@Html.ActionLink("Credit Card", "CreditCard", new { Tid=ViewBag.Tid})</li>
-<li>@Html.ActionLink("Debit Card", "DebitCard", new { Tid = ViewBag.Tid})</li>
-<li>@Html.ActionLink("Net Banking", "NetBanking", new { Tid = ViewBag.Tid})</li>
+<li>@Html.ActionLink("Credit Card or Debit Card", "CreditCard", new { Tid = ViewBag.Tid })</li>
+<li>@Html.ActionLink("Net Banking", "NetBanking", new { Tid = ViewBag.Tid })</li>
+<li>@Html.ActionLink("Cash On Delivery", "CashOnDelivery", new { Tid = ViewBag.Tid })</li>
+<li>@Html.ActionLink("UPI", "UPI", new { Tid = ViewBag.Tid })</li>
+
+
 
 
 

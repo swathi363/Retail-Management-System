@@ -1,13 +1,17 @@
-﻿
-
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+﻿<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="navbar-brand">
-        <span><i class="fa fa-shopping-basket"></i></span>
+        <img src="~/IMAGES/logooo.png" height="35px" />
 
-        Happy Retails
+        @*<i class="font">Happy Retails</i>*@
+        <img src="~/IMAGES/brand.png" height="35px" />
     </div>
-    <div>
+    <style>
+        .font {
+            font-family: 'Grandstander', cursive;
+            font-style: normal;
+        }
+    </style>
+    <div class="font ">
 
 
         <ul class="nav navbar-nav ml-auto">
@@ -16,12 +20,9 @@
             <li class="nav-item"><a href="/home/contact" class="nav-link" style="color:white">Customer Care<span><i class="fa fa-phone" style="color:white"></i></span></a> </li>
 
             <li>
-
-
-
                 <form method="get" action="/Product/Search" class="form-inline">
 
-                    @Html.TextBox("ProductName", null, new { @class = "form-control ", @style = "width:330px", @placeholder = "Search for products, brands and more" })
+                    @Html.TextBox("ProductName", null, new { @class = "form-control ", @style = "width:280px", @placeholder = "Search for products, brands and more" })
                     <div class="form-group">
                         <div class="col-md-10">
                             <button type="submit" class="btn-dark btn btn-outline-info  fa fa-search" />
@@ -33,9 +34,8 @@
 
         </ul>
 
-
-
     </div>
+    <div class="font">
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -43,49 +43,37 @@
 
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="nav navbar-nav ml-auto">
-
-
-            @*<li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white">
-                        Login<i class="fa fa-sign-in"></i>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/admin/login">Admin</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/user/index">User<i class="fa fa-Users"></i></a>
-                    </div>
-
-                </li>*@
+  
             <li class="nav-item"><a href="/Admin/Feedback" class="nav-link" style="color:white">Feedbacks<span><i class="fa fa-comment" style="color:white"></i></span></a> </li>
-
-            @*<li class="nav-item"><a href="/Admin/Create" class="nav-link" style="color:white">Log Out<span><i class="fa fa-shopping-cart" style="color:white"></i></span></a> </li>*@
 
             <li class="nav-item dropdown ">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white">
-                   Hi @User.Identity.Name <i class=" fa fa-user-circle"></i>
+                    Hi @User.Identity.Name <i class=" fa fa-user-circle"></i>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/admin/login">My Account <i class=" fa fa-user"></i></a>
+                    <a class="dropdown-item" href="/admin/editadmin">My Account <i class=" fa fa-user"></i></a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/user/index">Change Password <i class="fa fa-key"></i></a>
+                    <a class="dropdown-item" href="/admin/changepassword">Change Password <i class="fa fa-key"></i></a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/admin/logout">Logout <i class="fa fa-sign-out"></i></a>
                 </div>
             </li>
             <li class="nav-item dropdown ">
                 <style>
-                    .dropdown-toggle::after
-                    {content:none;}
+                    .dropdown-toggle::after {
+                        content: none;
+                    }
                 </style>
-                <a class="nav-link  dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white" >
+                <a class="nav-link  dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white">
                     Settings  <i class="fa fa-bars"></i>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/admin/login">Add Admin</a>
+                    <a class="dropdown-item" href="/admin/addadmin">Add Admin</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/user/index">Reports<i class="fa fa-Users"></i></a>
+                    <a class="dropdown-item" href="/admin/Report">Reports<i class="fa fa-Users"></i></a>
                 </div>
             </li>
         </ul>
     </div>
+        </div>
 </nav>

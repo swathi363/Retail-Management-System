@@ -10,6 +10,8 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace Retail_Management_System.Controllers
 {
@@ -139,6 +141,10 @@ namespace Retail_Management_System.Controllers
         [Authorize]
         public ActionResult Create()
         {
+            if(Session["UserId"]==null)
+            {
+                return RedirectToAction("Login");
+            }
             ViewBag.Supplier = db.Suppliers;
             return View();
         }
@@ -316,7 +322,97 @@ namespace Retail_Management_System.Controllers
                 return RedirectToAction("Report");
             }
         }
+       [Authorize]
+        public ActionResult AddAdmin()
+        {
+            return View();
+        }
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddAdmin([Bind(Include = "UserId,Firstname,Lastname,Password,ConfirmPassword,ContactNumber")]Admin adm)
+        {
+            if (Session["UserId"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                adm.Password = encrypt(adm.Password);
+                adm.ConfirmPassword = encrypt(adm.ConfirmPassword);
+                var check = db.Users.Find(adm.UserId);
+                if (check == null)
+                {
+                    db.Configuration.ValidateOnSaveEnabled = false;
+                    db.Admins.Add(adm);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "User already Exists");
+                    return View();
+                }
+            }
+        }
+        [Authorize]
+        public ActionResult EditAdmin()
+        {
+            string username = User.Identity.Name;
+            Admin user = db.Admins.FirstOrDefault(u => u.UserId.Equals(username));
+            Admin model = new Admin();
+            model.Firstname = user.Firstname;
+            model.Lastname = user.Lastname;
+            model.ContactNumber = user.ContactNumber;
+            return View(model);
 
+        }
+        //Post Edit Current user info
+        [Authorize]
+        [HttpPost]
+        public ActionResult EditAdmin(Admin usr)
+        {
+            string username = User.Identity.Name;
+            Admin user = db.Admins.FirstOrDefault(u => u.UserId.Equals(username));
+            user.Firstname = usr.Firstname;
+            user.Lastname = usr.Lastname;
+            user.ContactNumber = usr.ContactNumber;
+            Session["Username"] = (user.Firstname + " " + user.Lastname).ToString();
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChanges();
+            return View(usr);
+        }
+        [Authorize]
+        public ActionResult ChangePassword()
+        {
+            if(Session["UserId"]==null)
+            {
+                return RedirectToAction("Login");
+            }
+            return View();
+        }
+        //Post change password for admin
+        [Authorize]
+        [HttpPost]
+        public ActionResult ChangePassword(Admin usr)
+        {
+            if (Session["UserId"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                usr.Password = encrypt(usr.Password);
+                usr.ConfirmPassword = encrypt(usr.ConfirmPassword);
+                string username = User.Identity.Name;
+                Admin user = db.Admins.FirstOrDefault(u => u.UserId.Equals(username));
+                user.Password = usr.Password;
+                user.ConfirmPassword = usr.ConfirmPassword;
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
         //Dispose the database
         protected override void Dispose(bool disposing)
         {
