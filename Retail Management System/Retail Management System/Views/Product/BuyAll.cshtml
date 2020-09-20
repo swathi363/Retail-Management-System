@@ -43,8 +43,8 @@
         <div class="d-flex justify-content-center mt-2">
             <p style="color:chocolate" class="d-flex justify-content-center">
                 Do you want to change shipping adddres?
-            </p>
             @Html.ActionLink("Change Address", "PayAll", new { UserId = ViewBag.UserId, ProductId = ViewBag.ProductId }, new { @class = " btn btn-primary btn btn-sm" })
+                </p>
         </div>
         <ul>Choose Payment Options</ul>
         <li>@Html.ActionLink("Credit Card or Debit Card", "CreditCard")</li>
