@@ -12,15 +12,23 @@ namespace Retail_Management_System.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Display(Name ="Transaction Id")]
         public int Tid { get; set; }
+        [Display(Name = "Bill No")]
+
         public int BillNo { get; set; }
         [DataType(DataType.EmailAddress)]
         public string UserId { get; set; }
         public string ProductId { get; set; }
+        [Display(Name = "Product Name")]
         public string ProductName { get; set; }
+        [Display(Name = "No of Product")]
+
         public int NoofProduct { get; set; }
         public double Amount { get; set; }
         [DataType(DataType.Date)]
+        [Display(Name = "Transactin Date")]
+
         public DateTime Tdate { get; set; }
         public virtual User user { get; set; }
         public virtual Product product { get; set; }

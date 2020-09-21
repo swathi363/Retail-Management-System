@@ -4,6 +4,11 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    <style>
+        footer {
+            position: relative;
+        }
+    </style>
 }
 @Html.Partial("_background")
 @if (Session["UserId"] != null)

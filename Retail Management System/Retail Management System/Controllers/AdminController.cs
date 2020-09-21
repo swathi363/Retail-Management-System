@@ -54,9 +54,18 @@ namespace Retail_Management_System.Controllers
         {
             if(ModelState.IsValid)
             {
-                db.Suppliers.Add(supplier);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var check = db.Suppliers.Find(supplier.SupplierId);
+                    if (check == null)
+                {
+                    db.Suppliers.Add(supplier);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                ModelState.AddModelError("", "Supplier Id already exist");
+                    return View();
+                }
             }
             return View(supplier);
         }
@@ -152,6 +161,8 @@ namespace Retail_Management_System.Controllers
         [Authorize]
         public ActionResult Create([Bind(Include = "Productid,ProductName,CategoryName,BrandName,PreferredAge,PreferredGender,Price,Stock,SoldUnits,Discount,SupplierId,Description")]Product product,HttpPostedFileBase file)
         {
+            ViewBag.Supplier = db.Suppliers;
+
             var path = "";
             if(file!=null)
             {
@@ -172,9 +183,18 @@ namespace Retail_Management_System.Controllers
             if (ModelState.IsValid)
             {
                 product.SpecialDiscount = 0;
-                db.Products.Add(product);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var check = db.Products.Find(product.Productid);
+                if (check == null)
+                {
+                    db.Products.Add(product);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Product Id already exist");
+                    return View();
+                }
             }
             return View(product);
 

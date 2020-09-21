@@ -47,7 +47,6 @@ namespace Retail_Management_System.Models
         public double SpecialDiscount { get; set; }
         [Required]
         [Display(Name = "Supplier Id ")]
-        
         public string SupplierId { get; set; }
         [Required]
         [Display(Name = "Product Description")]

@@ -253,7 +253,8 @@ namespace Retail_Management_System.Controllers
 
                 if (p.Stock == 0)
                 {
-                    ViewBag.Error = "No stock left!";
+                    ModelState.AddModelError("", "No stock left!");
+                    return View("ProductView", db.Products.Find(ProductId));
                 }
                 else
                 {
@@ -270,7 +271,8 @@ namespace Retail_Management_System.Controllers
 
                         if (noofunits > p.Stock)
                         {
-                            ViewBag.Error = "No stock available";
+                            ModelState.AddModelError("", "No stock available");
+                            return View("ProductView",db.Products.Find(ProductId));
                         }
                         else
                         {

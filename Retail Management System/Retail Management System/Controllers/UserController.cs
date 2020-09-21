@@ -242,9 +242,10 @@ namespace Retail_Management_System.Controllers
             return RedirectToAction("MyOrders");
         }
         [Authorize]
-        public ActionResult Feedback(string ProductId)
+        public ActionResult Feedback(string ProductId,string productname)
         {
             ViewBag.ProductId = ProductId;
+            ViewBag.ProductName = productname;
             return View();
         }
         [Authorize]
