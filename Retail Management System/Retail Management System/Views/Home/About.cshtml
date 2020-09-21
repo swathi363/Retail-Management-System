@@ -1,4 +1,6 @@
-﻿<style>
+﻿<link href="~/Content/ProductDisplaynFooter.css" rel="stylesheet" />
+
+<style>
     footer {
         position: relative;
     }
@@ -22,19 +24,29 @@ else
 {
     @Html.Partial("common_navbar")
 }
-<div class="container-fluid">
+@*<div class="container-fluid">*@
+<div class="justify-content-center p-3" style="text-align:justify">
+    
+    @*<div class="card p-2">*@
 
-    <h2><b>@ViewBag.Title</b></h2>
+        <h2><b>@ViewBag.Title</b></h2>
 
 
-    <p>
-        HappyRetail is a British multinational grocery and general merchandise retailer headquartered in United Kingdom. It is the third largest retailer in the world measured by profits and second-largest retailer in the world measured by revenues. It has stores in 12 countries across Asia and Europe and is the grocery market leader in the UK (where it has a market share of around 30%), the Republic of Ireland, Hungary, Malaysia and Thailand.
-    </p>
-    <p>
-        E-commerce is revolutionizing the way we all shop in World. Why do you want to hop from one store to another in search of the latest phone when you can find it on the Internet in a single click? Not only mobiles. Happy Retails houses everything you can possibly imagine, from trending electronics like laptops, tablets, smartphones, and mobile accessories to in-vogue fashion staples like shoes, clothing and lifestyle accessories; from modern furniture like sofa sets, dining tables, and wardrobes to appliances that make your life easy like washing machines, TVs, ACs, mixer grinder juicers and other time-saving kitchen and small appliances; from home furnishings like cushion covers, mattresses and bedsheets to toys and musical instruments, we got them all covered. You name it, and you can stay assured about finding them all here. For those of you with erratic working hours, Happy Retails is your best bet. Shop in your PJs, at night or in the wee hours of the morning. This e-commerce never shuts down.
+        <p>
+            HappyRetail is a British multinational grocery and general merchandise retailer headquartered in United Kingdom. It is the third largest retailer in the world measured by profits and second-largest retailer in the world measured by revenues. It has stores in 12 countries across Asia and Europe and is the grocery market leader in the UK (where it has a market share of around 30%), the Republic of Ireland, Hungary, Malaysia and Thailand.
+        </p>
 
-        What's more, with our year-round shopping festivals and events, our prices are irresistible. We're sure you'll find yourself picking up more than what you had in mind. If you are wondering why you should shop from Happy Retails when there are multiple options available to you.
+        <p>
+            E-commerce is revolutionizing the way we all shop in World. Why do you want to hop from one store to another in search of the latest phone when you can find it on the Internet in a single click? Not only mobiles. Happy Retails houses everything you can possibly imagine, from trending electronics like laptops, tablets, smartphones, and mobile accessories to in-vogue fashion staples like shoes, clothing and lifestyle accessories; from modern furniture like sofa sets, dining tables, and wardrobes to appliances that make your life easy like washing machines, TVs, ACs, mixer grinder juicers and other time-saving kitchen and small appliances; from home furnishings like cushion covers, mattresses and bedsheets to toys and musical instruments, we got them all covered. You name it, and you can stay assured about finding them all here. For those of you with erratic working hours, Happy Retails is your best bet. Shop in your PJs, at night or in the wee hours of the morning. This e-commerce never shuts down.
+
+            What's more, with our year-round shopping festivals and events, our prices are irresistible. We're sure you'll find yourself picking up more than what you had in mind. If you are wondering why you should shop from Happy Retails when there are multiple options available to you.
+        </p>
+
+        @*</div>*@
+        <div class="d-flex justify-content-center">
+            <img src="~/IMAGES/HappyRetails.jpg" style="height:400px;width:400px" />
         </div>
-<div class="d-flex justify-content-center">
-<img src="~/IMAGES/HappyRetails.jpg" style="height:400px;width:400px"/>
-</div>
+
+    </div>
+@*</div>*@
+
