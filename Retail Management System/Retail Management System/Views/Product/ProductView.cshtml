@@ -4,7 +4,6 @@
 @{
     ViewBag.Title = Model.ProductName;
 }
-@Html.Partial("_background")
 <style>
     footer {
         position: relative;
@@ -23,148 +22,138 @@ else
 {
     @Html.Partial("common_navbar")
 }
-<h2>@ViewBag.Title</h2>
+<h2 class="pl-3">@ViewBag.Title</h2>
 
 <div>
 
     <hr />
 
-    <div class="container-fluid ">
-        <div class="row">
-            &emsp;&emsp;&emsp;
-            <div class="col" style="align-items:center">
-                <div class="card p-sm-1 col-sm-8 bg-transparent">
+    <div class=" d-flex justify-content-center">
 
-                    @{ var img = Model.Productid + ".jpg";}
-                    <img src="~/Images/@img" height="600px" width="450px" />
-
-                    @using (Html.BeginForm("AddtoCart", "Product", FormMethod.Post, new { @class = "form-inline" }))
-                    {
-                        @Html.TextBox("Itemno", "1", new { @class = "form-control", @placeholder = "Quantity" })
-                        @Html.HiddenFor(m => m.Productid, new { @class = "form-control", @value = Model.Productid })
-                        <button type="submit" class="btn btn-primary btn-sm ml-2">Add to Cart <i class="fa fa-cart-plus"></i></button>
-                    }
-                </div>
-            </div>
-
-            <div class="col">
-                <dl class="card p-sm-1 col-8" style="text-align:left">
+        <div class="row"></div>
+        <div class="card col-5 mr-3 bg-transparent">
 
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.CategoryName)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.CategoryName)
-                    </dd>
-                    <dt>
-                        @Html.DisplayNameFor(model => model.BrandName)
-
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.BrandName)
-                    </dd>
-                    @if (Model.Stock > 10)
-                    {
-                        <dt style="color:green">Available</dt>
-                    }
-                    else if (Model.Stock < 10 && Model.Stock != 0)
-                    {
-                        <dt style="color:yellow">Only few left! Hurry up</dt>
-
-                    }
-                    else if (Model.Stock == 0)
-                    {
-                        <dt style="color:red">No stock left.</dt>
-
-                    }
-
-
-
-                    @if (Model.Discount != 0)
-                    {
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Discount)
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(model => model.Discount)% Off
-                        </dd>
-                    }
-                    else
-                    {
-                        <dt>No Discount Available!</dt>
-                    }
-
-                    @if (Model.SpecialDiscount != 0)
-                    {
-                        if (Model.Stock < 30 && Model.Stock != 0)
-                        {
-                            <dt style="color:yellow">Clearance Sale</dt>
-                        }
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.SpecialDiscount)
-
-
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(model => model.SpecialDiscount)% off
-                        </dd>
-
-                    }
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Price)
-                    </dt>
-
-
-                    <dd>
-
-
-                        @if (Model.Discount != 0 || Model.SpecialDiscount != 0)
-
-
-                        {<s>  ₹@Html.DisplayFor(model => model.Price) </s> <br />}
-                        @Html.DisplayName("₹")
-
-                        @(Model.Price - (Model.Discount + Model.SpecialDiscount) / 100 * Model.Price)
-                        @*@Html.DisplayFor(model => (model.Discount + model.SpecialDiscount))
-                            @Html.DisplayName("% Off")*@
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Description)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Description)
-                    </dd>
-
-
-                </dl>
-
-            </div>
-
-
-
+            @{ var img = Model.Productid + ".jpg";}
+            <img src="~/Images/@img" height="550px" />
 
         </div>
 
+        <div class="card col-7 ">
+            <dl>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CategoryName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CategoryName)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.BrandName)
+
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.BrandName)
+                </dd>
+                @if (Model.Stock > 10)
+                {
+                    <dt style="color:green">Available</dt>
+                }
+                else if (Model.Stock < 10 && Model.Stock != 0)
+                {
+                    <dt style="color:yellow">Only few left! Hurry up</dt>
+
+                }
+                else if (Model.Stock == 0)
+                {
+                    <dt style="color:red">No stock left.</dt>
+
+                }
+
+
+
+                @if (Model.Discount != 0)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Discount)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Discount)% Off
+                    </dd>
+                }
+                else
+                {
+                    <dt>No Discount Available!</dt>
+                }
+
+                @if (Model.SpecialDiscount != 0)
+                {
+                    if (Model.Stock < 30 && Model.Stock != 0)
+                    {
+                        <dt style="color:yellow">Clearance Sale</dt>
+                    }
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SpecialDiscount)
+
+
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.SpecialDiscount)% off
+                    </dd>
+
+                }
+                @*<dt>
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>*@
+
+
+                <dd>
+
+
+                    @if (Model.Discount != 0 || Model.SpecialDiscount != 0)
+
+
+                    {<s>  ₹@Html.DisplayFor(model => model.Price) </s> <br />}
+                    <span style="font-size:large;font-size:25pt" class="font-weight-bolder">
+                    @Html.DisplayName("₹")
+                    
+                    @(Model.Price - (Model.Discount + Model.SpecialDiscount) / 100 * Model.Price)</span>
+                    @*@Html.DisplayFor(model => (model.Discount + model.SpecialDiscount))
+                        @Html.DisplayName("% Off")*@
+
+
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+            </dl>
+
+            @using (Html.BeginForm("AddtoCart", "Product", FormMethod.Post, new { @class = "form-inline" }))
+            {
+                @Html.TextBox("Itemno", "1", new { @class = "form-control", @placeholder = "Quantity" })
+                @Html.HiddenFor(m => m.Productid, new { @class = "form-control", @value = Model.Productid })
+                <button type="submit" class="btn btn-primary btn-sm ml-2">Add to Cart <i class="fa fa-cart-plus"></i></button>
+            }
+        </div>
+
     </div>
+
+</div>
+    
+
+   
+</div>
+
+        
+
+    
 
 
 
