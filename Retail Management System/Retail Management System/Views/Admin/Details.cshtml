@@ -3,13 +3,18 @@
 @{
     ViewBag.Title = "Details";
 }
-@Html.Partial("_background")
 @Html.Partial("admin_navbar")
+@Html.Partial("_background")
 
-<h2>Details</h2>
+<style>
+    footer {
+        position: relative;
+    }
+</style>
 
-<div>
-    <h4>Product</h4>
+
+<div class="p-4">
+    <h4 style="text-align:center">Product Details</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -110,7 +115,10 @@
 
     </dl>
 </div>
+<div class="p-2">
 <p>
-    @Html.ActionLink("Edit", "Edit", new { ProductId = Model.Productid }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a href="/admin/edit?ProductId=@Model.Productid" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> Edit</a>
+    <a href="/admin/index" class="btn btn-dark btn-sm"><i class="fa fa-backward"></i> Back</a>
+
 </p>
+    </div>

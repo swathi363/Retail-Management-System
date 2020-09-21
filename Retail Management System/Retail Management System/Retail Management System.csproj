@@ -408,6 +408,7 @@
     <Content Include="Views\Product\CashOnDelivery.cshtml" />
     <Content Include="Views\Product\Filter.cshtml" />
     <Content Include="Views\Admin\DetailsAdmin.cshtml" />
+    <Content Include="Views\Shared\ContainerView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,14 +5,18 @@
 }
 @Html.Partial("_background")
 @Html.Partial("admin_navbar")
-<h2>Edit</h2>
+<style>
+    footer {
+        position: relative;
+    }
+</style>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Product</h4>
+        <h4 style="text-align:center">Edit Product</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Productid)
@@ -109,12 +113,13 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-dark" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <a href="/admin/index" class="btn btn-dark btn-sm"><i class="fa fa-backward"></i> Back</a>
+
 </div>
