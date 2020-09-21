@@ -1,4 +1,6 @@
-﻿@{
+﻿<link href="~/Content/ProductDisplaynFooter.css" rel="stylesheet" />
+
+@{
     ViewBag.Title = "Contact";
 }
 @Html.Partial("_background")
@@ -16,25 +18,39 @@ else
 {
     @Html.Partial("common_navbar")
 }
-<div class="container-fluid body-content">
+
+<div class="d-flex justify-content-center">
+    <div class="card w-25 p-4 mt-5" style="box-shadow:0 19px 38px rgba(0,0,0,0.30),0 15px 12px rgba(0,0,0,0.22)">
+        <h3 style="text-align:center"><b>Customer Care</b></h3>
+        <h5>
 
 
-    <h2><b>Customer Care</b></h2>
-    <h4>
-        <p>Feel free to contact us.</p>
+            <address>
+                Happy Retails Headquarters<br />
+                London, EN 98052-6399<br />
+                <abbr title="Phone">P:</abbr>
+                425.555.0100
+            </address>
 
-        <address>
-            Happy Retails Headquarters,<br />
-            London, EN 98052-6399<br />
-            <abbr title="Phone">P:</abbr>
-            425.555.0100
-        </address>
+            <address>
+                <strong>Support:</strong>   <a href="mailto:support@happyretail.com">support@happyretail.com</a><br />
+                <strong>Marketing:</strong> <a href="mailto:marketing@happyretail.com">marketing@happyretail.com</a>
+            </address>
 
-        <address>
-            <strong>Support:</strong>   <a href="mailto:support@happyretail.com">support@happyretail.com</a><br />
-            <strong>Marketing:</strong> <a href="mailto:marketing@happyretail.com">marketing@happyretail.com</a>
-        </address>
-    </h4>
+            <p style="color:gray;text-align:center">Feel free to contact us.</p>
+        </h5>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- The social media icon bar -->
+<div class="icon-bar">
+    <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+    <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+    <a href="#" class="google"><i class="fa fa-google"></i></a>
+    <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+    <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
 </div>
 
 
