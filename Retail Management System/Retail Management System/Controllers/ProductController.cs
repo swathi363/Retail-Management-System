@@ -419,6 +419,7 @@ namespace Retail_Management_System.Controllers
             return View();
 
         }
+        
         public ActionResult CreditCard()
         {
            
@@ -431,14 +432,13 @@ namespace Retail_Management_System.Controllers
         }
         public ActionResult CashOnDelivery()
         {
-            ViewBag.Deliverydate = DateTime.Now.AddDays(5).ToShortDateString();
-            return View();
+            return RedirectToAction("ConfirmPayment");
         }
         public ActionResult UPI()
         {
             return View();
         }
-        public ActionResult ConfirmPayment(int? Tid)
+        public ActionResult ConfirmPayment()
         {
             ViewBag.Deliverydate = DateTime.Now.AddDays(5).ToShortDateString();
             return View();

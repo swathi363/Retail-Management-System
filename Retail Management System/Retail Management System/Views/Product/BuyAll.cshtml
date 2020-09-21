@@ -41,17 +41,9 @@
             }
         </table>
         <div class="d-flex justify-content-center mt-2">
-            <p style="color:chocolate" class="d-flex justify-content-center">
-                Do you want to change shipping adddres?
-            @Html.ActionLink("Change Address", "PayAll", new { UserId = ViewBag.UserId, ProductId = ViewBag.ProductId }, new { @class = " btn btn-primary btn btn-sm" })
-                </p>
+            @Html.ActionLink("Next", "PayAll", new { UserId = ViewBag.UserId, ProductId = ViewBag.ProductId }, new { @class = " btn btn-primary btn btn-sm" })
         </div>
-        <ul>Choose Payment Options</ul>
-        <li>@Html.ActionLink("Credit Card or Debit Card", "CreditCard")</li>
-        <li>@Html.ActionLink("Net Banking", "NetBanking")</li>
-        <li>@Html.ActionLink("Cash On Delivery", "CashOnDelivery")</li>
-        <li>@Html.ActionLink("UPI", "UPI")</li>
-
+        
 
     </div>
 </div>

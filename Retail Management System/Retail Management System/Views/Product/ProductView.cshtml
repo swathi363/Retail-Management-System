@@ -5,6 +5,12 @@
     ViewBag.Title = Model.ProductName;
 }
 @Html.Partial("_background")
+<style>
+    footer {
+        position: relative;
+    }
+</style>
+
 @if (Session["UserId"] != null && @Session["Role"].ToString() == "user")
 {
     @Html.Partial("user_navbar")
@@ -30,7 +36,7 @@ else
                 <div class="card p-sm-1 col-sm-8 bg-transparent">
 
                     @{ var img = Model.Productid + ".jpg";}
-                    <img src="~/Images/@img" height="500" width="250" />
+                    <img src="~/Images/@img" height="600px" width="450px" />
 
                     @using (Html.BeginForm("AddtoCart", "Product", FormMethod.Post, new { @class = "form-inline" }))
                     {
