@@ -1,9 +1,10 @@
 ﻿<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="navbar-brand">
-        <img src="~/IMAGES/logooo.png" height="35px" />
+        <img src="~/IMAGES/lgo_1-removebg-preview.png" height="38px" />
 
         @*<i class="font">Happy Retails</i>*@
-        <img src="~/IMAGES/brand.png" height="35px" />
+        
+        <img src="~/IMAGES/nnn.png" height="43" width="180" />
     </div>
     <style>
         .font {
@@ -22,6 +23,7 @@
             <li>
                 <form method="get" action="/Product/Search">
                     <div class="input-group ">
+                        @Html.TextBox("ProductName", null, new { @class = "form-control ", @style = "width:360px", @placeholder = "Search for products, brands and more" })
                         @Html.TextBox("ProductName", null, new { @class = "form-control ", @style = "width:380px", @placeholder = "Search for products, brands and more" })
 
                         <div class="input-group-append">
