@@ -1,4 +1,5 @@
-﻿using Retail_Management_System.Models;
+﻿using Microsoft.Ajax.Utilities;
+using Retail_Management_System.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -100,16 +101,25 @@ namespace Retail_Management_System.Controllers
         [Authorize]
         public ActionResult Edit()
         {
-            string username = User.Identity.Name;
-            User user = db.Users.FirstOrDefault(u => u.UserId.Equals(username));
-            User model = new User();
-            model.Firstname = user.Firstname;
-            model.Lastname = user.Lastname;
-            model.Address = user.Address;
-            model.ContactNumber = user.ContactNumber;
-            model.City = user.City;
-            model.Country = user.Country;
-            return View(model);
+            if (Session["UserId"] != null && Session["Role"].ToString() == "user")
+            {
+            
+                string username = User.Identity.Name;
+                User user = db.Users.FirstOrDefault(u => u.UserId.Equals(username));
+                User model = new User();
+                model.Firstname = user.Firstname;
+                model.Lastname = user.Lastname;
+                model.Address = user.Address;
+                model.ContactNumber = user.ContactNumber;
+                model.City = user.City;
+                model.Country = user.Country;
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Index", "User");
+
+            }
 
         }
         //Post Edit Current user info
@@ -117,40 +127,66 @@ namespace Retail_Management_System.Controllers
         [HttpPost]
         public ActionResult Edit(User usr)
         {
-            string username = User.Identity.Name;
-            User user = db.Users.FirstOrDefault(u => u.UserId.Equals(username));
-            user.Firstname = usr.Firstname;
-            user.Lastname = usr.Lastname;
-            user.Address = usr.Address;
-            user.ContactNumber = usr.ContactNumber;
-            user.City = usr.City;
-            user.Country = usr.Country;
-            user.Password = user.Password;
-            user.ConfirmPassword = user.Password;
-            Session["Username"] = (user.Firstname + " " + user.Lastname).ToString();
-            db.Entry(user).State = EntityState.Modified;
-            db.SaveChanges();
-            return View(usr);
+            if (Session["UserId"] != null && Session["Role"].ToString() == "user")
+            {
+            
+                string username = User.Identity.Name;
+                User user = db.Users.FirstOrDefault(u => u.UserId.Equals(username));
+                user.Firstname = usr.Firstname;
+                user.Lastname = usr.Lastname;
+                user.Address = usr.Address;
+                user.ContactNumber = usr.ContactNumber;
+                user.City = usr.City;
+                user.Country = usr.Country;
+                user.Password = user.Password;
+                user.ConfirmPassword = user.Password;
+                Session["Username"] = (user.Firstname + " " + user.Lastname).ToString();
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return View(usr);
+            }
+            else
+            {
+                return RedirectToAction("Index", "User");
+            }
         }
         [Authorize]
         public ActionResult ChangePassword()
         {
-            return View();
+            if (Session["UserId"] != null && Session["Role"].ToString() == "user")
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "User");
+            }
         }
         //Post change password for user
         [Authorize]
         [HttpPost]
         public ActionResult ChangePassword(User usr)
         {
-            usr.Password = encrypt(usr.Password);
-            usr.ConfirmPassword = encrypt(usr.ConfirmPassword);
-            string username = User.Identity.Name;
-            User user = db.Users.FirstOrDefault(u => u.UserId.Equals(username));
-            user.Password = usr.Password;
-            user.ConfirmPassword = usr.ConfirmPassword;
-            db.Entry(user).State = EntityState.Modified;
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (Session["UserId"] != null && Session["Role"].ToString() == "user")
+            {
+            
+            
+            
+                usr.Password = encrypt(usr.Password);
+                usr.ConfirmPassword = encrypt(usr.ConfirmPassword);
+                string username = User.Identity.Name;
+                User user = db.Users.FirstOrDefault(u => u.UserId.Equals(username));
+                user.Password = usr.Password;
+                user.ConfirmPassword = usr.ConfirmPassword;
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Index", "User");
+
+            }
         }
         [Authorize]
         [HttpGet]
@@ -176,17 +212,27 @@ namespace Retail_Management_System.Controllers
         [Authorize]
         public ActionResult CartDelete(string UserId, string ProductId)
         {
-            if (ProductId == null)
+            if (Session["UserId"] != null && Session["Role"].ToString() == "user")
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            
+            
+            
+                if (ProductId == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
 
-            Cart cart = db.Carts.Where(c => c.UserId.Equals(UserId) && c.ProductId.Equals(ProductId)).FirstOrDefault();
-            if (cart == null)
-            {
-                return HttpNotFound();
+                Cart cart = db.Carts.Where(c => c.UserId.Equals(UserId) && c.ProductId.Equals(ProductId)).FirstOrDefault();
+                if (cart == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(cart);
             }
-            return View(cart);
+            else
+            {
+                return RedirectToAction("Index", "User");
+            }
         }
         //Post delete cart details
         [Authorize]
@@ -194,69 +240,127 @@ namespace Retail_Management_System.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string UserId, string ProductId)
         {
-            Cart cart = db.Carts.Where(c => c.UserId.Equals(UserId) && c.ProductId.Equals(ProductId)).FirstOrDefault();
-            db.Carts.Remove(cart);
-            db.SaveChanges();
-            return RedirectToAction("Cart");
+            if (Session["UserId"] != null && Session["Role"].ToString() == "user")
+            {
+               
+           
+            
+                Cart cart = db.Carts.Where(c => c.UserId.Equals(UserId) && c.ProductId.Equals(ProductId)).FirstOrDefault();
+                db.Carts.Remove(cart);
+                db.SaveChanges();
+                return RedirectToAction("Cart");
+            }
+            else 
+            {
+                return RedirectToAction("Index", "User");
+            }
         }
         [Authorize]
         public ActionResult MyOrders()
         {
-            string UserId = Session["UserId"].ToString();
-            var orders = db.Transactions.Where(c => c.UserId.Equals(UserId)).ToList().OrderBy(o => o.Tdate).ToList();
-            return View(orders);
+            if (Session["UserId"] != null && Session["Role"].ToString() == "user")
+            {
+
+                string UserId = Session["UserId"].ToString();
+                var orders = db.Transactions.Where(c => c.UserId.Equals(UserId)).ToList().OrderBy(o => o.Tdate).ToList();
+                return View(orders);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+            
         }
         [Authorize]
         public ActionResult CancelOrder(int? TId)
         {
-            if (TId == null)
+            if (Session["UserId"] != null && Session["Role"].ToString() == "user")
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+
+
+                if (TId == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                var transaction = db.Transactions.Where(t => t.Tid == TId).FirstOrDefault();
+                if (transaction == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(transaction);
             }
-            var transaction = db.Transactions.Where(t => t.Tid == TId).FirstOrDefault();
-            if (transaction == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("Index", "User");
             }
-            return View(transaction);
+
         }
         [Authorize]
         [HttpPost, ActionName("CancelOrder")]
         [ValidateAntiForgeryToken]
         public ActionResult CancelallConfirmed(int TId, int BillNo)
         {
-            var transaction = db.Transactions.Find(TId);
-            var ProductId = transaction.ProductId;
-            var products = db.Products.Find(ProductId);
-            products.Stock = products.Stock + transaction.NoofProduct;
-            products.SoldUnits = products.SoldUnits + 1;
-            db.Entry(products).State = EntityState.Modified;
-            db.SaveChanges();
-            double Amount = transaction.Amount;
-            db.Transactions.Remove(transaction);
-            db.SaveChanges();
-            var bill = db.Bills.Find(BillNo);
-            bill.Amount = bill.Amount - Amount;
-            db.Entry(bill).State = EntityState.Modified;
-            db.SaveChanges();
-            return RedirectToAction("MyOrders");
+            if (Session["UserId"] != null && Session["Role"].ToString() == "user")
+            {
+            
+            
+            
+                var transaction = db.Transactions.Find(TId);
+                var ProductId = transaction.ProductId;
+                var products = db.Products.Find(ProductId);
+                products.Stock = products.Stock + transaction.NoofProduct;
+                products.SoldUnits = products.SoldUnits + 1;
+                db.Entry(products).State = EntityState.Modified;
+                db.SaveChanges();
+                double Amount = transaction.Amount;
+                db.Transactions.Remove(transaction);
+                db.SaveChanges();
+                var bill = db.Bills.Find(BillNo);
+                bill.Amount = bill.Amount - Amount;
+                db.Entry(bill).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("MyOrders");
+            }
+            else
+            {
+                return RedirectToAction("Index", "User");
+            }
         }
         [Authorize]
         public ActionResult Feedback(string ProductId,string productname)
         {
-            ViewBag.ProductId = ProductId;
-            ViewBag.ProductName = productname;
-            return View();
+            if (Session["UserId"] != null && Session["Role"].ToString() == "user")
+            {
+            
+                ViewBag.ProductId = ProductId;
+                ViewBag.ProductName = productname;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "User");
+
+            }
         }
         [Authorize]
         [HttpPost]
         public ActionResult Feedback([Bind(Include = "Feedback")] Feedback fed, string ProductId)
         {
-            fed.ProductId = ProductId;
-            fed.UserId = Session["UserId"].ToString();
-            db.Feedbacks.Add(fed);
-            db.SaveChanges();
-            return RedirectToAction("MyOrders");
+            if (Session["UserId"] != null && Session["Role"].ToString() == "user")
+            {
+            
+                fed.ProductId = ProductId;
+                fed.UserId = Session["UserId"].ToString();
+                db.Feedbacks.Add(fed);
+                db.SaveChanges();
+                return RedirectToAction("MyOrders");
+            }
+            else
+            {
+                return RedirectToAction("Index", "User");
+
+            }
         }
     }
 }

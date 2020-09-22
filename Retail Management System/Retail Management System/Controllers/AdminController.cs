@@ -22,7 +22,16 @@ namespace Retail_Management_System.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            return View(db.Products.ToList());
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
+            {
+                return View(db.Products.ToList());
+
+            }
+            else
+            {
+                return RedirectToAction("Login","Admin");
+
+            }
         }
         
              
@@ -31,95 +40,164 @@ namespace Retail_Management_System.Controllers
         
         public ActionResult Details(string ProductId)
         {
-            if (ProductId == null)
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            
+            
+            
+
+                if (ProductId == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Product product = db.Products.Find(ProductId);
+                if (product == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(product);
             }
-            Product product = db.Products.Find(ProductId);
-            if (product == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("Login");
+
             }
-            return View(product);
         }
         [Authorize]
         public ActionResult CreateSupplier()
         {
-            return View();
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
+            {
+                return View();
+
+            }
+            else
+            {
+                return RedirectToAction("Login");
+
+            }
         }
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateSupplier([Bind(Include = "SupplierId,SupplierName")]Supplier supplier)
         {
-            if(ModelState.IsValid)
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
             {
-                var check = db.Suppliers.Find(supplier.SupplierId);
+                if (ModelState.IsValid)
+                {
+                    var check = db.Suppliers.Find(supplier.SupplierId);
                     if (check == null)
-                {
-                    db.Suppliers.Add(supplier);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    {
+                        db.Suppliers.Add(supplier);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Supplier Id already exist");
+                        return View();
+                    }
                 }
-                else
-                {
-                ModelState.AddModelError("", "Supplier Id already exist");
-                    return View();
-                }
+                return View(supplier);
             }
-            return View(supplier);
+            else
+            {
+                return RedirectToAction("Login");
+            }
         }
         public ActionResult SupplierView()
         {
-            return View(db.Suppliers.ToList());
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
+            {
+
+
+
+                return View(db.Suppliers.ToList());
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
         }
+    
         [Authorize]
         public ActionResult EditSupplier(string SupplierId)
         {
-            if (SupplierId == null)
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            
+            
+            
+                if (SupplierId == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+                }
+                Supplier supplier = db.Suppliers.Find(SupplierId);
+                if (supplier == null)
+                {
+                    return HttpNotFound();
+
+                }
+                return View(supplier);
+            }
+            else
+            {
+                return RedirectToAction("Login");
 
             }
-            Supplier supplier = db.Suppliers.Find(SupplierId);
-            if (supplier == null)
-            {
-                return HttpNotFound();
-
-            }
-            return View(supplier);
         }
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditSupplier([Bind(Include = "SupplierId,SupplierName")] Supplier supplier)
         {
-            if (ModelState.IsValid)
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
             {
-                db.Entry(supplier).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(supplier).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+
+                }
+                return View(supplier);
 
             }
-            return View(supplier);
-
+            else
+            {
+                return RedirectToAction("Login");
+            }
         }
+
         
         [Authorize]
         public ActionResult DetailsSuppliers(string SupplierId)
         {
-            if(SupplierId==null)
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            
+            
+            
+                if (SupplierId == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+                }
+                Supplier supplier = db.Suppliers.Find(SupplierId);
+                if (supplier == null)
+                {
+                    return HttpNotFound();
+
+                }
+                return View(supplier);
+            }
+            else
+            {
+                return RedirectToAction("Login");
 
             }
-            Supplier supplier = db.Suppliers.Find(SupplierId);
-            if(supplier==null)
-            {
-                return HttpNotFound();
-
-            }
-            return View(supplier);
 
         }
         [Authorize]
@@ -149,107 +227,156 @@ namespace Retail_Management_System.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            if(Session["UserId"]==null)
+            if (Session["UserId"] == null)
             {
                 return RedirectToAction("Login");
             }
-            ViewBag.Supplier = db.Suppliers;
-            return View();
+            else
+            {
+                ViewBag.Supplier = db.Suppliers;
+                    return View();
+            }
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Create([Bind(Include = "Productid,ProductName,CategoryName,BrandName,PreferredAge,PreferredGender,Price,Stock,SoldUnits,Discount,SupplierId,Description")]Product product,HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include  = "Productid,ProductName,CategoryName,BrandName,PreferredAge,PreferredGender,Price,Stock,SoldUnits,Discount,SupplierId,Description")]Product product,HttpPostedFileBase file)
         {
-            ViewBag.Supplier = db.Suppliers;
-
-            var path = "";
-            if(file!=null)
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
             {
-                if(file.ContentLength>0)
+                ViewBag.Supplier = db.Suppliers;
+
+                var path = "";
+                if (file != null)
                 {
-                    if(Path.GetExtension(file.FileName).ToLower()==".jpg"
-                        ||Path.GetExtension(file.FileName).ToLower()==".png"
-                        || Path.GetExtension(file.FileName).ToLower() == ".gif"
-                        || Path.GetExtension(file.FileName).ToLower() == ".jpeg")
+                    if (file.ContentLength > 0)
                     {
-                        path = Path.Combine(Server.MapPath("~/IMAGES/"), product.Productid+".jpg");
-                        file.SaveAs(path);
-                        ViewBag.UploadSuccess = true;
+                        if (Path.GetExtension(file.FileName).ToLower() == ".jpg"
+                            || Path.GetExtension(file.FileName).ToLower() == ".png"
+                            || Path.GetExtension(file.FileName).ToLower() == ".gif"
+                            || Path.GetExtension(file.FileName).ToLower() == ".jpeg")
+                        {
+                            path = Path.Combine(Server.MapPath("~/IMAGES/"), product.Productid + ".jpg");
+                            file.SaveAs(path);
+                            ViewBag.UploadSuccess = true;
+                        }
+
                     }
-
                 }
+                if (ModelState.IsValid)
+                {
+                    product.SpecialDiscount = 0;
+                    var check = db.Products.Find(product.Productid);
+                    if (check == null)
+                    {
+                        db.Products.Add(product);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Product Id already exist");
+                        return View();
+                    }
+                }
+                return View(product);
             }
-            if (ModelState.IsValid)
+            else
             {
-                product.SpecialDiscount = 0;
-                var check = db.Products.Find(product.Productid);
-                if (check == null)
-                {
-                    db.Products.Add(product);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Product Id already exist");
-                    return View();
-                }
+                return RedirectToAction("Login");
             }
-            return View(product);
-
         }
         [Authorize]
         public ActionResult Edit(string ProductId)
         {
-            if (ProductId == null)
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            
+            
+            
+                if (ProductId == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Product product = db.Products.Find(ProductId);
+                if (ProductId == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(product);
             }
-            Product product = db.Products.Find(ProductId);
-            if (product == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("Login");
+
             }
-            return View(product);
         }
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Productid,ProductName,CategoryName,BrandName,PreferredAge,PreferredGender,Price,Stock,SoldUnits,Discount,SpecialDiscount,SupplierId,Description")] Product product)
         {
-            if (ModelState.IsValid)
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
             {
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(product).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(product);
             }
-            return View(product);
+            else
+            {
+                return RedirectToAction("Login");
+            }
         }
         [Authorize]
         public ActionResult Delete(string ProductId)
-        {
-            if (ProductId == null)
+        { 
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+                
+                    if (ProductId == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    Product product = db.Products.Find(ProductId);
+                    if (product == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(product);
+                
             }
-            Product product = db.Products.Find(ProductId);
-            if (product == null)
+            
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("Login");
             }
-            return View(product);
         }
         [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string ProductId)
         {
-            Product product = db.Products.Find(ProductId);
-            product.Stock = 0;
-            db.Entry(product).State = EntityState.Modified;
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
+            {
+            
+            
+            
+                Product product = db.Products.Find(ProductId);
+                product.Stock = 0;
+                db.Entry(product).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Login");
+
+            }
         }
         
         public ActionResult Login()
@@ -311,41 +438,78 @@ namespace Retail_Management_System.Controllers
         }
         public ActionResult Feedback()
         {
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
+            {
                 return View(db.Feedbacks.ToList());
+
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
         }
         [Authorize]
         public ActionResult Report()
         {
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
+            {
                 return View();
+
+            }
+            else
+            {
+                return RedirectToAction("Login");
+
+            }
             
         }
         [Authorize]
         [HttpPost]
         public ActionResult Report(string TDate)
         {
-            DateTime dt;
-            if (DateTime.TryParse(TDate, out dt))
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
             {
-                var trs = db.Transactions.ToList();
-                for (int i = 0; i < trs.Count; i++)
+            
+                DateTime dt;
+                if (DateTime.TryParse(TDate, out dt))
                 {
-                    if (trs[i].Tdate.Month != dt.Month)
+                    var trs = db.Transactions.ToList();
+                    for (int i = 0; i < trs.Count; i++)
                     {
-                        trs.Remove(trs[i]);
-                        i--;
+                        if (trs[i].Tdate.Month != dt.Month)
+                        {
+                            trs.Remove(trs[i]);
+                            i--;
+                        }
                     }
+                    return View("ReportView", trs);
                 }
-                return View("ReportView", trs);
+                else
+                {
+                    return RedirectToAction("Report");
+                }
             }
             else
             {
-                return RedirectToAction("Report");
+                return RedirectToAction("Login");
+
             }
         }
        [Authorize]
         public ActionResult AddAdmin()
         {
-            return View();
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
+            {
+            
+            
+            
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+
+            }
         }
         [Authorize]
         [HttpPost]
@@ -378,13 +542,20 @@ namespace Retail_Management_System.Controllers
         [Authorize]
         public ActionResult EditAdmin()
         {
-            string username = User.Identity.Name;
-            Admin user = db.Admins.FirstOrDefault(u => u.UserId.Equals(username));
-            Admin model = new Admin();
-            model.Firstname = user.Firstname;
-            model.Lastname = user.Lastname;
-            model.ContactNumber = user.ContactNumber;
-            return View(model);
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
+            {
+                string username = User.Identity.Name;
+                Admin user = db.Admins.FirstOrDefault(u => u.UserId.Equals(username));
+                Admin model = new Admin();
+                model.Firstname = user.Firstname;
+                model.Lastname = user.Lastname;
+                model.ContactNumber = user.ContactNumber;
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
 
         }
         //Post Edit Current user info
@@ -392,38 +563,51 @@ namespace Retail_Management_System.Controllers
         [HttpPost]
         public ActionResult EditAdmin(Admin usr)
         {
-            string username = User.Identity.Name;
-            Admin user = db.Admins.FirstOrDefault(u => u.UserId.Equals(username));
-            user.Firstname = usr.Firstname;
-            user.Lastname = usr.Lastname;
-            user.ContactNumber = usr.ContactNumber;
-            user.Password = (user.Password);
-            user.ConfirmPassword = (user.Password);
-            Session["Username"] = (user.Firstname).ToString();
-            db.Entry(user).State = EntityState.Modified;
-            db.SaveChanges();
-            return View(usr);
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Admin")
+            {
+            
+            
+            
+                string username = User.Identity.Name;
+                Admin user = db.Admins.FirstOrDefault(u => u.UserId.Equals(username));
+                user.Firstname = usr.Firstname;
+                user.Lastname = usr.Lastname;
+                user.ContactNumber = usr.ContactNumber;
+                user.Password = (user.Password);
+                user.ConfirmPassword = (user.Password);
+                Session["Username"] = (user.Firstname).ToString();
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return View(usr);
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
         }
         [Authorize]
         public ActionResult ChangePassword()
         {
-            if(Session["UserId"]==null)
+            if(Session["UserId"]!=null)
+            {
+                return View();
+            }
+            else
             {
                 return RedirectToAction("Login");
+
             }
-            return View();
         }
         //Post change password for admin
         [Authorize]
         [HttpPost]
         public ActionResult ChangePassword(Admin usr)
         {
-            if (Session["UserId"] == null)
+            if (Session["UserId"] != null)
             {
-                return RedirectToAction("Login");
-            }
-            else
-            {
+            
+           
+            
                 usr.Password = encrypt(usr.Password);
                 usr.ConfirmPassword = encrypt(usr.ConfirmPassword);
                 string username = User.Identity.Name;
@@ -433,6 +617,10 @@ namespace Retail_Management_System.Controllers
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Login");
             }
         }
         //Dispose the database

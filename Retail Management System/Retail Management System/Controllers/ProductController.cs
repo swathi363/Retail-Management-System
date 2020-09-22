@@ -79,49 +79,53 @@ namespace Retail_Management_System.Controllers
 
         public ActionResult ProductView(string ProductId)
         {
-            if (ProductId == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Product product = db.Products.Find(ProductId);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
 
-            if (product.Stock < 30)
-            {
-                product.SpecialDiscount = 25;
-                db.Entry(product).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
+                if (ProductId == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Product product = db.Products.Find(ProductId);
+                if (product == null)
+                {
+                    return HttpNotFound();
+                }
 
-            }
-            DateTime dt1 = new DateTime(2020, 09, 23);
-            DateTime dt2 = new DateTime(2020, 09, 20);
-            DateTime dt3 = new DateTime(2020,09,21);
-            if (DateTime.Now.Date == dt1.Date&&DateTime.Now.Month==dt1.Month)
-            {
-                product.SpecialDiscount = 24;
-                db.Entry(product).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
+                if (product.Stock < 30)
+                {
+                    product.SpecialDiscount = 25;
+                    db.Entry(product).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+
+                }
+                DateTime dt1 = new DateTime(2020, 09, 23);
+                DateTime dt2 = new DateTime(2020, 09, 20);
+                DateTime dt3 = new DateTime(2020, 09, 21);
+                if (DateTime.Now.Date == dt1.Date && DateTime.Now.Month == dt1.Month)
+                {
+                    product.SpecialDiscount = 24;
+                    db.Entry(product).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
 
 
-            }
-            if (DateTime.Now.Date == dt2.Date && DateTime.Now.Month == dt2.Month)
-            {
-                product.SpecialDiscount = 23;
-                db.Entry(product).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
+                }
+                if (DateTime.Now.Date == dt2.Date && DateTime.Now.Month == dt2.Month)
+                {
+                    product.SpecialDiscount = 23;
+                    db.Entry(product).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
 
-            }
-            if (DateTime.Now.Date == dt3.Date && DateTime.Now.Month == dt3.Month)
-            {
-                product.SpecialDiscount = 13;
-                db.Entry(product).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
+                }
+                if (DateTime.Now.Date == dt3.Date && DateTime.Now.Month == dt3.Month)
+                {
+                    product.SpecialDiscount = 13;
+                    db.Entry(product).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
 
-            }
-            return View(product);
+                }
+                return View(product);
+            
+           
+
         }
         public ActionResult BrandView(string Brand)
         {
@@ -131,25 +135,25 @@ namespace Retail_Management_System.Controllers
                                   .Select(p => p.BrandName)
                                   .Distinct();
                 ViewBag.Brand = brand.ToList();
-                
+
                 return View();
             }
             else
             {
-                    var products = db.Products.Where(p => p.BrandName.Equals(Brand)).ToList();
+                var products = db.Products.Where(p => p.BrandName.Equals(Brand)).ToList();
 
-                    if (products != null)
-                    {
-                        // return the View named Products with the required category lists 
-                        return View("Brand", products);
-                    }
-                    else
-                    {
-                        ViewBag.Error = "Invalid Category";
-                    }
-                    // return the View named Products without any data 
-                    return View("Brand");
-                
+                if (products != null)
+                {
+                    // return the View named Products with the required category lists 
+                    return View("Brand", products);
+                }
+                else
+                {
+                    ViewBag.Error = "Invalid Category";
+                }
+                // return the View named Products without any data 
+                return View("Brand");
+
             }
         }
         public ActionResult AgeFilter(string Age)
@@ -214,15 +218,15 @@ namespace Retail_Management_System.Controllers
         public ActionResult Filter(string name)
         {
             var list = new List<Product>();
-            if(string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(name))
             {
                 list = db.Products.ToList();
             }
-            else if(name== "Category")
+            else if (name == "Category")
             {
                 return RedirectToAction("Index");
             }
-            else if(name== "Brand")
+            else if (name == "Brand")
             {
                 return RedirectToAction("BrandView");
             }
@@ -230,13 +234,13 @@ namespace Retail_Management_System.Controllers
             {
                 return RedirectToAction("AgeFilter");
             }
-            else if(name=="Gender")
+            else if (name == "Gender")
             {
                 return RedirectToAction("GenderFilter");
 
             }
             return RedirectToAction("Index");
-            
+
 
         }
         [Authorize]
@@ -272,7 +276,7 @@ namespace Retail_Management_System.Controllers
                         if (noofunits > p.Stock)
                         {
                             ModelState.AddModelError("", "No stock available");
-                            return View("ProductView",db.Products.Find(ProductId));
+                            return View("ProductView", db.Products.Find(ProductId));
                         }
                         else
                         {
@@ -304,146 +308,235 @@ namespace Retail_Management_System.Controllers
         [Authorize]
         public ActionResult BuyNow(string UserId, string ProductId)
         {
-            ViewBag.UserId = UserId;
-            ViewBag.ProductId = ProductId;
-            var user = db.Users.Where(u => u.UserId.Equals(UserId)).FirstOrDefault();
-            return View(user);
+            if (Session["UserId"] != null && Session["Role"].ToString() == "user")
+            {
+            
+                ViewBag.UserId = UserId;
+                ViewBag.ProductId = ProductId;
+                var user = db.Users.Where(u => u.UserId.Equals(UserId)).FirstOrDefault();
+                return View(user);
+            }
+            else
+            {
+                return RedirectToAction("Index", "User");
+
+            }
         }
-        
-      
-        
-        
+
+
+
+
         [Authorize]
         public ActionResult BuyAll()
         {
-            double sum = 0;
-            string UserId = Session["UserId"].ToString();
-            var cart = db.Carts.Where(c => c.UserId.Equals(UserId)).ToList();
-            foreach (Cart c in cart)
+            if (Session["UserId"] != null && Session["Role"].ToString() == "user")
             {
-                sum = sum + c.Amount;
+
+
+
+                double sum = 0;
+                string UserId = Session["UserId"].ToString();
+                var cart = db.Carts.Where(c => c.UserId.Equals(UserId)).ToList();
+                foreach (Cart c in cart)
+                {
+                    sum = sum + c.Amount;
+                }
+                ViewBag.TotalSum = sum;
+                var user = db.Users.Where(u => u.UserId.Equals(UserId)).FirstOrDefault();
+                ViewBag.Address = user.Address + "\n" + user.City + "\n" + user.Country;
+                ViewBag.Name = user.Firstname + " " + user.Lastname;
+                return View(cart);
             }
-            ViewBag.TotalSum = sum;
-            var user = db.Users.Where(u => u.UserId.Equals(UserId)).FirstOrDefault();
-            ViewBag.Address = user.Address + "\n" + user.City + "\n" + user.Country;
-            ViewBag.Name = user.Firstname + " " + user.Lastname;
-            return View(cart);
+            else
+            {
+                return RedirectToAction("Index", "User");
+
+            }
         }
         [Authorize]
         public ActionResult PayAll()
         {
-            string UserId = Session["UserId"].ToString();
-            var cart = db.Carts.Where(c => c.UserId.Equals(UserId)).ToList();
-            var t = db.Transactions.Select(tn => tn.BillNo).DefaultIfEmpty(0).Max() + 1;
-            Bill newbill = new Bill();
-            newbill.BillNo = t;
-            db.Bills.Add(newbill);
-            db.SaveChanges();
-            double sum = 0;
-
-            for (int i = 0; i < cart.Count; i++)
+            if (Session["UserId"] != null && Session["Role"].ToString() == "user")
             {
-                Transaction Trx = new Transaction();
-                Trx.BillNo = t;
-                Trx.UserId = cart[i].UserId;
-                var c = cart[i].ProductId.ToString();
-                Trx.ProductId = c;
-                Trx.ProductName = cart[i].ProductName;
-                Trx.NoofProduct = cart[i].NoofProduct;
-                Trx.Amount = cart[i].Amount;
-                sum = sum + Trx.Amount;
-                Trx.Tdate = DateTime.Now;
-                db.Transactions.Add(Trx);
+
+
+
+                string UserId = Session["UserId"].ToString();
+                var cart = db.Carts.Where(c => c.UserId.Equals(UserId)).ToList();
+                var t = db.Transactions.Select(tn => tn.BillNo).DefaultIfEmpty(0).Max() + 1;
+                Bill newbill = new Bill();
+                newbill.BillNo = t;
+                db.Bills.Add(newbill);
                 db.SaveChanges();
+                double sum = 0;
 
-                var p = db.Products.Where(pro => pro.Productid.Equals(c)).FirstOrDefault();
-                p.Stock = p.Stock - cart[i].NoofProduct;
-                p.SoldUnits = p.SoldUnits + 1;
-                db.Entry(p).State = EntityState.Modified;
-                db.SaveChanges();
-                db.Carts.Remove(cart[i]);
-                db.SaveChanges();
-
-
-            }
-
-            newbill.Amount = sum;
-            db.Entry(newbill).State = EntityState.Modified;
-            db.SaveChanges();
-            ViewBag.TotalSum = newbill.Amount.ToString();
-            return View();
-        }
-        public ActionResult PayNow(string UserId, string ProductId)
-        {
-            if (String.IsNullOrEmpty(ProductId))
-            {
-                ViewBag.Error = "Empty";
-            }
-            else
-            {
-                var c = db.Carts.Where(cart => cart.UserId.Equals(UserId) && cart.ProductId.Equals(ProductId)).FirstOrDefault();
-
-                var p = db.Products.Where(product => product.Productid.Equals(ProductId)).FirstOrDefault();
-                if (c.NoofProduct > p.Stock)
-                {
-                    ViewBag.Error = "No stock available";
-                }
-                else
+                for (int i = 0; i < cart.Count; i++)
                 {
                     Transaction Trx = new Transaction();
-                    Bill newbill = new Bill();
-                    var t = db.Bills.Select(tn => tn.BillNo).DefaultIfEmpty(0).Max() + 1;
-                    newbill.BillNo = t;
-                    newbill.Amount = c.Amount;
-                    db.Bills.Add(newbill);
-                    db.SaveChanges();
-
                     Trx.BillNo = t;
-                    Trx.UserId = c.UserId;
-                    Trx.ProductId = c.ProductId;
-                    Trx.ProductName = c.ProductName;
-                    Trx.NoofProduct = c.NoofProduct;
-                    Trx.Amount = c.Amount;
+                    Trx.UserId = cart[i].UserId;
+                    var c = cart[i].ProductId.ToString();
+                    Trx.ProductId = c;
+                    Trx.ProductName = cart[i].ProductName;
+                    Trx.NoofProduct = cart[i].NoofProduct;
+                    Trx.Amount = cart[i].Amount;
+                    sum = sum + Trx.Amount;
                     Trx.Tdate = DateTime.Now;
                     db.Transactions.Add(Trx);
                     db.SaveChanges();
-                    p.Stock = p.Stock - c.NoofProduct;
+
+                    var p = db.Products.Where(pro => pro.Productid.Equals(c)).FirstOrDefault();
+                    p.Stock = p.Stock - cart[i].NoofProduct;
                     p.SoldUnits = p.SoldUnits + 1;
                     db.Entry(p).State = EntityState.Modified;
                     db.SaveChanges();
-                    db.Carts.Remove(c);
+                    db.Carts.Remove(cart[i]);
                     db.SaveChanges();
-                    var user = db.Users.Find(UserId);
-                    ViewBag.Address = user.Address;
-                    ViewBag.TotalSum = newbill.Amount.ToString();
+
+
                 }
+
+                newbill.Amount = sum;
+                db.Entry(newbill).State = EntityState.Modified;
+                db.SaveChanges();
+                ViewBag.TotalSum = newbill.Amount.ToString();
+                return View();
             }
-            return View();
+            else
+            {
+                return RedirectToAction("Index", "User");
+            }
+           
+        
+
+        }
+        
+
+
+        public ActionResult PayNow(string UserId, string ProductId)
+        {
+            if (Session["UserId"] != null && Session["Role"].ToString() == "user")
+            {
+
+                if (String.IsNullOrEmpty(ProductId))
+                {
+                    ViewBag.Error = "Empty";
+                }
+                else
+                {
+                    var c = db.Carts.Where(cart => cart.UserId.Equals(UserId) && cart.ProductId.Equals(ProductId)).FirstOrDefault();
+
+                    var p = db.Products.Where(product => product.Productid.Equals(ProductId)).FirstOrDefault();
+                    if (c.NoofProduct > p.Stock)
+                    {
+                        ViewBag.Error = "No stock available";
+                    }
+                    else
+                    {
+                        Transaction Trx = new Transaction();
+                        Bill newbill = new Bill();
+                        var t = db.Bills.Select(tn => tn.BillNo).DefaultIfEmpty(0).Max() + 1;
+                        newbill.BillNo = t;
+                        newbill.Amount = c.Amount;
+                        db.Bills.Add(newbill);
+                        db.SaveChanges();
+
+                        Trx.BillNo = t;
+                        Trx.UserId = c.UserId;
+                        Trx.ProductId = c.ProductId;
+                        Trx.ProductName = c.ProductName;
+                        Trx.NoofProduct = c.NoofProduct;
+                        Trx.Amount = c.Amount;
+                        Trx.Tdate = DateTime.Now;
+                        db.Transactions.Add(Trx);
+                        db.SaveChanges();
+                        p.Stock = p.Stock - c.NoofProduct;
+                        p.SoldUnits = p.SoldUnits + 1;
+                        db.Entry(p).State = EntityState.Modified;
+                        db.SaveChanges();
+                        db.Carts.Remove(c);
+                        db.SaveChanges();
+                        var user = db.Users.Find(UserId);
+                        ViewBag.Address = user.Address;
+                        ViewBag.TotalSum = newbill.Amount.ToString();
+                    }
+                }
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "User");
+            }
+            
 
         }
         
         public ActionResult CreditCard()
         {
-           
-            return View();
+            if (Session["UserId"] != null && Session["Role"].ToString() == "user")
+            {
+                return View();
+
+            }
+            else
+            {
+                return RedirectToAction("Index", "User");
+
+            }
         }
         
         public ActionResult NetBanking()
         {
-            return View();
+            if (Session["UserId"] != null && Session["Role"].ToString() == "user")
+            {
+                return View();
+
+            }
+            else
+            {
+                return RedirectToAction("Index", "User");
+
+            }
         }
         public ActionResult CashOnDelivery()
         {
-            return RedirectToAction("ConfirmPayment");
+            if (Session["UserId"] != null && Session["Role"].ToString() == "user")
+            {
+                return RedirectToAction("ConfirmPayment");
+
+            }
+            else
+            {
+                return RedirectToAction("Index", "User");
+
+            }
         }
         public ActionResult UPI()
         {
-            return View();
+            if (Session["UserId"] !=null && Session["Role"].ToString() == "user")
+            {
+                return View();
+
+            }
+            else
+            {
+                return RedirectToAction("Index", "User");
+
+            }
         }
         public ActionResult ConfirmPayment()
         {
-            ViewBag.Deliverydate = DateTime.Now.AddDays(5).ToShortDateString();
-            return View();
+            if (Session["UserId"] != null && Session["Role"].ToString() == "user")
+            {
+                ViewBag.Deliverydate = DateTime.Now.AddDays(5).ToShortDateString();
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "User");
+
+                
+            }
         }
     }
 }

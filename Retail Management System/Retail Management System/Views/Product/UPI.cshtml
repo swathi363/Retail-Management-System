@@ -15,6 +15,7 @@
             Mobile Number* @Html.ValidationMessageFor(model => model.mobile)
         </label>
         @Html.TextBoxFor(model => model.mobile, new { @class = "inputComn", @placeholder = "Mobile Number" })
+        @Html.ValidationMessageFor(model => model.mobile, "", new { @class = "text-danger" })
 
 
         <div class="d-flex justify-content-center mt-2">

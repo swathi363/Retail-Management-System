@@ -137,7 +137,7 @@ else
 
             @using (Html.BeginForm("AddtoCart", "Product", FormMethod.Post, new { @class = "form-inline" }))
             {
-                @Html.TextBox("Itemno", "1", new { @class = "form-control col-md-2", @placeholder = "Quantity" })
+                @Html.TextBox("Itemno", "1", new { @class = "form-control col-md-2", @placeholder = "Quantity",@type="number",@max=Model.Stock })
                 @Html.HiddenFor(m => m.Productid, new { @class = "form-control", @value = Model.Productid })
                 <button type="submit" class="btn btn-primary btn-sm ml-2">Add to Cart <i class="fa fa-cart-plus"></i></button>
             }

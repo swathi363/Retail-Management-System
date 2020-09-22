@@ -22,27 +22,33 @@
                 </tr>
                 <tr>
                     <td>
-                        Name on Card* @Html.ValidationMessageFor(model => model.CardName)
+                         @Html.LabelFor(model => model.CardName,htmlAttributes:new { @class="control-label "})
                     </td>
                     <td>
                         @Html.TextBoxFor(model => model.CardName, new { @class = "inputComn", @placeholder = "Name" })
+                        @Html.ValidationMessageFor(model => model.CardName, "", new { @class = "text-danger" })
 
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        Card Number* @Html.ValidationMessageFor(model => model.cardnumber)
+                        @Html.LabelFor(model => model.cardnumber, htmlAttributes: new { @class = "control-label " })
                     </td>
                     <td>
                         @Html.TextBoxFor(model => model.cardnumber, new { @class = "inputComn", @placeholder = "Card Number" })
+                        @Html.ValidationMessageFor(model => model.cardnumber, "", new { @class = "text-danger" })
+
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        cvv* @Html.ValidationMessageFor(model => model.cvv)
+                        @Html.LabelFor(model => model.cvv, htmlAttributes: new { @class = "control-label" })
+
                     </td>
                     <td>
                         @Html.TextBoxFor(model => model.cvv, new { @class = "inputComn", @placeholder = "cvv" })
+                        @Html.ValidationMessageFor(model => model.cvv, "", new { @class = "text-danger" })
+
 
                     </td>
                 </tr>
